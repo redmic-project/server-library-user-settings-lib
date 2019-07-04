@@ -1,0 +1,11 @@
+include:
+  - project: 'redmic-project/gitlab-ci-templates'
+    ref: master
+    file: '/maven-building-library.yml'
+  - project: 'redmic-project/gitlab-ci-templates'
+    ref: master
+    file: '/license-listing.yml'
+
+stages:
+  - build
+  - license-list
