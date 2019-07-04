@@ -44,6 +44,12 @@
 			<version>${redmic.test-utils.version}</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.el</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<repositories>
