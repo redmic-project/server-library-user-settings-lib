@@ -19,12 +19,31 @@
 
 	<properties>
 		<!-- REDMIC -->
-
+		<redmic.models.version>0.10.0-feature-cleanAtlasComponents</redmic.models.version>
+		<redmic.broker-lib.version>0.10.0-feature-atlasMicroservice</redmic.broker-lib.version>
+		<redmic.test-utils.version>0.9.0-feature-atlasMicroservice</redmic.test-utils.version>
 		<!-- OTHERS -->
 	</properties>
 
 	<dependencies>
-
+		<dependency>
+			<groupId>es.redmic.lib</groupId>
+			<artifactId>models</artifactId>
+			<version>${redmic.models.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>es.redmic.lib</groupId>
+			<artifactId>broker-lib</artifactId>
+			<version>${redmic.broker-lib.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>es.redmic.lib</groupId>
+			<artifactId>test-utils</artifactId>
+			<version>${redmic.test-utils.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<repositories>
