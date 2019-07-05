@@ -225,17 +225,17 @@ public abstract class SettingsDataUtil {
 		return selection;
 	}
 
-	public static PersistenceDTO getSaveDTO() {
+	public static PersistenceDTO getPersistenceDTO() {
 
-		PersistenceDTO save = new PersistenceDTO();
+		PersistenceDTO persistence = new PersistenceDTO();
 
-		save.setId(PREFIX + CODE);
-		save.setName("prueba");
-		save.setUserId(USER);
+		persistence.setId(PREFIX + CODE);
+		persistence.setName("prueba");
+		persistence.setUserId(USER);
 
-		save.setInserted(DateTime.now());
-		save.setUpdated(DateTime.now());
-		save.setAccessed(DateTime.now());
-		return save;
+		persistence.setInserted(DateTime.now());
+		persistence.setUpdated(DateTime.now());
+		persistence.setAccessed(DateTime.now());
+		return persistence;
 	}
 }

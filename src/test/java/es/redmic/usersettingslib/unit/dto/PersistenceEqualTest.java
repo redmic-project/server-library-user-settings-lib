@@ -34,7 +34,7 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnTrue_IfSaveTypeIsEqual() {
 
-		PersistenceDTO dto = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto = SettingsDataUtil.getPersistenceDTO();
 
 		assertTrue(dto.equals(dto));
 	}
@@ -42,9 +42,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfIdIsDifferent() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setId("111111");
 		assertFalse(dto1.equals(dto2));
@@ -53,9 +53,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfIdIsNull() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setId(null);
 		assertFalse(dto1.equals(dto2));
@@ -64,9 +64,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfNameIsDifferent() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setName("cddd");
 		assertFalse(dto1.equals(dto2));
@@ -75,9 +75,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfNameIsNull() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setName(null);
 		assertFalse(dto1.equals(dto2));
@@ -86,9 +86,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfSharedIsDifferent() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setShared(true);
 		assertFalse(dto1.equals(dto2));
@@ -97,9 +97,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfSharedIsNull() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setShared(null);
 		assertFalse(dto1.equals(dto2));
@@ -108,9 +108,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfUserIdIsDifferent() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setUserId("ddd");
 		assertFalse(dto1.equals(dto2));
@@ -119,9 +119,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfUserIdIsNull() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setUserId(null);
 		assertFalse(dto1.equals(dto2));
@@ -130,9 +130,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfInsertedIsDifferent() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setInserted(DateTime.now().plus(2));
 		assertFalse(dto1.equals(dto2));
@@ -141,9 +141,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfInsertedIsNull() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setInserted(null);
 		assertFalse(dto1.equals(dto2));
@@ -152,9 +152,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfUpdatedIsDifferent() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setUpdated(DateTime.now().plus(2));
 		assertFalse(dto1.equals(dto2));
@@ -163,9 +163,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfUpdatedIsNull() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setUpdated(null);
 		assertFalse(dto1.equals(dto2));
@@ -174,9 +174,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfAccessedIsDifferent() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setAccessed(DateTime.now().plus(2));
 		assertFalse(dto1.equals(dto2));
@@ -185,9 +185,9 @@ public class PersistenceEqualTest {
 	@Test
 	public void equal_returnFalse_IfAccessedIsNull() {
 
-		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getPersistenceDTO();
 
-		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getPersistenceDTO();
 
 		dto1.setAccessed(null);
 		assertFalse(dto1.equals(dto2));

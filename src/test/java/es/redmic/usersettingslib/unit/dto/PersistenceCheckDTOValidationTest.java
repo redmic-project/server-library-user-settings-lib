@@ -34,7 +34,7 @@ public class PersistenceCheckDTOValidationTest extends DTOBaseTest<PersistenceDT
 	@Before
 	public void reset() {
 
-		dto = SettingsDataUtil.getSaveDTO();
+		dto = SettingsDataUtil.getPersistenceDTO();
 	}
 
 	@Test

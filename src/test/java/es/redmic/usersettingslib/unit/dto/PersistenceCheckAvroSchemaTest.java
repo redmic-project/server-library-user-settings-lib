@@ -35,11 +35,12 @@ public class PersistenceCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void serializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() throws JSONException {
 
-		PersistenceDTO dto = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto = SettingsDataUtil.getPersistenceDTO();
 
 		Object result = serializerAndDeserializer(dto);
 
-		assertTrue("El objeto obtenido debe ser una instancia de SaveDTO", PersistenceDTO.class.isInstance(result));
+		assertTrue("El objeto obtenido debe ser una instancia de PersistenceDTO",
+				PersistenceDTO.class.isInstance(result));
 
 		JSONAssert.assertEquals(result.toString(), dto.toString(), false);
 	}
