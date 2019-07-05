@@ -24,17 +24,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import es.redmic.testutils.dto.DTOBaseTest;
-import es.redmic.usersettingslib.dto.SettingsDTO;
+import es.redmic.usersettingslib.dto.SelectionDTO;
 import es.redmic.usersettingslib.unit.utils.SettingsDataUtil;
 
-public class SettingsCheckDTOValidationTest extends DTOBaseTest<SettingsDTO> {
+public class SelectionCheckDTOValidationTest extends DTOBaseTest<SelectionDTO> {
 
-	private static SettingsDTO dto;
+	private static SelectionDTO dto;
 
 	@Before
 	public void reset() {
 
-		dto = SettingsDataUtil.getSettings();
+		dto = SettingsDataUtil.getSelectionDTO();
 	}
 
 	@Test
@@ -47,14 +47,6 @@ public class SettingsCheckDTOValidationTest extends DTOBaseTest<SettingsDTO> {
 	public void validationDTO_ReturnError_IfServiceIsNull() {
 
 		dto.setService(null);
-
-		checkDTOHasError(dto, NOT_NULL_MESSAGE_TEMPLATE);
-	}
-
-	@Test
-	public void validationDTO_ReturnError_IfSharedIsNull() {
-
-		dto.setShared(null);
 
 		checkDTOHasError(dto, NOT_NULL_MESSAGE_TEMPLATE);
 	}

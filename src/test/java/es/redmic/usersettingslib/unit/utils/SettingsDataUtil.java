@@ -25,7 +25,8 @@ import java.util.UUID;
 
 import org.joda.time.DateTime;
 
-import es.redmic.usersettingslib.dto.SettingsDTO;
+import es.redmic.usersettingslib.dto.SaveDTO;
+import es.redmic.usersettingslib.dto.SelectionDTO;
 
 public abstract class SettingsDataUtil {
 
@@ -36,23 +37,35 @@ public abstract class SettingsDataUtil {
 	// @formatter:on
 
 	@SuppressWarnings("serial")
-	public static SettingsDTO getSettings() {
+	public static SelectionDTO getSelectionDTO() {
 
-		SettingsDTO settings = new SettingsDTO();
+		SelectionDTO selection = new SelectionDTO();
 
-		settings.setId(PREFIX + CODE);
-		settings.setName("prueba");
-		settings.setService("prueba");
-		settings.setUserId(USER);
-		settings.setSelection(new ArrayList<String>() {
+		selection.setId(PREFIX + CODE);
+		selection.setService("prueba");
+		selection.setSelection(new ArrayList<String>() {
 			{
 				add("1");
 			}
 		});
 
-		settings.setInserted(DateTime.now());
-		settings.setUpdated(DateTime.now());
-		settings.setAccessed(DateTime.now());
-		return settings;
+		selection.setInserted(DateTime.now());
+		selection.setUpdated(DateTime.now());
+		selection.setAccessed(DateTime.now());
+		return selection;
+	}
+
+	public static SaveDTO getSaveDTO() {
+
+		SaveDTO save = new SaveDTO();
+
+		save.setId(PREFIX + CODE);
+		save.setName("prueba");
+		save.setUserId(USER);
+
+		save.setInserted(DateTime.now());
+		save.setUpdated(DateTime.now());
+		save.setAccessed(DateTime.now());
+		return save;
 	}
 }

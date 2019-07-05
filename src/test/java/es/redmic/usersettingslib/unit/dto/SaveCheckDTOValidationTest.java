@@ -20,27 +20,34 @@ package es.redmic.usersettingslib.unit.dto;
  * #L%
  */
 
-import static org.junit.Assert.assertTrue;
-
-import org.json.JSONException;
+import org.junit.Before;
 import org.junit.Test;
-import org.skyscreamer.jsonassert.JSONAssert;
 
-import es.redmic.testutils.utils.AvroBaseTest;
-import es.redmic.usersettingslib.dto.SettingsDTO;
+import es.redmic.testutils.dto.DTOBaseTest;
+import es.redmic.usersettingslib.dto.SaveDTO;
 import es.redmic.usersettingslib.unit.utils.SettingsDataUtil;
 
-public class SettingsCheckAvroSchemaTest extends AvroBaseTest {
+public class SaveCheckDTOValidationTest extends DTOBaseTest<SaveDTO> {
+
+	private static SaveDTO dto;
+
+	@Before
+	public void reset() {
+
+		dto = SettingsDataUtil.getSaveDTO();
+	}
 
 	@Test
-	public void serializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() throws JSONException {
+	public void validationDTO_NoReturnError_IfDTOIsCorrect() {
 
-		SettingsDTO dto = SettingsDataUtil.getSettings();
+		checkDTOHasNoError(dto);
+	}
 
-		Object result = serializerAndDeserializer(dto);
+	@Test
+	public void validationDTO_ReturnError_IfSharedIsNull() {
 
-		assertTrue("El objeto obtenido debe ser una instancia de SettingsDTO", SettingsDTO.class.isInstance(result));
+		dto.setShared(null);
 
-		JSONAssert.assertEquals(result.toString(), dto.toString(), false);
+		checkDTOHasError(dto, NOT_NULL_MESSAGE_TEMPLATE);
 	}
 }
