@@ -40,6 +40,11 @@ import es.redmic.usersettingslib.events.deselect.DeselectConfirmedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectFailedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectedEvent;
+import es.redmic.usersettingslib.events.save.SaveCancelledEvent;
+import es.redmic.usersettingslib.events.save.SaveConfirmedEvent;
+import es.redmic.usersettingslib.events.save.SaveEvent;
+import es.redmic.usersettingslib.events.save.SaveFailedEvent;
+import es.redmic.usersettingslib.events.save.SavedEvent;
 import es.redmic.usersettingslib.events.select.SelectCancelledEvent;
 import es.redmic.usersettingslib.events.select.SelectConfirmedEvent;
 import es.redmic.usersettingslib.events.select.SelectEvent;
@@ -197,6 +202,56 @@ public abstract class SettingsDataUtil {
 
 		ClearCancelledEvent evt = new ClearCancelledEvent().buildFrom(getClearEvent());
 		evt.setType(SettingsEventTypes.CLEAR_CANCELLED);
+		evt.setExceptionType("ItemNotFound");
+		Map<String, String> arguments = new HashMap<String, String>();
+		arguments.put("a", "b");
+		evt.setArguments(arguments);
+		return evt;
+	}
+
+	// SAVE
+
+	public static SaveEvent getSaveEvent() {
+
+		SaveEvent evt = new SaveEvent();
+		evt.setAggregateId(PREFIX + CODE);
+		evt.setType(SettingsEventTypes.SAVE);
+		evt.setVersion(1);
+		evt.setUserId(USER);
+		evt.setPersistence(getPersistenceDTO());
+		return evt;
+	}
+
+	public static SaveConfirmedEvent getSaveConfirmedEvent() {
+
+		SaveConfirmedEvent evt = new SaveConfirmedEvent().buildFrom(getSaveEvent());
+		evt.setType(SettingsEventTypes.SAVE_CONFIRMED);
+		return evt;
+	}
+
+	public static SavedEvent getSaveedEvent() {
+
+		SavedEvent evt = new SavedEvent().buildFrom(getSaveEvent());
+		evt.setType(SettingsEventTypes.SAVED);
+		evt.setPersistence(getPersistenceDTO());
+		return evt;
+	}
+
+	public static SaveFailedEvent getSaveFailedEvent() {
+
+		SaveFailedEvent evt = new SaveFailedEvent().buildFrom(getSaveEvent());
+		evt.setType(SettingsEventTypes.SAVE_FAILED);
+		evt.setExceptionType("ItemNotFound");
+		Map<String, String> arguments = new HashMap<String, String>();
+		arguments.put("a", "b");
+		evt.setArguments(arguments);
+		return evt;
+	}
+
+	public static SaveCancelledEvent getSaveCancelledEvent() {
+
+		SaveCancelledEvent evt = new SaveCancelledEvent().buildFrom(getSaveEvent());
+		evt.setType(SettingsEventTypes.SAVE_CANCELLED);
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
