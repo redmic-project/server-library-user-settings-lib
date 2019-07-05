@@ -26,15 +26,15 @@ import static org.junit.Assert.assertTrue;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import es.redmic.usersettingslib.dto.SaveDTO;
+import es.redmic.usersettingslib.dto.PersistenceDTO;
 import es.redmic.usersettingslib.unit.utils.SettingsDataUtil;
 
-public class SaveEqualTest {
+public class PersistenceEqualTest {
 
 	@Test
 	public void equal_returnTrue_IfSaveTypeIsEqual() {
 
-		SaveDTO dto = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto = SettingsDataUtil.getSaveDTO();
 
 		assertTrue(dto.equals(dto));
 	}
@@ -42,9 +42,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfIdIsDifferent() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setId("111111");
 		assertFalse(dto1.equals(dto2));
@@ -53,9 +53,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfIdIsNull() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setId(null);
 		assertFalse(dto1.equals(dto2));
@@ -64,9 +64,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfNameIsDifferent() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setName("cddd");
 		assertFalse(dto1.equals(dto2));
@@ -75,9 +75,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfNameIsNull() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setName(null);
 		assertFalse(dto1.equals(dto2));
@@ -86,9 +86,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfSharedIsDifferent() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setShared(true);
 		assertFalse(dto1.equals(dto2));
@@ -97,9 +97,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfSharedIsNull() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setShared(null);
 		assertFalse(dto1.equals(dto2));
@@ -108,9 +108,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfUserIdIsDifferent() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setUserId("ddd");
 		assertFalse(dto1.equals(dto2));
@@ -119,9 +119,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfUserIdIsNull() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setUserId(null);
 		assertFalse(dto1.equals(dto2));
@@ -130,9 +130,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfInsertedIsDifferent() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setInserted(DateTime.now().plus(2));
 		assertFalse(dto1.equals(dto2));
@@ -141,9 +141,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfInsertedIsNull() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setInserted(null);
 		assertFalse(dto1.equals(dto2));
@@ -152,9 +152,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfUpdatedIsDifferent() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setUpdated(DateTime.now().plus(2));
 		assertFalse(dto1.equals(dto2));
@@ -163,9 +163,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfUpdatedIsNull() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setUpdated(null);
 		assertFalse(dto1.equals(dto2));
@@ -174,9 +174,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfAccessedIsDifferent() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setAccessed(DateTime.now().plus(2));
 		assertFalse(dto1.equals(dto2));
@@ -185,9 +185,9 @@ public class SaveEqualTest {
 	@Test
 	public void equal_returnFalse_IfAccessedIsNull() {
 
-		SaveDTO dto1 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto1 = SettingsDataUtil.getSaveDTO();
 
-		SaveDTO dto2 = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto2 = SettingsDataUtil.getSaveDTO();
 
 		dto1.setAccessed(null);
 		assertFalse(dto1.equals(dto2));

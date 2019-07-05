@@ -29,13 +29,13 @@ import org.joda.time.DateTimeZone;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kjetland.jackson.jsonSchema.annotations.JsonSchemaDefault;
 
-public class SaveDTO extends SettingsBaseDTO {
+public class PersistenceDTO extends SettingsBaseDTO {
 
 	// @formatter:off
 	
 	@JsonIgnore
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
-		"{\"type\":\"record\",\"name\":\"SaveDTO\",\"namespace\":\"es.redmic.usersettingslib.dto\",\"fields\":["
+		"{\"type\":\"record\",\"name\":\"PersistenceDTO\",\"namespace\":\"es.redmic.usersettingslib.dto\",\"fields\":["
 			+ "{\"name\":\"name\",\"type\":[\"string\", \"null\"]},"
 			+ "{\"name\":\"shared\",\"type\":\"boolean\", \"default\": \"false\"},"
 			+ "{\"name\":\"userId\",\"type\":[\"string\", \"null\"]},"
@@ -48,7 +48,7 @@ public class SaveDTO extends SettingsBaseDTO {
 			+ "{\"name\":\"id\",\"type\":\"string\"}]}");
 	// @formatter:on
 
-	public SaveDTO() {
+	public PersistenceDTO() {
 		super();
 	}
 
@@ -102,7 +102,7 @@ public class SaveDTO extends SettingsBaseDTO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SaveDTO other = (SaveDTO) obj;
+		PersistenceDTO other = (PersistenceDTO) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;

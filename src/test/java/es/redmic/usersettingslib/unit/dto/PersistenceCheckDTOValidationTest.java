@@ -24,12 +24,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import es.redmic.testutils.dto.DTOBaseTest;
-import es.redmic.usersettingslib.dto.SaveDTO;
+import es.redmic.usersettingslib.dto.PersistenceDTO;
 import es.redmic.usersettingslib.unit.utils.SettingsDataUtil;
 
-public class SaveCheckDTOValidationTest extends DTOBaseTest<SaveDTO> {
+public class PersistenceCheckDTOValidationTest extends DTOBaseTest<PersistenceDTO> {
 
-	private static SaveDTO dto;
+	private static PersistenceDTO dto;
 
 	@Before
 	public void reset() {

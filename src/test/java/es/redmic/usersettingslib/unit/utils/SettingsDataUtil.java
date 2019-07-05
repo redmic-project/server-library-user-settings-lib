@@ -21,12 +21,30 @@ package es.redmic.usersettingslib.unit.utils;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
 
-import es.redmic.usersettingslib.dto.SaveDTO;
+import es.redmic.usersettingslib.dto.PersistenceDTO;
 import es.redmic.usersettingslib.dto.SelectionDTO;
+import es.redmic.usersettingslib.events.SettingsEventTypes;
+import es.redmic.usersettingslib.events.clear.ClearCancelledEvent;
+import es.redmic.usersettingslib.events.clear.ClearConfirmedEvent;
+import es.redmic.usersettingslib.events.clear.ClearEvent;
+import es.redmic.usersettingslib.events.clear.ClearFailedEvent;
+import es.redmic.usersettingslib.events.clear.ClearedEvent;
+import es.redmic.usersettingslib.events.deselect.DeselectCancelledEvent;
+import es.redmic.usersettingslib.events.deselect.DeselectConfirmedEvent;
+import es.redmic.usersettingslib.events.deselect.DeselectEvent;
+import es.redmic.usersettingslib.events.deselect.DeselectFailedEvent;
+import es.redmic.usersettingslib.events.deselect.DeselectedEvent;
+import es.redmic.usersettingslib.events.select.SelectCancelledEvent;
+import es.redmic.usersettingslib.events.select.SelectConfirmedEvent;
+import es.redmic.usersettingslib.events.select.SelectEvent;
+import es.redmic.usersettingslib.events.select.SelectFailedEvent;
+import es.redmic.usersettingslib.events.select.SelectedEvent;
 
 public abstract class SettingsDataUtil {
 
@@ -35,6 +53,158 @@ public abstract class SettingsDataUtil {
 			CODE = UUID.randomUUID().toString(),
 			USER = "1";
 	// @formatter:on
+
+	// SELECT
+
+	public static SelectEvent getSelectEvent() {
+
+		SelectEvent evt = new SelectEvent();
+		evt.setAggregateId(PREFIX + CODE);
+		evt.setType(SettingsEventTypes.SELECT);
+		evt.setVersion(1);
+		evt.setUserId(USER);
+		evt.setSelection(getSelectionDTO());
+		return evt;
+	}
+
+	public static SelectConfirmedEvent getSelectConfirmedEvent() {
+
+		SelectConfirmedEvent evt = new SelectConfirmedEvent().buildFrom(getSelectEvent());
+		evt.setType(SettingsEventTypes.SELECT_CONFIRMED);
+		return evt;
+	}
+
+	public static SelectedEvent getSelectedEvent() {
+
+		SelectedEvent evt = new SelectedEvent().buildFrom(getSelectEvent());
+		evt.setType(SettingsEventTypes.SELECTED);
+		evt.setSelection(getSelectionDTO());
+		return evt;
+	}
+
+	public static SelectFailedEvent getSelectFailedEvent() {
+
+		SelectFailedEvent evt = new SelectFailedEvent().buildFrom(getSelectEvent());
+		evt.setType(SettingsEventTypes.SELECT_FAILED);
+		evt.setExceptionType("ItemNotFound");
+		Map<String, String> arguments = new HashMap<String, String>();
+		arguments.put("a", "b");
+		evt.setArguments(arguments);
+		return evt;
+	}
+
+	public static SelectCancelledEvent getSelectCancelledEvent() {
+
+		SelectCancelledEvent evt = new SelectCancelledEvent().buildFrom(getSelectEvent());
+		evt.setType(SettingsEventTypes.SELECT_CANCELLED);
+		evt.setExceptionType("ItemNotFound");
+		Map<String, String> arguments = new HashMap<String, String>();
+		arguments.put("a", "b");
+		evt.setArguments(arguments);
+		return evt;
+	}
+
+	// DESELECT
+
+	public static DeselectEvent getDeselectEvent() {
+
+		DeselectEvent evt = new DeselectEvent();
+		evt.setAggregateId(PREFIX + CODE);
+		evt.setType(SettingsEventTypes.SELECT);
+		evt.setVersion(1);
+		evt.setUserId(USER);
+		evt.setSelection(getSelectionDTO());
+		return evt;
+	}
+
+	public static DeselectConfirmedEvent getDeselectConfirmedEvent() {
+
+		DeselectConfirmedEvent evt = new DeselectConfirmedEvent().buildFrom(getDeselectEvent());
+		evt.setType(SettingsEventTypes.DESELECT_CONFIRMED);
+		return evt;
+	}
+
+	public static DeselectedEvent getDeselectedEvent() {
+
+		DeselectedEvent evt = new DeselectedEvent().buildFrom(getDeselectEvent());
+		evt.setType(SettingsEventTypes.DESELECTED);
+		evt.setSelection(getSelectionDTO());
+		return evt;
+	}
+
+	public static DeselectFailedEvent getDeselectFailedEvent() {
+
+		DeselectFailedEvent evt = new DeselectFailedEvent().buildFrom(getDeselectEvent());
+		evt.setType(SettingsEventTypes.DESELECT_FAILED);
+		evt.setExceptionType("ItemNotFound");
+		Map<String, String> arguments = new HashMap<String, String>();
+		arguments.put("a", "b");
+		evt.setArguments(arguments);
+		return evt;
+	}
+
+	public static DeselectCancelledEvent getDeselectCancelledEvent() {
+
+		DeselectCancelledEvent evt = new DeselectCancelledEvent().buildFrom(getDeselectEvent());
+		evt.setType(SettingsEventTypes.DESELECT_CANCELLED);
+		evt.setExceptionType("ItemNotFound");
+		Map<String, String> arguments = new HashMap<String, String>();
+		arguments.put("a", "b");
+		evt.setArguments(arguments);
+		return evt;
+	}
+
+	// CLEAR
+
+	public static ClearEvent getClearEvent() {
+
+		ClearEvent evt = new ClearEvent();
+		evt.setAggregateId(PREFIX + CODE);
+		evt.setType(SettingsEventTypes.CLEAR);
+		evt.setVersion(1);
+		evt.setUserId(USER);
+		evt.setSelection(getSelectionDTO());
+		return evt;
+	}
+
+	public static ClearConfirmedEvent getClearConfirmedEvent() {
+
+		ClearConfirmedEvent evt = new ClearConfirmedEvent().buildFrom(getClearEvent());
+		evt.setType(SettingsEventTypes.CLEAR_CONFIRMED);
+		return evt;
+	}
+
+	public static ClearedEvent getClearedEvent() {
+
+		ClearedEvent evt = new ClearedEvent().buildFrom(getClearEvent());
+		evt.setType(SettingsEventTypes.CLEARED);
+		evt.setSelection(getSelectionDTO());
+		return evt;
+	}
+
+	public static ClearFailedEvent getClearFailedEvent() {
+
+		ClearFailedEvent evt = new ClearFailedEvent().buildFrom(getClearEvent());
+		evt.setType(SettingsEventTypes.CLEAR_FAILED);
+		evt.setExceptionType("ItemNotFound");
+		Map<String, String> arguments = new HashMap<String, String>();
+		arguments.put("a", "b");
+		evt.setArguments(arguments);
+		return evt;
+	}
+
+	public static ClearCancelledEvent getClearCancelledEvent() {
+
+		ClearCancelledEvent evt = new ClearCancelledEvent().buildFrom(getClearEvent());
+		evt.setType(SettingsEventTypes.CLEAR_CANCELLED);
+		evt.setExceptionType("ItemNotFound");
+		Map<String, String> arguments = new HashMap<String, String>();
+		arguments.put("a", "b");
+		evt.setArguments(arguments);
+		return evt;
+	}
+
+	//
 
 	@SuppressWarnings("serial")
 	public static SelectionDTO getSelectionDTO() {
@@ -55,9 +225,9 @@ public abstract class SettingsDataUtil {
 		return selection;
 	}
 
-	public static SaveDTO getSaveDTO() {
+	public static PersistenceDTO getSaveDTO() {
 
-		SaveDTO save = new SaveDTO();
+		PersistenceDTO save = new PersistenceDTO();
 
 		save.setId(PREFIX + CODE);
 		save.setName("prueba");

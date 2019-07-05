@@ -27,19 +27,19 @@ import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
 import es.redmic.testutils.utils.AvroBaseTest;
-import es.redmic.usersettingslib.dto.SaveDTO;
+import es.redmic.usersettingslib.dto.PersistenceDTO;
 import es.redmic.usersettingslib.unit.utils.SettingsDataUtil;
 
-public class SaveCheckAvroSchemaTest extends AvroBaseTest {
+public class PersistenceCheckAvroSchemaTest extends AvroBaseTest {
 
 	@Test
 	public void serializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() throws JSONException {
 
-		SaveDTO dto = SettingsDataUtil.getSaveDTO();
+		PersistenceDTO dto = SettingsDataUtil.getSaveDTO();
 
 		Object result = serializerAndDeserializer(dto);
 
-		assertTrue("El objeto obtenido debe ser una instancia de SaveDTO", SaveDTO.class.isInstance(result));
+		assertTrue("El objeto obtenido debe ser una instancia de SaveDTO", PersistenceDTO.class.isInstance(result));
 
 		JSONAssert.assertEquals(result.toString(), dto.toString(), false);
 	}
