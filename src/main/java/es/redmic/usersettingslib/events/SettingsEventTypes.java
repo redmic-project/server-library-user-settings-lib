@@ -47,13 +47,7 @@ public abstract class SettingsEventTypes {
 		SAVE_CONFIRMED = "SAVE_CONFIRMED",
 		SAVED = "SAVED",
 		SAVE_FAILED = "SAVE_FAILED",
-		SAVE_CANCELLED = "SAVE_CANCELLED",
-		//SHARE
-		SHARE = "SHARE",
-		SHARE_CONFIRMED = "SHARE_CONFIRMED",
-		SHARED = "SHARED",
-		SHARE_FAILED = "SHARE_FAILED",
-		SHARE_CANCELLED = "SHARE_CANCELLED";
+		SAVE_CANCELLED = "SAVE_CANCELLED";
 	//@formatter:on
 
 	public static boolean isLocked(String eventType) {
@@ -61,8 +55,7 @@ public abstract class SettingsEventTypes {
 		return !(eventType.equals(SELECTED.toString()) || eventType.equals(SELECT_CANCELLED.toString())
 				|| eventType.equals(DESELECTED.toString()) || eventType.equals(DESELECT_CANCELLED.toString())
 				|| eventType.equals(CLEARED.toString()) || eventType.equals(CLEAR_CANCELLED.toString())
-				|| eventType.equals(SAVED.toString()) || eventType.equals(SAVE_CANCELLED.toString())
-				|| eventType.equals(SHARED.toString()) || eventType.equals(SHARE_CANCELLED.toString()));
+				|| eventType.equals(SAVED.toString()) || eventType.equals(SAVE_CANCELLED.toString()));
 	}
 
 	public static boolean isSnapshot(String eventType) {
@@ -70,8 +63,7 @@ public abstract class SettingsEventTypes {
 		return eventType.equals(SettingsEventTypes.SELECTED.toString())
 				|| eventType.equals(SettingsEventTypes.DESELECTED.toString())
 				|| eventType.equals(SettingsEventTypes.CLEARED.toString())
-				|| eventType.equals(SettingsEventTypes.SAVED.toString())
-				|| eventType.equals(SettingsEventTypes.SHARED.toString());
+				|| eventType.equals(SettingsEventTypes.SAVED.toString());
 	}
 
 	public static boolean isUpdatable(String eventType) {
