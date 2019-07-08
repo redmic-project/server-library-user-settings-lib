@@ -20,6 +20,7 @@
 	<properties>
 		<!-- REDMIC -->
 		<redmic.models.version>0.10.0-feature-cleanAtlasComponents</redmic.models.version>
+		<redmic.exceptions.version>0.9.0-feature-atlasExceptions</redmic.exceptions.version>
 		<redmic.broker-lib.version>0.10.0-feature-atlasMicroservice</redmic.broker-lib.version>
 		<redmic.test-utils.version>0.9.0-feature-atlasMicroservice</redmic.test-utils.version>
 		<!-- OTHERS -->
@@ -30,6 +31,12 @@
 			<groupId>es.redmic.lib</groupId>
 			<artifactId>models</artifactId>
 			<version>${redmic.models.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>es.redmic.lib</groupId>
+			<artifactId>exceptions</artifactId>
+			<version>${redmic.exceptions.version}</version>
 		</dependency>
 		
 		<dependency>
