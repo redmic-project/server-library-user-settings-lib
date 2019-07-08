@@ -278,7 +278,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void SaveedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		SavedEvent event = SettingsDataUtil.getSaveedEvent();
+		SavedEvent event = SettingsDataUtil.getSavedEvent();
 
 		Object result = serializerAndDeserializer(event);
 

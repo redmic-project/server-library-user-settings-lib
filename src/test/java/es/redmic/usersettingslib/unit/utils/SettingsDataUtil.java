@@ -232,7 +232,7 @@ public abstract class SettingsDataUtil {
 		return evt;
 	}
 
-	public static SavedEvent getSaveedEvent() {
+	public static SavedEvent getSavedEvent() {
 
 		SavedEvent evt = new SavedEvent().buildFrom(getSaveEvent());
 		evt.setType(SettingsEventTypes.SAVED);
