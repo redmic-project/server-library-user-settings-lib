@@ -2,8 +2,9 @@ package es.redmic.usersettingslib.events.clear;
 
 import org.apache.avro.Schema;
 
-import es.redmic.brokerlib.avro.common.EventError;
+import es.redmic.usersettingslib.dto.SelectionDTO;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
+import es.redmic.usersettingslib.events.common.SelectionCancelledEvent;
 
 /*-
  * #%L
@@ -25,13 +26,14 @@ import es.redmic.usersettingslib.events.SettingsEventTypes;
  * #L%
  */
 
-public class ClearCancelledEvent extends EventError {
+public class ClearCancelledEvent extends SelectionCancelledEvent {
 
 	// @formatter:off
 
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
 		+ "\"type\":\"record\",\"name\":\"ClearCancelledEvent\","
 				+ "\"namespace\":\"es.redmic.usersettingslib.events.clear\",\"fields\":["
+			+ getSelectionEventSchema() + "," 
 			+ getFailEventSchema() + ","
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
@@ -40,6 +42,11 @@ public class ClearCancelledEvent extends EventError {
 
 	public ClearCancelledEvent() {
 		super(type);
+	}
+
+	public ClearCancelledEvent(SelectionDTO selection) {
+		super(type);
+		this.setSelection(selection);
 	}
 
 	@Override

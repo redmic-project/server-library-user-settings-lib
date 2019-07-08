@@ -102,6 +102,7 @@ public abstract class SettingsDataUtil {
 
 		SelectCancelledEvent evt = new SelectCancelledEvent().buildFrom(getSelectEvent());
 		evt.setType(SettingsEventTypes.SELECT_CANCELLED);
+		evt.setSelection(getSelectionDTO());
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -152,6 +153,7 @@ public abstract class SettingsDataUtil {
 
 		DeselectCancelledEvent evt = new DeselectCancelledEvent().buildFrom(getDeselectEvent());
 		evt.setType(SettingsEventTypes.DESELECT_CANCELLED);
+		evt.setSelection(getSelectionDTO());
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -202,6 +204,7 @@ public abstract class SettingsDataUtil {
 
 		ClearCancelledEvent evt = new ClearCancelledEvent().buildFrom(getClearEvent());
 		evt.setType(SettingsEventTypes.CLEAR_CANCELLED);
+		evt.setSelection(getSelectionDTO());
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -252,6 +255,7 @@ public abstract class SettingsDataUtil {
 
 		SaveCancelledEvent evt = new SaveCancelledEvent().buildFrom(getSaveEvent());
 		evt.setType(SettingsEventTypes.SAVE_CANCELLED);
+		evt.setPersistence(getPersistenceDTO());
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
