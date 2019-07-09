@@ -14,6 +14,13 @@ import es.redmic.usersettingslib.events.clear.ClearConfirmedEvent;
 import es.redmic.usersettingslib.events.clear.ClearEvent;
 import es.redmic.usersettingslib.events.clear.ClearFailedEvent;
 import es.redmic.usersettingslib.events.clear.ClearedEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsCancelledEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckFailedEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckedEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsConfirmedEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsFailedEvent;
+import es.redmic.usersettingslib.events.delete.SettingsDeletedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectCancelledEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectConfirmedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectEvent;
@@ -93,6 +100,54 @@ public class SettingsEventFactoryTest {
 		SaveSettingsEvent event = (SaveSettingsEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVE);
 
 		assertEquals(SettingsEventTypes.SAVE, event.getType());
+
+		checkMetadataFields(source, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnDeleteEvent_IfTypeIsDelete() {
+
+		Event source = SettingsDataUtil.getDeleteEvent();
+		DeleteSettingsEvent event = (DeleteSettingsEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.DELETE);
+
+		assertEquals(SettingsEventTypes.DELETE, event.getType());
+
+		checkMetadataFields(source, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnDeleteSettingsCheckedEvent_IfTypeIsDeleteChecked() {
+
+		Event source = SettingsDataUtil.getDeleteEvent();
+		DeleteSettingsCheckedEvent event = (DeleteSettingsCheckedEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.DELETE_CHECKED);
+
+		assertEquals(SettingsEventTypes.DELETE_CHECKED, event.getType());
+
+		checkMetadataFields(source, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnDeleteSettingsConfirmedEvent_IfTypeIsDeleteConfirmed() {
+
+		Event source = SettingsDataUtil.getDeleteEvent();
+		DeleteSettingsConfirmedEvent event = (DeleteSettingsConfirmedEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.DELETE_CONFIRMED);
+
+		assertEquals(SettingsEventTypes.DELETE_CONFIRMED, event.getType());
+
+		checkMetadataFields(source, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnSettingsDeletedEvent_IfTypeIsDeleted() {
+
+		Event source = SettingsDataUtil.getDeleteEvent();
+		SettingsDeletedEvent event = (SettingsDeletedEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.DELETED);
+
+		assertEquals(SettingsEventTypes.DELETED, event.getType());
 
 		checkMetadataFields(source, event);
 	}
@@ -258,10 +313,42 @@ public class SettingsEventFactoryTest {
 
 		Event source = SettingsDataUtil.getSaveEvent();
 
-		SaveSettingsFailedEvent event = (SaveSettingsFailedEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVE_FAILED,
-				exception.getExceptionType(), exception.getArguments());
+		SaveSettingsFailedEvent event = (SaveSettingsFailedEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.SAVE_FAILED, exception.getExceptionType(), exception.getArguments());
 
 		assertEquals(SettingsEventTypes.SAVE_FAILED, event.getType());
+
+		checkMetadataFields(source, event);
+		checkErrorFields(exception, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnDeleteSettingsFailedEvent_IfTypeIsDeleteFailed() {
+
+		DeleteSettingsFailedEvent exception = SettingsDataUtil.getDeleteFailedEvent();
+
+		Event source = SettingsDataUtil.getDeleteEvent();
+
+		DeleteSettingsFailedEvent event = (DeleteSettingsFailedEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.DELETE_FAILED, exception.getExceptionType(), exception.getArguments());
+
+		assertEquals(SettingsEventTypes.DELETE_FAILED, event.getType());
+
+		checkMetadataFields(source, event);
+		checkErrorFields(exception, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnDeleteSettingsCheckFailedEvent_IfTypeIsDeleteCheckFailed() {
+
+		DeleteSettingsCheckFailedEvent exception = SettingsDataUtil.getDeleteSettingsCheckFailedEvent();
+
+		Event source = SettingsDataUtil.getDeleteEvent();
+
+		DeleteSettingsCheckFailedEvent event = (DeleteSettingsCheckFailedEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.DELETE_CHECK_FAILED, exception.getExceptionType(), exception.getArguments());
+
+		assertEquals(SettingsEventTypes.DELETE_CHECK_FAILED, event.getType());
 
 		checkMetadataFields(source, event);
 		checkErrorFields(exception, event);
@@ -335,6 +422,24 @@ public class SettingsEventFactoryTest {
 				exception.getArguments());
 
 		assertEquals(SettingsEventTypes.SAVE_CANCELLED, event.getType());
+
+		checkMetadataFields(source, event);
+		checkErrorFields(exception, event);
+		assertNotNull(event.getPersistence());
+	}
+
+	@Test
+	public void GetEvent_ReturnDeleteSettingsCancelledEvent_IfTypeIsDeleteCancelled() {
+
+		DeleteSettingsCancelledEvent exception = SettingsDataUtil.getDeleteCancelledEvent();
+
+		Event source = SettingsDataUtil.getSaveEvent();
+
+		DeleteSettingsCancelledEvent event = (DeleteSettingsCancelledEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.DELETE_CANCELLED, SettingsDataUtil.getPersistenceDTO(), exception.getExceptionType(),
+				exception.getArguments());
+
+		assertEquals(SettingsEventTypes.DELETE_CANCELLED, event.getType());
 
 		checkMetadataFields(source, event);
 		checkErrorFields(exception, event);

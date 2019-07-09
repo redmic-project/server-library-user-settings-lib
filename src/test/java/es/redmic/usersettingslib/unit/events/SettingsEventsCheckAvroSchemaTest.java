@@ -31,6 +31,14 @@ import es.redmic.usersettingslib.events.clear.ClearConfirmedEvent;
 import es.redmic.usersettingslib.events.clear.ClearEvent;
 import es.redmic.usersettingslib.events.clear.ClearFailedEvent;
 import es.redmic.usersettingslib.events.clear.ClearedEvent;
+import es.redmic.usersettingslib.events.delete.CheckDeleteSettingsEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsCancelledEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckFailedEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckedEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsConfirmedEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsFailedEvent;
+import es.redmic.usersettingslib.events.delete.SettingsDeletedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectCancelledEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectConfirmedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectEvent;
@@ -257,7 +265,8 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 
 		Object result = serializerAndDeserializer(event);
 
-		assertTrue("El objeto obtenido debe ser una instancia de SaveEvent", SaveSettingsEvent.class.isInstance(result));
+		assertTrue("El objeto obtenido debe ser una instancia de SaveEvent",
+				SaveSettingsEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}
@@ -282,7 +291,8 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 
 		Object result = serializerAndDeserializer(event);
 
-		assertTrue("El objeto obtenido debe ser una instancia de SavedEvent", SettingsSavedEvent.class.isInstance(result));
+		assertTrue("El objeto obtenido debe ser una instancia de SavedEvent",
+				SettingsSavedEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}
@@ -309,6 +319,112 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 
 		assertTrue("El objeto obtenido debe ser una instancia de SaveCancelledEvent",
 				SaveSettingsCancelledEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	// DELETE
+
+	@Test
+	public void CreateDeleteEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		DeleteSettingsEvent event = SettingsDataUtil.getDeleteEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de DeleteEvent",
+				DeleteSettingsEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	@Test
+	public void CheckDeleteSettingsEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		CheckDeleteSettingsEvent event = SettingsDataUtil.getCheckDeleteSettingsEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de CheckDeleteSettingsEvent",
+				CheckDeleteSettingsEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	@Test
+	public void DeleteSettingsCheckedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		DeleteSettingsCheckedEvent event = SettingsDataUtil.getDeleteSettingsCheckedEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de DeleteSettingsCheckedEvent",
+				DeleteSettingsCheckedEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	@Test
+	public void DeleteSettingsCheckFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		DeleteSettingsCheckFailedEvent event = SettingsDataUtil.getDeleteSettingsCheckFailedEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de DeleteSettingsCheckFailedEvent",
+				DeleteSettingsCheckFailedEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	@Test
+	public void CreateDeleteConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		DeleteSettingsConfirmedEvent event = SettingsDataUtil.getDeleteConfirmedEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de DeleteConfirmedEvent",
+				DeleteSettingsConfirmedEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	@Test
+	public void DeletedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		SettingsDeletedEvent event = SettingsDataUtil.getDeletedEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de DeletedEvent",
+				SettingsDeletedEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	@Test
+	public void CreateDeleteFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		DeleteSettingsFailedEvent event = SettingsDataUtil.getDeleteFailedEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de DeleteFailedEvent",
+				DeleteSettingsFailedEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	@Test
+	public void DeleteCancelledEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		DeleteSettingsCancelledEvent event = SettingsDataUtil.getDeleteCancelledEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de DeleteCancelledEvent",
+				DeleteSettingsCancelledEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}

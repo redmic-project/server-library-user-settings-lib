@@ -36,6 +36,14 @@ import es.redmic.usersettingslib.events.clear.ClearConfirmedEvent;
 import es.redmic.usersettingslib.events.clear.ClearEvent;
 import es.redmic.usersettingslib.events.clear.ClearFailedEvent;
 import es.redmic.usersettingslib.events.clear.ClearedEvent;
+import es.redmic.usersettingslib.events.delete.CheckDeleteSettingsEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsCancelledEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckFailedEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckedEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsConfirmedEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsFailedEvent;
+import es.redmic.usersettingslib.events.delete.SettingsDeletedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectCancelledEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectConfirmedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectEvent;
@@ -262,6 +270,77 @@ public abstract class SettingsDataUtil {
 		arguments.put("a", "b");
 		evt.setArguments(arguments);
 		return evt;
+	}
+
+	// DELETE
+
+	public static DeleteSettingsEvent getDeleteEvent() {
+
+		DeleteSettingsEvent evt = new DeleteSettingsEvent();
+		evt.setAggregateId(PREFIX + CODE);
+		evt.setType(SettingsEventTypes.SAVE);
+		evt.setVersion(1);
+		evt.setUserId(USER);
+		return evt;
+	}
+
+	public static DeleteSettingsConfirmedEvent getDeleteConfirmedEvent() {
+
+		DeleteSettingsConfirmedEvent evt = new DeleteSettingsConfirmedEvent().buildFrom(getDeleteEvent());
+		evt.setType(SettingsEventTypes.SAVE_CONFIRMED);
+		return evt;
+	}
+
+	public static SettingsDeletedEvent getDeletedEvent() {
+
+		SettingsDeletedEvent evt = new SettingsDeletedEvent().buildFrom(getDeleteEvent());
+		evt.setType(SettingsEventTypes.SAVED);
+		return evt;
+	}
+
+	public static DeleteSettingsFailedEvent getDeleteFailedEvent() {
+
+		DeleteSettingsFailedEvent evt = new DeleteSettingsFailedEvent().buildFrom(getDeleteEvent());
+		evt.setType(SettingsEventTypes.SAVE_FAILED);
+		evt.setExceptionType("ItemNotFound");
+		Map<String, String> arguments = new HashMap<String, String>();
+		arguments.put("a", "b");
+		evt.setArguments(arguments);
+		return evt;
+	}
+
+	public static DeleteSettingsCancelledEvent getDeleteCancelledEvent() {
+
+		DeleteSettingsCancelledEvent evt = new DeleteSettingsCancelledEvent().buildFrom(getDeleteEvent());
+		evt.setType(SettingsEventTypes.SAVE_CANCELLED);
+		evt.setPersistence(getPersistenceDTO());
+		evt.setExceptionType("ItemNotFound");
+		Map<String, String> arguments = new HashMap<String, String>();
+		arguments.put("a", "b");
+		evt.setArguments(arguments);
+		return evt;
+	}
+
+	public static CheckDeleteSettingsEvent getCheckDeleteSettingsEvent() {
+
+		return new CheckDeleteSettingsEvent().buildFrom(getDeleteEvent());
+	}
+
+	public static DeleteSettingsCheckFailedEvent getDeleteSettingsCheckFailedEvent() {
+
+		DeleteSettingsCheckFailedEvent event = new DeleteSettingsCheckFailedEvent().buildFrom(getDeleteEvent());
+
+		event.setExceptionType("ItemIsShared");
+		Map<String, String> arguments = new HashMap<String, String>();
+		arguments.put("a", "b");
+		event.setArguments(arguments);
+
+		return event;
+	}
+
+	public static DeleteSettingsCheckedEvent getDeleteSettingsCheckedEvent() {
+
+		return new DeleteSettingsCheckedEvent().buildFrom(getDeleteEvent());
 	}
 
 	//

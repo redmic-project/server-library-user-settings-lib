@@ -40,6 +40,13 @@ import es.redmic.usersettingslib.events.common.PersistenceCancelledEvent;
 import es.redmic.usersettingslib.events.common.PersistenceEvent;
 import es.redmic.usersettingslib.events.common.SelectionCancelledEvent;
 import es.redmic.usersettingslib.events.common.SelectionEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsCancelledEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckFailedEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckedEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsConfirmedEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsEvent;
+import es.redmic.usersettingslib.events.delete.DeleteSettingsFailedEvent;
+import es.redmic.usersettingslib.events.delete.SettingsDeletedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectCancelledEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectConfirmedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectEvent;
@@ -82,8 +89,20 @@ public class SettingsEventFactory {
 
 		if (type.equals(SettingsEventTypes.SAVE)) {
 
-			logger.debug("Creando evento SaveEvent para: " + source.getAggregateId());
+			logger.debug("Creando evento SaveSettingsEvent para: " + source.getAggregateId());
 			return new SaveSettingsEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.DELETE)) {
+
+			logger.debug("Creando evento DeleteSettingsEvent para: " + source.getAggregateId());
+			return new DeleteSettingsEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.DELETE_CHECKED)) {
+
+			logger.debug("Creando evento DeleteSettingsCheckedEvent para: " + source.getAggregateId());
+			return new DeleteSettingsCheckedEvent().buildFrom(source);
 		}
 
 		if (type.equals(SettingsEventTypes.SELECT_CONFIRMED)) {
@@ -109,8 +128,21 @@ public class SettingsEventFactory {
 
 		if (type.equals(SettingsEventTypes.SAVE_CONFIRMED)) {
 
-			logger.debug("Creando evento SaveConfirmedEvent para: " + source.getAggregateId());
+			logger.debug("Creando evento SaveSettingsConfirmedEvent para: " + source.getAggregateId());
 			return new SaveSettingsConfirmedEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.DELETE_CONFIRMED)) {
+
+			logger.debug("Creando evento DeleteSettingsConfirmedEvent para: " + source.getAggregateId());
+
+			return new DeleteSettingsConfirmedEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.DELETED)) {
+
+			logger.debug("Creando evento SettingsDeletedEvent para: " + source.getAggregateId());
+			return new SettingsDeletedEvent().buildFrom(source);
 		}
 
 		logger.error("Tipo de evento no soportado");
@@ -150,7 +182,7 @@ public class SettingsEventFactory {
 		PersistenceEvent successfulEvent = null;
 
 		if (type.equals(SettingsEventTypes.SAVED)) {
-			logger.debug("Creando evento SavedEvent para: " + source.getAggregateId());
+			logger.debug("Creando evento SettingsSavedEvent para: " + source.getAggregateId());
 			successfulEvent = new SettingsSavedEvent().buildFrom(source);
 		}
 
@@ -186,8 +218,20 @@ public class SettingsEventFactory {
 
 		if (type.equals(SettingsEventTypes.SAVE_FAILED)) {
 
-			logger.debug("No se pudo guardar la selección");
+			logger.debug("No se pudo guardar la configuración");
 			failedEvent = new SaveSettingsFailedEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.DELETE_FAILED)) {
+
+			logger.debug("No se pudo eliminar la configuración");
+			failedEvent = new DeleteSettingsFailedEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.DELETE_CHECK_FAILED)) {
+
+			logger.debug("Checkeo de eliminación fallido, la confirmación está compartida");
+			failedEvent = new DeleteSettingsCheckFailedEvent().buildFrom(source);
 		}
 
 		if (failedEvent != null) {
@@ -246,8 +290,14 @@ public class SettingsEventFactory {
 
 		if (type.equals(SettingsEventTypes.SAVE_CANCELLED)) {
 
-			logger.debug("Creando evento SaveCancelledEvent para: " + source.getAggregateId());
+			logger.debug("Creando evento SaveSettingsCancelledEvent para: " + source.getAggregateId());
 			cancelledEvent = new SaveSettingsCancelledEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.DELETE_CANCELLED)) {
+
+			logger.debug("Creando evento DeleteSettingsCancelledEvent para: " + source.getAggregateId());
+			cancelledEvent = new DeleteSettingsCancelledEvent().buildFrom(source);
 		}
 
 		if (cancelledEvent != null) {
