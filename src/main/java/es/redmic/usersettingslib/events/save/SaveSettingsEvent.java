@@ -33,7 +33,7 @@ public class SaveSettingsEvent extends PersistenceEvent {
 	// @formatter:off
 
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
-		+ "\"type\":\"record\",\"name\":\"SaveEvent\","
+		+ "\"type\":\"record\",\"name\":\"SaveSettingsEvent\","
 				+ "\"namespace\":\"es.redmic.usersettingslib.events.save\",\"fields\":["
 			+ getPersistenceEventSchema() + ","
 			+ getEventBaseSchema() + "]}");

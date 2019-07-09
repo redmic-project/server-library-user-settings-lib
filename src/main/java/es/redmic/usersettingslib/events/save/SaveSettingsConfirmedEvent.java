@@ -30,7 +30,7 @@ public class SaveSettingsConfirmedEvent extends SimpleEvent {
 	// @formatter:off
 
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
-		+ "\"type\":\"record\",\"name\":\"SaveConfirmedEvent\","
+		+ "\"type\":\"record\",\"name\":\"SaveSettingsConfirmedEvent\","
 				+ "\"namespace\":\"es.redmic.usersettingslib.events.save\",\"fields\":["
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on

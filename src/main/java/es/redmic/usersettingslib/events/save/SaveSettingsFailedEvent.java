@@ -30,7 +30,7 @@ public class SaveSettingsFailedEvent extends EventError {
 	// @formatter:off
 
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
-		+ "\"type\":\"record\",\"name\":\"SaveFailedEvent\","
+		+ "\"type\":\"record\",\"name\":\"SaveSettingsFailedEvent\","
 				+ "\"namespace\":\"es.redmic.usersettingslib.events.save\",\"fields\":["
 			+ getFailEventSchema() + ","
 			+ getEventBaseSchema() + "]}");

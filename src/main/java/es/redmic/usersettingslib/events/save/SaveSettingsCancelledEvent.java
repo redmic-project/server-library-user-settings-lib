@@ -31,7 +31,7 @@ public class SaveSettingsCancelledEvent extends PersistenceCancelledEvent {
 	// @formatter:off
 
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
-		+ "\"type\":\"record\",\"name\":\"SaveCancelledEvent\","
+		+ "\"type\":\"record\",\"name\":\"SaveSettingsCancelledEvent\","
 				+ "\"namespace\":\"es.redmic.usersettingslib.events.save\",\"fields\":["
 			+ getPersistenceEventSchema() + ","
 			+ getFailEventSchema() + ","
