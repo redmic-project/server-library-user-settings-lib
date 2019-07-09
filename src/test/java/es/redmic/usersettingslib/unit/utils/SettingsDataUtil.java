@@ -41,11 +41,11 @@ import es.redmic.usersettingslib.events.deselect.DeselectConfirmedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectFailedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectedEvent;
-import es.redmic.usersettingslib.events.save.SaveCancelledEvent;
-import es.redmic.usersettingslib.events.save.SaveConfirmedEvent;
-import es.redmic.usersettingslib.events.save.SaveEvent;
-import es.redmic.usersettingslib.events.save.SaveFailedEvent;
-import es.redmic.usersettingslib.events.save.SavedEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsCancelledEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsConfirmedEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsFailedEvent;
+import es.redmic.usersettingslib.events.save.SettingsSavedEvent;
 import es.redmic.usersettingslib.events.select.SelectCancelledEvent;
 import es.redmic.usersettingslib.events.select.SelectConfirmedEvent;
 import es.redmic.usersettingslib.events.select.SelectEvent;
@@ -215,9 +215,9 @@ public abstract class SettingsDataUtil {
 
 	// SAVE
 
-	public static SaveEvent getSaveEvent() {
+	public static SaveSettingsEvent getSaveEvent() {
 
-		SaveEvent evt = new SaveEvent();
+		SaveSettingsEvent evt = new SaveSettingsEvent();
 		evt.setAggregateId(PREFIX + CODE);
 		evt.setType(SettingsEventTypes.SAVE);
 		evt.setVersion(1);
@@ -226,24 +226,24 @@ public abstract class SettingsDataUtil {
 		return evt;
 	}
 
-	public static SaveConfirmedEvent getSaveConfirmedEvent() {
+	public static SaveSettingsConfirmedEvent getSaveConfirmedEvent() {
 
-		SaveConfirmedEvent evt = new SaveConfirmedEvent().buildFrom(getSaveEvent());
+		SaveSettingsConfirmedEvent evt = new SaveSettingsConfirmedEvent().buildFrom(getSaveEvent());
 		evt.setType(SettingsEventTypes.SAVE_CONFIRMED);
 		return evt;
 	}
 
-	public static SavedEvent getSavedEvent() {
+	public static SettingsSavedEvent getSavedEvent() {
 
-		SavedEvent evt = new SavedEvent().buildFrom(getSaveEvent());
+		SettingsSavedEvent evt = new SettingsSavedEvent().buildFrom(getSaveEvent());
 		evt.setType(SettingsEventTypes.SAVED);
 		evt.setPersistence(getPersistenceDTO());
 		return evt;
 	}
 
-	public static SaveFailedEvent getSaveFailedEvent() {
+	public static SaveSettingsFailedEvent getSaveFailedEvent() {
 
-		SaveFailedEvent evt = new SaveFailedEvent().buildFrom(getSaveEvent());
+		SaveSettingsFailedEvent evt = new SaveSettingsFailedEvent().buildFrom(getSaveEvent());
 		evt.setType(SettingsEventTypes.SAVE_FAILED);
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
@@ -252,9 +252,9 @@ public abstract class SettingsDataUtil {
 		return evt;
 	}
 
-	public static SaveCancelledEvent getSaveCancelledEvent() {
+	public static SaveSettingsCancelledEvent getSaveCancelledEvent() {
 
-		SaveCancelledEvent evt = new SaveCancelledEvent().buildFrom(getSaveEvent());
+		SaveSettingsCancelledEvent evt = new SaveSettingsCancelledEvent().buildFrom(getSaveEvent());
 		evt.setType(SettingsEventTypes.SAVE_CANCELLED);
 		evt.setPersistence(getPersistenceDTO());
 		evt.setExceptionType("ItemNotFound");

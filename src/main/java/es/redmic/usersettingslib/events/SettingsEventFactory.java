@@ -45,11 +45,11 @@ import es.redmic.usersettingslib.events.deselect.DeselectConfirmedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectFailedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectedEvent;
-import es.redmic.usersettingslib.events.save.SaveCancelledEvent;
-import es.redmic.usersettingslib.events.save.SaveConfirmedEvent;
-import es.redmic.usersettingslib.events.save.SaveEvent;
-import es.redmic.usersettingslib.events.save.SaveFailedEvent;
-import es.redmic.usersettingslib.events.save.SavedEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsCancelledEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsConfirmedEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsFailedEvent;
+import es.redmic.usersettingslib.events.save.SettingsSavedEvent;
 import es.redmic.usersettingslib.events.select.SelectCancelledEvent;
 import es.redmic.usersettingslib.events.select.SelectConfirmedEvent;
 import es.redmic.usersettingslib.events.select.SelectEvent;
@@ -83,7 +83,7 @@ public class SettingsEventFactory {
 		if (type.equals(SettingsEventTypes.SAVE)) {
 
 			logger.debug("Creando evento SaveEvent para: " + source.getAggregateId());
-			return new SaveEvent().buildFrom(source);
+			return new SaveSettingsEvent().buildFrom(source);
 		}
 
 		if (type.equals(SettingsEventTypes.SELECT_CONFIRMED)) {
@@ -110,7 +110,7 @@ public class SettingsEventFactory {
 		if (type.equals(SettingsEventTypes.SAVE_CONFIRMED)) {
 
 			logger.debug("Creando evento SaveConfirmedEvent para: " + source.getAggregateId());
-			return new SaveConfirmedEvent().buildFrom(source);
+			return new SaveSettingsConfirmedEvent().buildFrom(source);
 		}
 
 		logger.error("Tipo de evento no soportado");
@@ -151,7 +151,7 @@ public class SettingsEventFactory {
 
 		if (type.equals(SettingsEventTypes.SAVED)) {
 			logger.debug("Creando evento SavedEvent para: " + source.getAggregateId());
-			successfulEvent = new SavedEvent().buildFrom(source);
+			successfulEvent = new SettingsSavedEvent().buildFrom(source);
 		}
 
 		if (successfulEvent != null) {
@@ -187,7 +187,7 @@ public class SettingsEventFactory {
 		if (type.equals(SettingsEventTypes.SAVE_FAILED)) {
 
 			logger.debug("No se pudo guardar la selección");
-			failedEvent = new SaveFailedEvent().buildFrom(source);
+			failedEvent = new SaveSettingsFailedEvent().buildFrom(source);
 		}
 
 		if (failedEvent != null) {
@@ -247,7 +247,7 @@ public class SettingsEventFactory {
 		if (type.equals(SettingsEventTypes.SAVE_CANCELLED)) {
 
 			logger.debug("Creando evento SaveCancelledEvent para: " + source.getAggregateId());
-			cancelledEvent = new SaveCancelledEvent().buildFrom(source);
+			cancelledEvent = new SaveSettingsCancelledEvent().buildFrom(source);
 		}
 
 		if (cancelledEvent != null) {

@@ -19,11 +19,11 @@ import es.redmic.usersettingslib.events.deselect.DeselectConfirmedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectFailedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectedEvent;
-import es.redmic.usersettingslib.events.save.SaveCancelledEvent;
-import es.redmic.usersettingslib.events.save.SaveConfirmedEvent;
-import es.redmic.usersettingslib.events.save.SaveEvent;
-import es.redmic.usersettingslib.events.save.SaveFailedEvent;
-import es.redmic.usersettingslib.events.save.SavedEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsCancelledEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsConfirmedEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsFailedEvent;
+import es.redmic.usersettingslib.events.save.SettingsSavedEvent;
 import es.redmic.usersettingslib.events.select.SelectCancelledEvent;
 import es.redmic.usersettingslib.events.select.SelectConfirmedEvent;
 import es.redmic.usersettingslib.events.select.SelectEvent;
@@ -90,7 +90,7 @@ public class SettingsEventFactoryTest {
 	public void GetEvent_ReturnSaveEvent_IfTypeIsSave() {
 
 		Event source = SettingsDataUtil.getSaveEvent();
-		SaveEvent event = (SaveEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVE);
+		SaveSettingsEvent event = (SaveSettingsEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVE);
 
 		assertEquals(SettingsEventTypes.SAVE, event.getType());
 
@@ -139,7 +139,7 @@ public class SettingsEventFactoryTest {
 	public void GetEvent_ReturnSaveConfirmedEvent_IfTypeIsSaveConfirmed() {
 
 		Event source = SettingsDataUtil.getSaveEvent();
-		SaveConfirmedEvent event = (SaveConfirmedEvent) SettingsEventFactory.getEvent(source,
+		SaveSettingsConfirmedEvent event = (SaveSettingsConfirmedEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.SAVE_CONFIRMED);
 
 		assertEquals(SettingsEventTypes.SAVE_CONFIRMED, event.getType());
@@ -192,7 +192,7 @@ public class SettingsEventFactoryTest {
 	public void GetEvent_ReturnSavedEvent_IfTypeIsSaved() {
 
 		Event source = SettingsDataUtil.getSaveEvent();
-		SavedEvent event = (SavedEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVED,
+		SettingsSavedEvent event = (SettingsSavedEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVED,
 				SettingsDataUtil.getPersistenceDTO());
 
 		assertEquals(SettingsEventTypes.SAVED, event.getType());
@@ -254,11 +254,11 @@ public class SettingsEventFactoryTest {
 	@Test
 	public void GetEvent_ReturnSaveFailedEvent_IfTypeIsSaveFailed() {
 
-		SaveFailedEvent exception = SettingsDataUtil.getSaveFailedEvent();
+		SaveSettingsFailedEvent exception = SettingsDataUtil.getSaveFailedEvent();
 
 		Event source = SettingsDataUtil.getSaveEvent();
 
-		SaveFailedEvent event = (SaveFailedEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVE_FAILED,
+		SaveSettingsFailedEvent event = (SaveSettingsFailedEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVE_FAILED,
 				exception.getExceptionType(), exception.getArguments());
 
 		assertEquals(SettingsEventTypes.SAVE_FAILED, event.getType());
@@ -326,11 +326,11 @@ public class SettingsEventFactoryTest {
 	@Test
 	public void GetEvent_ReturnSaveCancelledEvent_IfTypeIsSaveCancelled() {
 
-		SaveCancelledEvent exception = SettingsDataUtil.getSaveCancelledEvent();
+		SaveSettingsCancelledEvent exception = SettingsDataUtil.getSaveCancelledEvent();
 
 		Event source = SettingsDataUtil.getSaveEvent();
 
-		SaveCancelledEvent event = (SaveCancelledEvent) SettingsEventFactory.getEvent(source,
+		SaveSettingsCancelledEvent event = (SaveSettingsCancelledEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.SAVE_CANCELLED, SettingsDataUtil.getPersistenceDTO(), exception.getExceptionType(),
 				exception.getArguments());
 

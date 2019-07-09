@@ -28,7 +28,7 @@ import es.redmic.usersettingslib.events.common.PersistenceEvent;
  * #L%
  */
 
-public class SaveEvent extends PersistenceEvent {
+public class SaveSettingsEvent extends PersistenceEvent {
 
 	// @formatter:off
 
@@ -41,12 +41,12 @@ public class SaveEvent extends PersistenceEvent {
 
 	static String type = SettingsEventTypes.SAVE;
 
-	public SaveEvent() {
+	public SaveSettingsEvent() {
 		super(type);
 		setSessionId(UUID.randomUUID().toString());
 	}
 
-	public SaveEvent(PersistenceDTO persistence) {
+	public SaveSettingsEvent(PersistenceDTO persistence) {
 		super(type);
 		this.setPersistence(persistence);
 		setSessionId(UUID.randomUUID().toString());

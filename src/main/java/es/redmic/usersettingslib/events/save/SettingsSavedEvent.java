@@ -2,8 +2,9 @@ package es.redmic.usersettingslib.events.save;
 
 import org.apache.avro.Schema;
 
-import es.redmic.brokerlib.avro.common.SimpleEvent;
+import es.redmic.usersettingslib.dto.PersistenceDTO;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
+import es.redmic.usersettingslib.events.common.PersistenceEvent;
 
 /*-
  * #%L
@@ -25,20 +26,25 @@ import es.redmic.usersettingslib.events.SettingsEventTypes;
  * #L%
  */
 
-public class SaveConfirmedEvent extends SimpleEvent {
+public class SettingsSavedEvent extends PersistenceEvent {
 
 	// @formatter:off
 
-	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
-		+ "\"type\":\"record\",\"name\":\"SaveConfirmedEvent\","
-				+ "\"namespace\":\"es.redmic.usersettingslib.events.save\",\"fields\":["
-			+ getEventBaseSchema() + "]}");
+	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser()
+			.parse("{" + "\"type\":\"record\",\"name\":\"SavedEvent\","
+					+ "\"namespace\":\"es.redmic.usersettingslib.events.save\",\"fields\":["
+					+ getPersistenceEventSchema() + "," + getEventBaseSchema() + "]}");
 	// @formatter:on
 
-	static String type = SettingsEventTypes.SAVE_CONFIRMED;
+	static String type = SettingsEventTypes.SAVED;
 
-	public SaveConfirmedEvent() {
+	public SettingsSavedEvent() {
 		super(type);
+	}
+
+	public SettingsSavedEvent(PersistenceDTO persistence) {
+		super(type);
+		this.setPersistence(persistence);
 	}
 
 	@Override

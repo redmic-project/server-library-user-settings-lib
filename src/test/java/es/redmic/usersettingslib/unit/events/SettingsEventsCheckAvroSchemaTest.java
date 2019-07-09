@@ -36,11 +36,11 @@ import es.redmic.usersettingslib.events.deselect.DeselectConfirmedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectFailedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectedEvent;
-import es.redmic.usersettingslib.events.save.SaveCancelledEvent;
-import es.redmic.usersettingslib.events.save.SaveConfirmedEvent;
-import es.redmic.usersettingslib.events.save.SaveEvent;
-import es.redmic.usersettingslib.events.save.SaveFailedEvent;
-import es.redmic.usersettingslib.events.save.SavedEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsCancelledEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsConfirmedEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsEvent;
+import es.redmic.usersettingslib.events.save.SaveSettingsFailedEvent;
+import es.redmic.usersettingslib.events.save.SettingsSavedEvent;
 import es.redmic.usersettingslib.events.select.SelectCancelledEvent;
 import es.redmic.usersettingslib.events.select.SelectConfirmedEvent;
 import es.redmic.usersettingslib.events.select.SelectEvent;
@@ -253,11 +253,11 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void CreateSaveEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		SaveEvent event = SettingsDataUtil.getSaveEvent();
+		SaveSettingsEvent event = SettingsDataUtil.getSaveEvent();
 
 		Object result = serializerAndDeserializer(event);
 
-		assertTrue("El objeto obtenido debe ser una instancia de SaveEvent", SaveEvent.class.isInstance(result));
+		assertTrue("El objeto obtenido debe ser una instancia de SaveEvent", SaveSettingsEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}
@@ -265,12 +265,12 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void CreateSaveConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		SaveConfirmedEvent event = SettingsDataUtil.getSaveConfirmedEvent();
+		SaveSettingsConfirmedEvent event = SettingsDataUtil.getSaveConfirmedEvent();
 
 		Object result = serializerAndDeserializer(event);
 
 		assertTrue("El objeto obtenido debe ser una instancia de SaveConfirmedEvent",
-				SaveConfirmedEvent.class.isInstance(result));
+				SaveSettingsConfirmedEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}
@@ -278,11 +278,11 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void SaveedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		SavedEvent event = SettingsDataUtil.getSavedEvent();
+		SettingsSavedEvent event = SettingsDataUtil.getSavedEvent();
 
 		Object result = serializerAndDeserializer(event);
 
-		assertTrue("El objeto obtenido debe ser una instancia de SavedEvent", SavedEvent.class.isInstance(result));
+		assertTrue("El objeto obtenido debe ser una instancia de SavedEvent", SettingsSavedEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}
@@ -290,12 +290,12 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void CreateSaveFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		SaveFailedEvent event = SettingsDataUtil.getSaveFailedEvent();
+		SaveSettingsFailedEvent event = SettingsDataUtil.getSaveFailedEvent();
 
 		Object result = serializerAndDeserializer(event);
 
 		assertTrue("El objeto obtenido debe ser una instancia de SaveFailedEvent",
-				SaveFailedEvent.class.isInstance(result));
+				SaveSettingsFailedEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}
@@ -303,12 +303,12 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void SaveCancelledEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		SaveCancelledEvent event = SettingsDataUtil.getSaveCancelledEvent();
+		SaveSettingsCancelledEvent event = SettingsDataUtil.getSaveCancelledEvent();
 
 		Object result = serializerAndDeserializer(event);
 
 		assertTrue("El objeto obtenido debe ser una instancia de SaveCancelledEvent",
-				SaveCancelledEvent.class.isInstance(result));
+				SaveSettingsCancelledEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}

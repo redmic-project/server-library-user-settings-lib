@@ -25,7 +25,7 @@ import es.redmic.usersettingslib.events.SettingsEventTypes;
  * #L%
  */
 
-public class SaveFailedEvent extends EventError {
+public class SaveSettingsFailedEvent extends EventError {
 
 	// @formatter:off
 
@@ -38,7 +38,7 @@ public class SaveFailedEvent extends EventError {
 
 	static String type = SettingsEventTypes.SAVE_FAILED;
 
-	public SaveFailedEvent() {
+	public SaveSettingsFailedEvent() {
 		super(type);
 	}
 
