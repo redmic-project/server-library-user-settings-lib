@@ -29,6 +29,7 @@ import org.joda.time.DateTime;
 
 import es.redmic.usersettingslib.dto.PersistenceDTO;
 import es.redmic.usersettingslib.dto.SelectionDTO;
+import es.redmic.usersettingslib.dto.SettingsDTO;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
 import es.redmic.usersettingslib.events.clear.ClearCancelledEvent;
 import es.redmic.usersettingslib.events.clear.ClearConfirmedEvent;
@@ -292,9 +293,34 @@ public abstract class SettingsDataUtil {
 		persistence.setName("prueba");
 		persistence.setUserId(USER);
 
+		persistence.setService("prueba");
+
 		persistence.setInserted(DateTime.now());
 		persistence.setUpdated(DateTime.now());
 		persistence.setAccessed(DateTime.now());
 		return persistence;
+	}
+
+	@SuppressWarnings("serial")
+	public static SettingsDTO getSettingsDTO() {
+
+		SettingsDTO settings = new SettingsDTO();
+
+		settings.setId(PREFIX + CODE);
+
+		settings.setName("prueba");
+		settings.setUserId(USER);
+
+		settings.setService("prueba");
+		settings.setSelection(new ArrayList<String>() {
+			{
+				add("1");
+			}
+		});
+
+		settings.setInserted(DateTime.now());
+		settings.setUpdated(DateTime.now());
+		settings.setAccessed(DateTime.now());
+		return settings;
 	}
 }

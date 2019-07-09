@@ -22,8 +22,6 @@ package es.redmic.usersettingslib.dto;
 
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
 import org.apache.avro.Schema;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -54,9 +52,6 @@ public class SelectionDTO extends SettingsBaseDTO {
 
 	private List<String> selection;
 
-	@NotNull
-	private String service;
-
 	public List<String> getSelection() {
 		return selection;
 	}
@@ -65,20 +60,11 @@ public class SelectionDTO extends SettingsBaseDTO {
 		this.selection = selection;
 	}
 
-	public String getService() {
-		return service;
-	}
-
-	public void setService(String service) {
-		this.service = service;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((selection == null) ? 0 : selection.hashCode());
-		result = prime * result + ((service == null) ? 0 : service.hashCode());
 		return result;
 	}
 
@@ -95,11 +81,6 @@ public class SelectionDTO extends SettingsBaseDTO {
 			if (other.selection != null)
 				return false;
 		} else if (!selection.equals(other.selection))
-			return false;
-		if (service == null) {
-			if (other.service != null)
-				return false;
-		} else if (!service.equals(other.service))
 			return false;
 		return true;
 	}

@@ -42,12 +42,4 @@ public class SelectionCheckDTOValidationTest extends DTOBaseTest<SelectionDTO> {
 
 		checkDTOHasNoError(dto);
 	}
-
-	@Test
-	public void validationDTO_ReturnError_IfServiceIsNull() {
-
-		dto.setService(null);
-
-		checkDTOHasError(dto, NOT_NULL_MESSAGE_TEMPLATE);
-	}
 }

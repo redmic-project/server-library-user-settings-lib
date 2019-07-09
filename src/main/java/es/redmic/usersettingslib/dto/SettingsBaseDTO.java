@@ -22,8 +22,10 @@ package es.redmic.usersettingslib.dto;
 
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.kjetland.jackson.jsonSchema.annotations.JsonSchemaIgnore;
 
 import es.redmic.brokerlib.avro.common.CommonDTO;
 import es.redmic.brokerlib.deserializer.CustomDateTimeDeserializer;
@@ -34,6 +36,10 @@ public abstract class SettingsBaseDTO extends CommonDTO {
 	public SettingsBaseDTO() {
 		super();
 	}
+
+	@JsonIgnore
+	@JsonSchemaIgnore
+	private String service;
 
 	@JsonSerialize(using = CustomDateTimeSerializer.class)
 	@JsonDeserialize(using = CustomDateTimeDeserializer.class)
@@ -46,6 +52,14 @@ public abstract class SettingsBaseDTO extends CommonDTO {
 	@JsonSerialize(using = CustomDateTimeSerializer.class)
 	@JsonDeserialize(using = CustomDateTimeDeserializer.class)
 	DateTime accessed;
+
+	public String getService() {
+		return service;
+	}
+
+	public void setService(String service) {
+		this.service = service;
+	}
 
 	public DateTime getInserted() {
 		return inserted;
@@ -75,6 +89,7 @@ public abstract class SettingsBaseDTO extends CommonDTO {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + ((service == null) ? 0 : service.hashCode());
 		result = prime * result + ((accessed == null) ? 0 : accessed.hashCode());
 		result = prime * result + ((inserted == null) ? 0 : inserted.hashCode());
 		result = prime * result + ((updated == null) ? 0 : updated.hashCode());
@@ -90,6 +105,11 @@ public abstract class SettingsBaseDTO extends CommonDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		SettingsBaseDTO other = (SettingsBaseDTO) obj;
+		if (service == null) {
+			if (other.service != null)
+				return false;
+		} else if (!service.equals(other.service))
+			return false;
 		if (accessed == null) {
 			if (other.accessed != null)
 				return false;

@@ -28,6 +28,7 @@ import org.joda.time.DateTimeZone;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kjetland.jackson.jsonSchema.annotations.JsonSchemaDefault;
+import com.kjetland.jackson.jsonSchema.annotations.JsonSchemaIgnore;
 
 public class PersistenceDTO extends SettingsBaseDTO {
 
@@ -38,7 +39,8 @@ public class PersistenceDTO extends SettingsBaseDTO {
 		"{\"type\":\"record\",\"name\":\"PersistenceDTO\",\"namespace\":\"es.redmic.usersettingslib.dto\",\"fields\":["
 			+ "{\"name\":\"name\",\"type\":[\"string\", \"null\"]},"
 			+ "{\"name\":\"shared\",\"type\":\"boolean\", \"default\": \"false\"},"
-			+ "{\"name\":\"userId\",\"type\":[\"string\", \"null\"]},"
+			+ "{\"name\":\"userId\",\"type\": \"string\"},"
+			+ "{\"name\":\"service\",\"type\":\"string\"},"
 			+ "{\"name\":\"inserted\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}],"
 				+ "\"default\": null},"
 			+ "{\"name\":\"updated\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}],"
@@ -58,6 +60,8 @@ public class PersistenceDTO extends SettingsBaseDTO {
 	@NotNull
 	private Boolean shared = false;
 
+	@JsonIgnore
+	@JsonSchemaIgnore
 	private String userId;
 
 	public String getName() {
@@ -138,12 +142,14 @@ public class PersistenceDTO extends SettingsBaseDTO {
 		case 2:
 			return getUserId();
 		case 3:
-			return getInserted() != null ? getInserted().getMillis() : null;
+			return getService();
 		case 4:
-			return getUpdated() != null ? getUpdated().getMillis() : null;
+			return getInserted() != null ? getInserted().getMillis() : null;
 		case 5:
-			return getAccessed() != null ? getAccessed().getMillis() : null;
+			return getUpdated() != null ? getUpdated().getMillis() : null;
 		case 6:
+			return getAccessed() != null ? getAccessed().getMillis() : null;
+		case 7:
 			return getId();
 		default:
 			throw new org.apache.avro.AvroRuntimeException("Bad index");
@@ -164,15 +170,18 @@ public class PersistenceDTO extends SettingsBaseDTO {
 			setUserId(value != null ? value.toString() : null);
 			break;
 		case 3:
-			setInserted(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
+			setService(value.toString());
 			break;
 		case 4:
-			setUpdated(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
+			setInserted(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
 			break;
 		case 5:
-			setAccessed(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
+			setUpdated(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
 			break;
 		case 6:
+			setAccessed(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
+			break;
+		case 7:
 			setId(value.toString());
 			break;
 		default:
