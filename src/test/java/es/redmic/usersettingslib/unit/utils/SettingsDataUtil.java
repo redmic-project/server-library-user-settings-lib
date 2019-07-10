@@ -278,7 +278,7 @@ public abstract class SettingsDataUtil {
 
 		DeleteSettingsEvent evt = new DeleteSettingsEvent();
 		evt.setAggregateId(PREFIX + CODE);
-		evt.setType(SettingsEventTypes.SAVE);
+		evt.setType(SettingsEventTypes.DELETE);
 		evt.setVersion(1);
 		evt.setUserId(USER);
 		return evt;
@@ -287,21 +287,21 @@ public abstract class SettingsDataUtil {
 	public static DeleteSettingsConfirmedEvent getDeleteConfirmedEvent() {
 
 		DeleteSettingsConfirmedEvent evt = new DeleteSettingsConfirmedEvent().buildFrom(getDeleteEvent());
-		evt.setType(SettingsEventTypes.SAVE_CONFIRMED);
+		evt.setType(SettingsEventTypes.DELETE_CONFIRMED);
 		return evt;
 	}
 
 	public static SettingsDeletedEvent getDeletedEvent() {
 
 		SettingsDeletedEvent evt = new SettingsDeletedEvent().buildFrom(getDeleteEvent());
-		evt.setType(SettingsEventTypes.SAVED);
+		evt.setType(SettingsEventTypes.DELETED);
 		return evt;
 	}
 
 	public static DeleteSettingsFailedEvent getDeleteFailedEvent() {
 
 		DeleteSettingsFailedEvent evt = new DeleteSettingsFailedEvent().buildFrom(getDeleteEvent());
-		evt.setType(SettingsEventTypes.SAVE_FAILED);
+		evt.setType(SettingsEventTypes.DELETE_FAILED);
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -312,7 +312,7 @@ public abstract class SettingsDataUtil {
 	public static DeleteSettingsCancelledEvent getDeleteCancelledEvent() {
 
 		DeleteSettingsCancelledEvent evt = new DeleteSettingsCancelledEvent().buildFrom(getDeleteEvent());
-		evt.setType(SettingsEventTypes.SAVE_CANCELLED);
+		evt.setType(SettingsEventTypes.DELETE_CANCELLED);
 		evt.setPersistence(getPersistenceDTO());
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
