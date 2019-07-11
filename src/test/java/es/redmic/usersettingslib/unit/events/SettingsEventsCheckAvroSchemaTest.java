@@ -30,6 +30,7 @@ import es.redmic.usersettingslib.events.clearselection.ClearSelectionCancelledEv
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionConfirmedEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionFailedEvent;
+import es.redmic.usersettingslib.events.clearselection.PartialClearSelectionEvent;
 import es.redmic.usersettingslib.events.clearselection.SelectionClearedEvent;
 import es.redmic.usersettingslib.events.delete.CheckDeleteSettingsEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCancelledEvent;
@@ -44,11 +45,14 @@ import es.redmic.usersettingslib.events.deselect.DeselectConfirmedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectFailedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectedEvent;
+import es.redmic.usersettingslib.events.deselect.PartialDeselectEvent;
+import es.redmic.usersettingslib.events.save.PartialSaveSettingsEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsConfirmedEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsFailedEvent;
 import es.redmic.usersettingslib.events.save.SettingsSavedEvent;
+import es.redmic.usersettingslib.events.select.PartialSelectEvent;
 import es.redmic.usersettingslib.events.select.SelectCancelledEvent;
 import es.redmic.usersettingslib.events.select.SelectConfirmedEvent;
 import es.redmic.usersettingslib.events.select.SelectEvent;
@@ -61,7 +65,20 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	// Select
 
 	@Test
-	public void CreateSelectEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void PartialSelectEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		PartialSelectEvent event = SettingsDataUtil.getPartialSelectEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de PartialSelectEvent",
+				PartialSelectEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	@Test
+	public void SelectEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		SelectEvent event = SettingsDataUtil.getSelectEvent();
 
@@ -73,7 +90,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	}
 
 	@Test
-	public void CreateSelectConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void SelectConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		SelectConfirmedEvent event = SettingsDataUtil.getSelectConfirmedEvent();
 
@@ -99,7 +116,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	}
 
 	@Test
-	public void CreateSelectFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void SelectFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		SelectFailedEvent event = SettingsDataUtil.getSelectFailedEvent();
 
@@ -127,7 +144,20 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	// Deselect
 
 	@Test
-	public void CreateDeselectEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void PartialDeselectEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		PartialDeselectEvent event = SettingsDataUtil.getPartialDeselectEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de PartialDeselectEvent",
+				PartialDeselectEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	@Test
+	public void DeselectEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		DeselectEvent event = SettingsDataUtil.getDeselectEvent();
 
@@ -140,7 +170,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	}
 
 	@Test
-	public void CreateDeselectConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void DeselectConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		DeselectConfirmedEvent event = SettingsDataUtil.getDeselectConfirmedEvent();
 
@@ -166,7 +196,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	}
 
 	@Test
-	public void CreateDeselectFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void DeselectFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		DeselectFailedEvent event = SettingsDataUtil.getDeselectFailedEvent();
 
@@ -194,19 +224,33 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	// Clear
 
 	@Test
-	public void CreateClearEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void PartialClearEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		ClearSelectionEvent event = SettingsDataUtil.getClearEvent();
+		PartialClearSelectionEvent event = SettingsDataUtil.getPartialClearSelectionEvent();
 
 		Object result = serializerAndDeserializer(event);
 
-		assertTrue("El objeto obtenido debe ser una instancia de ClearEvent", ClearSelectionEvent.class.isInstance(result));
+		assertTrue("El objeto obtenido debe ser una instancia de PartialClearSelectionEvent",
+				PartialClearSelectionEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}
 
 	@Test
-	public void CreateClearConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void ClearEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		ClearSelectionEvent event = SettingsDataUtil.getClearEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de ClearEvent",
+				ClearSelectionEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	@Test
+	public void ClearConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		ClearSelectionConfirmedEvent event = SettingsDataUtil.getClearConfirmedEvent();
 
@@ -225,13 +269,14 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 
 		Object result = serializerAndDeserializer(event);
 
-		assertTrue("El objeto obtenido debe ser una instancia de ClearedEvent", SelectionClearedEvent.class.isInstance(result));
+		assertTrue("El objeto obtenido debe ser una instancia de ClearedEvent",
+				SelectionClearedEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}
 
 	@Test
-	public void CreateClearFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void ClearFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		ClearSelectionFailedEvent event = SettingsDataUtil.getClearFailedEvent();
 
@@ -259,7 +304,20 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	// SAVE
 
 	@Test
-	public void CreateSaveEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void PartialSaveEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		PartialSaveSettingsEvent event = SettingsDataUtil.getPartialSaveSettingsEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de PartialSaveSettingsEvent",
+				PartialSaveSettingsEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	@Test
+	public void SaveEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		SaveSettingsEvent event = SettingsDataUtil.getSaveEvent();
 
@@ -272,7 +330,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	}
 
 	@Test
-	public void CreateSaveConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void SaveConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		SaveSettingsConfirmedEvent event = SettingsDataUtil.getSaveConfirmedEvent();
 
@@ -285,7 +343,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	}
 
 	@Test
-	public void SaveedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void SavedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		SettingsSavedEvent event = SettingsDataUtil.getSavedEvent();
 
@@ -298,7 +356,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	}
 
 	@Test
-	public void CreateSaveFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void SaveFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		SaveSettingsFailedEvent event = SettingsDataUtil.getSaveFailedEvent();
 
@@ -326,7 +384,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	// DELETE
 
 	@Test
-	public void CreateDeleteEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void DeleteEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		DeleteSettingsEvent event = SettingsDataUtil.getDeleteEvent();
 
@@ -378,7 +436,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	}
 
 	@Test
-	public void CreateDeleteConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void DeleteConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		DeleteSettingsConfirmedEvent event = SettingsDataUtil.getDeleteConfirmedEvent();
 
@@ -404,7 +462,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	}
 
 	@Test
-	public void CreateDeleteFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+	public void DeleteFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
 		DeleteSettingsFailedEvent event = SettingsDataUtil.getDeleteFailedEvent();
 
