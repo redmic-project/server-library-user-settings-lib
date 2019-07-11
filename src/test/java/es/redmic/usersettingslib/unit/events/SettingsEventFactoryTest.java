@@ -7,12 +7,14 @@ import org.junit.Test;
 
 import es.redmic.brokerlib.avro.common.Event;
 import es.redmic.brokerlib.avro.common.EventError;
+import es.redmic.testutils.utils.AvroBaseTest;
 import es.redmic.usersettingslib.events.SettingsEventFactory;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionCancelledEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionConfirmedEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionFailedEvent;
+import es.redmic.usersettingslib.events.clearselection.PartialClearSelectionEvent;
 import es.redmic.usersettingslib.events.clearselection.SelectionClearedEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckFailedEvent;
@@ -26,11 +28,14 @@ import es.redmic.usersettingslib.events.deselect.DeselectConfirmedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectFailedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectedEvent;
+import es.redmic.usersettingslib.events.deselect.PartialDeselectEvent;
+import es.redmic.usersettingslib.events.save.PartialSaveSettingsEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsConfirmedEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsFailedEvent;
 import es.redmic.usersettingslib.events.save.SettingsSavedEvent;
+import es.redmic.usersettingslib.events.select.PartialSelectEvent;
 import es.redmic.usersettingslib.events.select.SelectCancelledEvent;
 import es.redmic.usersettingslib.events.select.SelectConfirmedEvent;
 import es.redmic.usersettingslib.events.select.SelectEvent;
@@ -58,13 +63,64 @@ import es.redmic.usersettingslib.unit.utils.SettingsDataUtil;
  * #L%
  */
 
-public class SettingsEventFactoryTest {
+public class SettingsEventFactoryTest extends AvroBaseTest {
+
+	@Test
+	public void GetEvent_ReturnPartialSelectEvent_IfTypeIsPartialSelect() {
+
+		Event source = SettingsDataUtil.getSelectEvent();
+		PartialSelectEvent event = (PartialSelectEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.PARTIAL_SELECT, SettingsDataUtil.getSelectionDTO());
+
+		assertEquals(SettingsEventTypes.PARTIAL_SELECT, event.getType());
+
+		checkMetadataFields(source, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnPartialDeselectEvent_IfTypeIsPartialDeselect() {
+
+		Event source = SettingsDataUtil.getDeselectEvent();
+		PartialDeselectEvent event = (PartialDeselectEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.PARTIAL_DESELECT, SettingsDataUtil.getSelectionDTO());
+
+		assertEquals(SettingsEventTypes.PARTIAL_DESELECT, event.getType());
+
+		checkMetadataFields(source, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnPartialClearEvent_IfTypeIsPartialClear() {
+
+		Event source = SettingsDataUtil.getClearEvent();
+		PartialClearSelectionEvent event = (PartialClearSelectionEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.PARTIAL_CLEAR_SELECTION, SettingsDataUtil.getSelectionDTO());
+
+		assertEquals(SettingsEventTypes.PARTIAL_CLEAR_SELECTION, event.getType());
+
+		checkMetadataFields(source, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnPartialSaveEvent_IfTypeIsPartialSave() {
+
+		Event source = SettingsDataUtil.getSaveEvent();
+		PartialSaveSettingsEvent event = (PartialSaveSettingsEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.PARTIAL_SAVE, SettingsDataUtil.getPersistenceDTO());
+
+		assertEquals(SettingsEventTypes.PARTIAL_SAVE, event.getType());
+
+		checkMetadataFields(source, event);
+	}
+
+	//
 
 	@Test
 	public void GetEvent_ReturnSelectEvent_IfTypeIsSelect() {
 
 		Event source = SettingsDataUtil.getSelectEvent();
-		SelectEvent event = (SelectEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SELECT);
+		SelectEvent event = (SelectEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SELECT,
+				SettingsDataUtil.getSelectionDTO());
 
 		assertEquals(SettingsEventTypes.SELECT, event.getType());
 
@@ -72,10 +128,11 @@ public class SettingsEventFactoryTest {
 	}
 
 	@Test
-	public void GetEvent_ReturnDeselectEvent_IfTypeIsDeselect_Checked() {
+	public void GetEvent_ReturnDeselectEvent_IfTypeIsDeselect() {
 
 		Event source = SettingsDataUtil.getDeselectEvent();
-		DeselectEvent event = (DeselectEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.DESELECT);
+		DeselectEvent event = (DeselectEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.DESELECT,
+				SettingsDataUtil.getSelectionDTO());
 
 		assertEquals(SettingsEventTypes.DESELECT, event.getType());
 
@@ -86,9 +143,10 @@ public class SettingsEventFactoryTest {
 	public void GetEvent_ReturnClearEvent_IfTypeIsClear() {
 
 		Event source = SettingsDataUtil.getClearEvent();
-		ClearSelectionEvent event = (ClearSelectionEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.CLEAR);
+		ClearSelectionEvent event = (ClearSelectionEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.CLEAR_SELECTION, SettingsDataUtil.getSelectionDTO());
 
-		assertEquals(SettingsEventTypes.CLEAR, event.getType());
+		assertEquals(SettingsEventTypes.CLEAR_SELECTION, event.getType());
 
 		checkMetadataFields(source, event);
 	}
@@ -97,7 +155,8 @@ public class SettingsEventFactoryTest {
 	public void GetEvent_ReturnSaveEvent_IfTypeIsSave() {
 
 		Event source = SettingsDataUtil.getSaveEvent();
-		SaveSettingsEvent event = (SaveSettingsEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVE);
+		SaveSettingsEvent event = (SaveSettingsEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVE,
+				SettingsDataUtil.getPersistenceDTO());
 
 		assertEquals(SettingsEventTypes.SAVE, event.getType());
 
@@ -183,9 +242,9 @@ public class SettingsEventFactoryTest {
 
 		Event source = SettingsDataUtil.getClearEvent();
 		ClearSelectionConfirmedEvent event = (ClearSelectionConfirmedEvent) SettingsEventFactory.getEvent(source,
-				SettingsEventTypes.CLEAR_CONFIRMED);
+				SettingsEventTypes.CLEAR_SELECTION_CONFIRMED);
 
-		assertEquals(SettingsEventTypes.CLEAR_CONFIRMED, event.getType());
+		assertEquals(SettingsEventTypes.CLEAR_SELECTION_CONFIRMED, event.getType());
 
 		checkMetadataFields(source, event);
 	}
@@ -234,10 +293,10 @@ public class SettingsEventFactoryTest {
 	public void GetEvent_ReturnClearedEvent_IfTypeIsCleared() {
 
 		Event source = SettingsDataUtil.getClearEvent();
-		SelectionClearedEvent event = (SelectionClearedEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.CLEARED,
-				SettingsDataUtil.getSelectionDTO());
+		SelectionClearedEvent event = (SelectionClearedEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.SELECTION_CLEARED, SettingsDataUtil.getSelectionDTO());
 
-		assertEquals(SettingsEventTypes.CLEARED, event.getType());
+		assertEquals(SettingsEventTypes.SELECTION_CLEARED, event.getType());
 		assertNotNull(event.getSelection());
 
 		checkMetadataFields(source, event);
@@ -298,9 +357,9 @@ public class SettingsEventFactoryTest {
 		Event source = SettingsDataUtil.getClearEvent();
 
 		ClearSelectionFailedEvent event = (ClearSelectionFailedEvent) SettingsEventFactory.getEvent(source,
-				SettingsEventTypes.CLEAR_FAILED, exception.getExceptionType(), exception.getArguments());
+				SettingsEventTypes.CLEAR_SELECTION_FAILED, exception.getExceptionType(), exception.getArguments());
 
-		assertEquals(SettingsEventTypes.CLEAR_FAILED, event.getType());
+		assertEquals(SettingsEventTypes.CLEAR_SELECTION_FAILED, event.getType());
 
 		checkMetadataFields(source, event);
 		checkErrorFields(exception, event);
@@ -400,10 +459,10 @@ public class SettingsEventFactoryTest {
 		Event source = SettingsDataUtil.getClearEvent();
 
 		ClearSelectionCancelledEvent event = (ClearSelectionCancelledEvent) SettingsEventFactory.getEvent(source,
-				SettingsEventTypes.CLEAR_CANCELLED, SettingsDataUtil.getSelectionDTO(), exception.getExceptionType(),
-				exception.getArguments());
+				SettingsEventTypes.CLEAR_SELECTION_CANCELLED, SettingsDataUtil.getSelectionDTO(),
+				exception.getExceptionType(), exception.getArguments());
 
-		assertEquals(SettingsEventTypes.CLEAR_CANCELLED, event.getType());
+		assertEquals(SettingsEventTypes.CLEAR_SELECTION_CANCELLED, event.getType());
 
 		checkMetadataFields(source, event);
 		checkErrorFields(exception, event);
@@ -454,12 +513,16 @@ public class SettingsEventFactoryTest {
 		assertEquals(source.getVersion(), evt.getVersion());
 		assertEquals(source.getSessionId(), evt.getSessionId());
 		assertEquals(source.getUserId(), evt.getUserId());
+
+		serializerAndDeserializer(evt);
 	}
 
 	private void checkErrorFields(EventError source, EventError evt) {
 
 		assertEquals(source.getExceptionType(), evt.getExceptionType());
 		assertEquals(source.getArguments(), evt.getArguments());
+
+		serializerAndDeserializer(evt);
 	}
 
 }

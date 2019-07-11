@@ -35,6 +35,7 @@ import es.redmic.usersettingslib.events.clearselection.ClearSelectionCancelledEv
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionConfirmedEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionFailedEvent;
+import es.redmic.usersettingslib.events.clearselection.PartialClearSelectionEvent;
 import es.redmic.usersettingslib.events.clearselection.SelectionClearedEvent;
 import es.redmic.usersettingslib.events.common.PersistenceCancelledEvent;
 import es.redmic.usersettingslib.events.common.PersistenceEvent;
@@ -52,11 +53,14 @@ import es.redmic.usersettingslib.events.deselect.DeselectConfirmedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectFailedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectedEvent;
+import es.redmic.usersettingslib.events.deselect.PartialDeselectEvent;
+import es.redmic.usersettingslib.events.save.PartialSaveSettingsEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsConfirmedEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsFailedEvent;
 import es.redmic.usersettingslib.events.save.SettingsSavedEvent;
+import es.redmic.usersettingslib.events.select.PartialSelectEvent;
 import es.redmic.usersettingslib.events.select.SelectCancelledEvent;
 import es.redmic.usersettingslib.events.select.SelectConfirmedEvent;
 import es.redmic.usersettingslib.events.select.SelectEvent;
@@ -68,30 +72,6 @@ public class SettingsEventFactory {
 	private static Logger logger = LogManager.getLogger();
 
 	public static Event getEvent(Event source, String type) {
-
-		if (type.equals(SettingsEventTypes.SELECT)) {
-
-			logger.debug("Creando evento SelectEvent para: " + source.getAggregateId());
-			return new SelectEvent().buildFrom(source);
-		}
-
-		if (type.equals(SettingsEventTypes.DESELECT)) {
-
-			logger.debug("Creando evento DeselectEvent para: " + source.getAggregateId());
-			return new DeselectEvent().buildFrom(source);
-		}
-
-		if (type.equals(SettingsEventTypes.CLEAR)) {
-
-			logger.debug("Creando evento ClearEvent para: " + source.getAggregateId());
-			return new ClearSelectionEvent().buildFrom(source);
-		}
-
-		if (type.equals(SettingsEventTypes.SAVE)) {
-
-			logger.debug("Creando evento SaveSettingsEvent para: " + source.getAggregateId());
-			return new SaveSettingsEvent().buildFrom(source);
-		}
 
 		if (type.equals(SettingsEventTypes.DELETE)) {
 
@@ -119,7 +99,7 @@ public class SettingsEventFactory {
 			return new DeselectConfirmedEvent().buildFrom(source);
 		}
 
-		if (type.equals(SettingsEventTypes.CLEAR_CONFIRMED)) {
+		if (type.equals(SettingsEventTypes.CLEAR_SELECTION_CONFIRMED)) {
 
 			logger.debug("Creando evento ClearConfirmedEvent para: " + source.getAggregateId());
 
@@ -153,6 +133,42 @@ public class SettingsEventFactory {
 
 		SelectionEvent successfulEvent = null;
 
+		if (type.equals(SettingsEventTypes.PARTIAL_SELECT)) {
+
+			logger.debug("Creando evento PartialSelectEvent para: " + source.getAggregateId());
+			successfulEvent = new PartialSelectEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.PARTIAL_DESELECT)) {
+
+			logger.debug("Creando evento PartialDeselectEvent para: " + source.getAggregateId());
+			successfulEvent = new PartialDeselectEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.PARTIAL_CLEAR_SELECTION)) {
+
+			logger.debug("Creando evento PartialClearEvent para: " + source.getAggregateId());
+			successfulEvent = new PartialClearSelectionEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.SELECT)) {
+
+			logger.debug("Creando evento SelectEvent para: " + source.getAggregateId());
+			successfulEvent = new SelectEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.DESELECT)) {
+
+			logger.debug("Creando evento DeselectEvent para: " + source.getAggregateId());
+			successfulEvent = new DeselectEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.CLEAR_SELECTION)) {
+
+			logger.debug("Creando evento ClearEvent para: " + source.getAggregateId());
+			successfulEvent = new ClearSelectionEvent().buildFrom(source);
+		}
+
 		if (type.equals(SettingsEventTypes.SELECTED)) {
 			logger.debug("Creando evento SettingsCreatedEvent para: " + source.getAggregateId());
 			successfulEvent = new SelectedEvent().buildFrom(source);
@@ -163,7 +179,7 @@ public class SettingsEventFactory {
 			successfulEvent = new DeselectedEvent().buildFrom(source);
 		}
 
-		if (type.equals(SettingsEventTypes.CLEARED)) {
+		if (type.equals(SettingsEventTypes.SELECTION_CLEARED)) {
 			logger.debug("Creando evento SettingsUpdatedEvent para: " + source.getAggregateId());
 			successfulEvent = new SelectionClearedEvent().buildFrom(source);
 		}
@@ -180,6 +196,18 @@ public class SettingsEventFactory {
 	public static Event getEvent(Event source, String type, PersistenceDTO persistence) {
 
 		PersistenceEvent successfulEvent = null;
+
+		if (type.equals(SettingsEventTypes.PARTIAL_SAVE)) {
+
+			logger.debug("Creando evento PartialSaveSettingsEvent para: " + source.getAggregateId());
+			successfulEvent = new PartialSaveSettingsEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.SAVE)) {
+
+			logger.debug("Creando evento SaveSettingsEvent para: " + source.getAggregateId());
+			successfulEvent = new SaveSettingsEvent().buildFrom(source);
+		}
 
 		if (type.equals(SettingsEventTypes.SAVED)) {
 			logger.debug("Creando evento SettingsSavedEvent para: " + source.getAggregateId());
@@ -210,7 +238,7 @@ public class SettingsEventFactory {
 			logger.debug("No se pudo deseleccionar");
 			failedEvent = new DeselectFailedEvent().buildFrom(source);
 		}
-		if (type.equals(SettingsEventTypes.CLEAR_FAILED)) {
+		if (type.equals(SettingsEventTypes.CLEAR_SELECTION_FAILED)) {
 
 			logger.debug("No se pudo limpiar la selección");
 			failedEvent = new ClearSelectionFailedEvent().buildFrom(source);
@@ -263,7 +291,7 @@ public class SettingsEventFactory {
 			cancelledEvent = new DeselectCancelledEvent().buildFrom(source);
 		}
 
-		if (type.equals(SettingsEventTypes.CLEAR_CANCELLED)) {
+		if (type.equals(SettingsEventTypes.CLEAR_SELECTION_CANCELLED)) {
 
 			logger.debug("Creando evento ClearCancelledEvent para: " + source.getAggregateId());
 			cancelledEvent = new ClearSelectionCancelledEvent().buildFrom(source);
