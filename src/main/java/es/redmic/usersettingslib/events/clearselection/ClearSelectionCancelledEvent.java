@@ -38,7 +38,7 @@ public class ClearSelectionCancelledEvent extends SelectionCancelledEvent {
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
 
-	static String type = SettingsEventTypes.CLEAR_CANCELLED;
+	static String type = SettingsEventTypes.CLEAR_SELECTION_CANCELLED;
 
 	public ClearSelectionCancelledEvent() {
 		super(type);

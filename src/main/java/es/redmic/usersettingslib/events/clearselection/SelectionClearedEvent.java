@@ -36,7 +36,7 @@ public class SelectionClearedEvent extends SelectionEvent {
 					+ getSelectionEventSchema() + "," + getEventBaseSchema() + "]}");
 	// @formatter:on
 
-	static String type = SettingsEventTypes.CLEARED;
+	static String type = SettingsEventTypes.SELECTION_CLEARED;
 
 	public SelectionClearedEvent() {
 		super(type);

@@ -39,7 +39,7 @@ public class PartialClearSelectionEvent extends SelectionEvent {
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
 
-	static String type = SettingsEventTypes.CLEAR;
+	static String type = SettingsEventTypes.PARTIAL_CLEAR_SELECTION;
 
 	public PartialClearSelectionEvent() {
 		super(type);

@@ -35,7 +35,7 @@ public class ClearSelectionConfirmedEvent extends SimpleEvent {
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
 
-	static String type = SettingsEventTypes.CLEAR_CONFIRMED;
+	static String type = SettingsEventTypes.CLEAR_SELECTION_CONFIRMED;
 
 	public ClearSelectionConfirmedEvent() {
 		super(type);

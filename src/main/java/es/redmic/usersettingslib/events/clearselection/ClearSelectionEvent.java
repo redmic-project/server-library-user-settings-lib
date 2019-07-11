@@ -39,7 +39,7 @@ public class ClearSelectionEvent extends SelectionEvent {
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
 
-	static String type = SettingsEventTypes.CLEAR;
+	static String type = SettingsEventTypes.CLEAR_SELECTION;
 
 	public ClearSelectionEvent() {
 		super(type);

@@ -36,7 +36,7 @@ public class ClearSelectionFailedEvent extends EventError {
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
 
-	static String type = SettingsEventTypes.CLEAR_FAILED;
+	static String type = SettingsEventTypes.CLEAR_SELECTION_FAILED;
 
 	public ClearSelectionFailedEvent() {
 		super(type);
