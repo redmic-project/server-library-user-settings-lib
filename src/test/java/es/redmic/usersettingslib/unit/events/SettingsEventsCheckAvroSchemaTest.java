@@ -26,11 +26,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import es.redmic.testutils.utils.AvroBaseTest;
-import es.redmic.usersettingslib.events.clear.ClearCancelledEvent;
-import es.redmic.usersettingslib.events.clear.ClearConfirmedEvent;
-import es.redmic.usersettingslib.events.clear.ClearEvent;
-import es.redmic.usersettingslib.events.clear.ClearFailedEvent;
-import es.redmic.usersettingslib.events.clear.ClearedEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionCancelledEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionConfirmedEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionFailedEvent;
+import es.redmic.usersettingslib.events.clearselection.SelectionClearedEvent;
 import es.redmic.usersettingslib.events.delete.CheckDeleteSettingsEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckFailedEvent;
@@ -196,11 +196,11 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void CreateClearEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		ClearEvent event = SettingsDataUtil.getClearEvent();
+		ClearSelectionEvent event = SettingsDataUtil.getClearEvent();
 
 		Object result = serializerAndDeserializer(event);
 
-		assertTrue("El objeto obtenido debe ser una instancia de ClearEvent", ClearEvent.class.isInstance(result));
+		assertTrue("El objeto obtenido debe ser una instancia de ClearEvent", ClearSelectionEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}
@@ -208,12 +208,12 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void CreateClearConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		ClearConfirmedEvent event = SettingsDataUtil.getClearConfirmedEvent();
+		ClearSelectionConfirmedEvent event = SettingsDataUtil.getClearConfirmedEvent();
 
 		Object result = serializerAndDeserializer(event);
 
 		assertTrue("El objeto obtenido debe ser una instancia de ClearConfirmedEvent",
-				ClearConfirmedEvent.class.isInstance(result));
+				ClearSelectionConfirmedEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}
@@ -221,11 +221,11 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void ClearedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		ClearedEvent event = SettingsDataUtil.getClearedEvent();
+		SelectionClearedEvent event = SettingsDataUtil.getClearedEvent();
 
 		Object result = serializerAndDeserializer(event);
 
-		assertTrue("El objeto obtenido debe ser una instancia de ClearedEvent", ClearedEvent.class.isInstance(result));
+		assertTrue("El objeto obtenido debe ser una instancia de ClearedEvent", SelectionClearedEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}
@@ -233,12 +233,12 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void CreateClearFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		ClearFailedEvent event = SettingsDataUtil.getClearFailedEvent();
+		ClearSelectionFailedEvent event = SettingsDataUtil.getClearFailedEvent();
 
 		Object result = serializerAndDeserializer(event);
 
 		assertTrue("El objeto obtenido debe ser una instancia de ClearFailedEvent",
-				ClearFailedEvent.class.isInstance(result));
+				ClearSelectionFailedEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}
@@ -246,12 +246,12 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void ClearCancelledEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		ClearCancelledEvent event = SettingsDataUtil.getClearCancelledEvent();
+		ClearSelectionCancelledEvent event = SettingsDataUtil.getClearCancelledEvent();
 
 		Object result = serializerAndDeserializer(event);
 
 		assertTrue("El objeto obtenido debe ser una instancia de ClearCancelledEvent",
-				ClearCancelledEvent.class.isInstance(result));
+				ClearSelectionCancelledEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}

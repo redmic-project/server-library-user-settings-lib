@@ -31,11 +31,11 @@ import es.redmic.usersettingslib.dto.PersistenceDTO;
 import es.redmic.usersettingslib.dto.SelectionDTO;
 import es.redmic.usersettingslib.dto.SettingsDTO;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
-import es.redmic.usersettingslib.events.clear.ClearCancelledEvent;
-import es.redmic.usersettingslib.events.clear.ClearConfirmedEvent;
-import es.redmic.usersettingslib.events.clear.ClearEvent;
-import es.redmic.usersettingslib.events.clear.ClearFailedEvent;
-import es.redmic.usersettingslib.events.clear.ClearedEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionCancelledEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionConfirmedEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionFailedEvent;
+import es.redmic.usersettingslib.events.clearselection.SelectionClearedEvent;
 import es.redmic.usersettingslib.events.delete.CheckDeleteSettingsEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckFailedEvent;
@@ -172,9 +172,9 @@ public abstract class SettingsDataUtil {
 
 	// CLEAR
 
-	public static ClearEvent getClearEvent() {
+	public static ClearSelectionEvent getClearEvent() {
 
-		ClearEvent evt = new ClearEvent();
+		ClearSelectionEvent evt = new ClearSelectionEvent();
 		evt.setAggregateId(PREFIX + CODE);
 		evt.setType(SettingsEventTypes.CLEAR);
 		evt.setVersion(1);
@@ -183,24 +183,24 @@ public abstract class SettingsDataUtil {
 		return evt;
 	}
 
-	public static ClearConfirmedEvent getClearConfirmedEvent() {
+	public static ClearSelectionConfirmedEvent getClearConfirmedEvent() {
 
-		ClearConfirmedEvent evt = new ClearConfirmedEvent().buildFrom(getClearEvent());
+		ClearSelectionConfirmedEvent evt = new ClearSelectionConfirmedEvent().buildFrom(getClearEvent());
 		evt.setType(SettingsEventTypes.CLEAR_CONFIRMED);
 		return evt;
 	}
 
-	public static ClearedEvent getClearedEvent() {
+	public static SelectionClearedEvent getClearedEvent() {
 
-		ClearedEvent evt = new ClearedEvent().buildFrom(getClearEvent());
+		SelectionClearedEvent evt = new SelectionClearedEvent().buildFrom(getClearEvent());
 		evt.setType(SettingsEventTypes.CLEARED);
 		evt.setSelection(getSelectionDTO());
 		return evt;
 	}
 
-	public static ClearFailedEvent getClearFailedEvent() {
+	public static ClearSelectionFailedEvent getClearFailedEvent() {
 
-		ClearFailedEvent evt = new ClearFailedEvent().buildFrom(getClearEvent());
+		ClearSelectionFailedEvent evt = new ClearSelectionFailedEvent().buildFrom(getClearEvent());
 		evt.setType(SettingsEventTypes.CLEAR_FAILED);
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
@@ -209,9 +209,9 @@ public abstract class SettingsDataUtil {
 		return evt;
 	}
 
-	public static ClearCancelledEvent getClearCancelledEvent() {
+	public static ClearSelectionCancelledEvent getClearCancelledEvent() {
 
-		ClearCancelledEvent evt = new ClearCancelledEvent().buildFrom(getClearEvent());
+		ClearSelectionCancelledEvent evt = new ClearSelectionCancelledEvent().buildFrom(getClearEvent());
 		evt.setType(SettingsEventTypes.CLEAR_CANCELLED);
 		evt.setSelection(getSelectionDTO());
 		evt.setExceptionType("ItemNotFound");

@@ -31,11 +31,11 @@ import es.redmic.exception.common.ExceptionType;
 import es.redmic.exception.common.InternalException;
 import es.redmic.usersettingslib.dto.PersistenceDTO;
 import es.redmic.usersettingslib.dto.SelectionDTO;
-import es.redmic.usersettingslib.events.clear.ClearCancelledEvent;
-import es.redmic.usersettingslib.events.clear.ClearConfirmedEvent;
-import es.redmic.usersettingslib.events.clear.ClearEvent;
-import es.redmic.usersettingslib.events.clear.ClearFailedEvent;
-import es.redmic.usersettingslib.events.clear.ClearedEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionCancelledEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionConfirmedEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionFailedEvent;
+import es.redmic.usersettingslib.events.clearselection.SelectionClearedEvent;
 import es.redmic.usersettingslib.events.common.PersistenceCancelledEvent;
 import es.redmic.usersettingslib.events.common.PersistenceEvent;
 import es.redmic.usersettingslib.events.common.SelectionCancelledEvent;
@@ -84,7 +84,7 @@ public class SettingsEventFactory {
 		if (type.equals(SettingsEventTypes.CLEAR)) {
 
 			logger.debug("Creando evento ClearEvent para: " + source.getAggregateId());
-			return new ClearEvent().buildFrom(source);
+			return new ClearSelectionEvent().buildFrom(source);
 		}
 
 		if (type.equals(SettingsEventTypes.SAVE)) {
@@ -123,7 +123,7 @@ public class SettingsEventFactory {
 
 			logger.debug("Creando evento ClearConfirmedEvent para: " + source.getAggregateId());
 
-			return new ClearConfirmedEvent().buildFrom(source);
+			return new ClearSelectionConfirmedEvent().buildFrom(source);
 		}
 
 		if (type.equals(SettingsEventTypes.SAVE_CONFIRMED)) {
@@ -165,7 +165,7 @@ public class SettingsEventFactory {
 
 		if (type.equals(SettingsEventTypes.CLEARED)) {
 			logger.debug("Creando evento SettingsUpdatedEvent para: " + source.getAggregateId());
-			successfulEvent = new ClearedEvent().buildFrom(source);
+			successfulEvent = new SelectionClearedEvent().buildFrom(source);
 		}
 
 		if (successfulEvent != null) {
@@ -213,7 +213,7 @@ public class SettingsEventFactory {
 		if (type.equals(SettingsEventTypes.CLEAR_FAILED)) {
 
 			logger.debug("No se pudo limpiar la selección");
-			failedEvent = new ClearFailedEvent().buildFrom(source);
+			failedEvent = new ClearSelectionFailedEvent().buildFrom(source);
 		}
 
 		if (type.equals(SettingsEventTypes.SAVE_FAILED)) {
@@ -266,7 +266,7 @@ public class SettingsEventFactory {
 		if (type.equals(SettingsEventTypes.CLEAR_CANCELLED)) {
 
 			logger.debug("Creando evento ClearCancelledEvent para: " + source.getAggregateId());
-			cancelledEvent = new ClearCancelledEvent().buildFrom(source);
+			cancelledEvent = new ClearSelectionCancelledEvent().buildFrom(source);
 		}
 
 		if (cancelledEvent != null) {

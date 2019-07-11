@@ -9,11 +9,11 @@ import es.redmic.brokerlib.avro.common.Event;
 import es.redmic.brokerlib.avro.common.EventError;
 import es.redmic.usersettingslib.events.SettingsEventFactory;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
-import es.redmic.usersettingslib.events.clear.ClearCancelledEvent;
-import es.redmic.usersettingslib.events.clear.ClearConfirmedEvent;
-import es.redmic.usersettingslib.events.clear.ClearEvent;
-import es.redmic.usersettingslib.events.clear.ClearFailedEvent;
-import es.redmic.usersettingslib.events.clear.ClearedEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionCancelledEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionConfirmedEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionEvent;
+import es.redmic.usersettingslib.events.clearselection.ClearSelectionFailedEvent;
+import es.redmic.usersettingslib.events.clearselection.SelectionClearedEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckFailedEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckedEvent;
@@ -86,7 +86,7 @@ public class SettingsEventFactoryTest {
 	public void GetEvent_ReturnClearEvent_IfTypeIsClear() {
 
 		Event source = SettingsDataUtil.getClearEvent();
-		ClearEvent event = (ClearEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.CLEAR);
+		ClearSelectionEvent event = (ClearSelectionEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.CLEAR);
 
 		assertEquals(SettingsEventTypes.CLEAR, event.getType());
 
@@ -182,7 +182,7 @@ public class SettingsEventFactoryTest {
 	public void GetEvent_ReturnClearConfirmedEvent_IfTypeIsClearConfirmed() {
 
 		Event source = SettingsDataUtil.getClearEvent();
-		ClearConfirmedEvent event = (ClearConfirmedEvent) SettingsEventFactory.getEvent(source,
+		ClearSelectionConfirmedEvent event = (ClearSelectionConfirmedEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.CLEAR_CONFIRMED);
 
 		assertEquals(SettingsEventTypes.CLEAR_CONFIRMED, event.getType());
@@ -234,7 +234,7 @@ public class SettingsEventFactoryTest {
 	public void GetEvent_ReturnClearedEvent_IfTypeIsCleared() {
 
 		Event source = SettingsDataUtil.getClearEvent();
-		ClearedEvent event = (ClearedEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.CLEARED,
+		SelectionClearedEvent event = (SelectionClearedEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.CLEARED,
 				SettingsDataUtil.getSelectionDTO());
 
 		assertEquals(SettingsEventTypes.CLEARED, event.getType());
@@ -293,11 +293,11 @@ public class SettingsEventFactoryTest {
 	@Test
 	public void GetEvent_ReturnClearFailedEventt_IfTypeIsClearFailed() {
 
-		ClearFailedEvent exception = SettingsDataUtil.getClearFailedEvent();
+		ClearSelectionFailedEvent exception = SettingsDataUtil.getClearFailedEvent();
 
 		Event source = SettingsDataUtil.getClearEvent();
 
-		ClearFailedEvent event = (ClearFailedEvent) SettingsEventFactory.getEvent(source,
+		ClearSelectionFailedEvent event = (ClearSelectionFailedEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.CLEAR_FAILED, exception.getExceptionType(), exception.getArguments());
 
 		assertEquals(SettingsEventTypes.CLEAR_FAILED, event.getType());
@@ -395,11 +395,11 @@ public class SettingsEventFactoryTest {
 	@Test
 	public void GetEvent_ReturnClearCancelledEvent_IfTypeIsClearCancelled() {
 
-		ClearCancelledEvent exception = SettingsDataUtil.getClearCancelledEvent();
+		ClearSelectionCancelledEvent exception = SettingsDataUtil.getClearCancelledEvent();
 
 		Event source = SettingsDataUtil.getClearEvent();
 
-		ClearCancelledEvent event = (ClearCancelledEvent) SettingsEventFactory.getEvent(source,
+		ClearSelectionCancelledEvent event = (ClearSelectionCancelledEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.CLEAR_CANCELLED, SettingsDataUtil.getSelectionDTO(), exception.getExceptionType(),
 				exception.getArguments());
 

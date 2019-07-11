@@ -1,12 +1,9 @@
-package es.redmic.usersettingslib.events.clear;
-
-import java.util.UUID;
+package es.redmic.usersettingslib.events.clearselection;
 
 import org.apache.avro.Schema;
 
-import es.redmic.usersettingslib.dto.SelectionDTO;
+import es.redmic.brokerlib.avro.common.EventError;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
-import es.redmic.usersettingslib.events.common.SelectionEvent;
 
 /*-
  * #%L
@@ -28,28 +25,21 @@ import es.redmic.usersettingslib.events.common.SelectionEvent;
  * #L%
  */
 
-public class ClearEvent extends SelectionEvent {
+public class ClearSelectionFailedEvent extends EventError {
 
 	// @formatter:off
 
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
-		+ "\"type\":\"record\",\"name\":\"ClearEvent\","
-				+ "\"namespace\":\"es.redmic.usersettingslib.events.clear\",\"fields\":["
-			+ getSelectionEventSchema() + ","
+		+ "\"type\":\"record\",\"name\":\"ClearSelectionFailedEvent\","
+				+ "\"namespace\":\"es.redmic.usersettingslib.events.clearselection\",\"fields\":["
+			+ getFailEventSchema() + ","
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
 
-	static String type = SettingsEventTypes.CLEAR;
+	static String type = SettingsEventTypes.CLEAR_FAILED;
 
-	public ClearEvent() {
+	public ClearSelectionFailedEvent() {
 		super(type);
-		setSessionId(UUID.randomUUID().toString());
-	}
-
-	public ClearEvent(SelectionDTO selection) {
-		super(type);
-		this.setSelection(selection);
-		setSessionId(UUID.randomUUID().toString());
 	}
 
 	@Override

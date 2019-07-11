@@ -1,9 +1,10 @@
-package es.redmic.usersettingslib.events.clear;
+package es.redmic.usersettingslib.events.clearselection;
 
 import org.apache.avro.Schema;
 
-import es.redmic.brokerlib.avro.common.EventError;
+import es.redmic.usersettingslib.dto.SelectionDTO;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
+import es.redmic.usersettingslib.events.common.SelectionEvent;
 
 /*-
  * #%L
@@ -25,21 +26,25 @@ import es.redmic.usersettingslib.events.SettingsEventTypes;
  * #L%
  */
 
-public class ClearFailedEvent extends EventError {
+public class SelectionClearedEvent extends SelectionEvent {
 
 	// @formatter:off
 
-	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
-		+ "\"type\":\"record\",\"name\":\"ClearFailedEvent\","
-				+ "\"namespace\":\"es.redmic.usersettingslib.events.clear\",\"fields\":["
-			+ getFailEventSchema() + ","
-			+ getEventBaseSchema() + "]}");
+	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser()
+			.parse("{" + "\"type\":\"record\",\"name\":\"SelectionClearedEvent\","
+					+ "\"namespace\":\"es.redmic.usersettingslib.events.clearselection\",\"fields\":["
+					+ getSelectionEventSchema() + "," + getEventBaseSchema() + "]}");
 	// @formatter:on
 
-	static String type = SettingsEventTypes.CLEAR_FAILED;
+	static String type = SettingsEventTypes.CLEARED;
 
-	public ClearFailedEvent() {
+	public SelectionClearedEvent() {
 		super(type);
+	}
+
+	public SelectionClearedEvent(SelectionDTO selection) {
+		super(type);
+		this.setSelection(selection);
 	}
 
 	@Override

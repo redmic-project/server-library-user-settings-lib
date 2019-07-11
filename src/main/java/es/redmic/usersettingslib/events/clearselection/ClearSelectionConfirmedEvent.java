@@ -1,10 +1,9 @@
-package es.redmic.usersettingslib.events.clear;
+package es.redmic.usersettingslib.events.clearselection;
 
 import org.apache.avro.Schema;
 
-import es.redmic.usersettingslib.dto.SelectionDTO;
+import es.redmic.brokerlib.avro.common.SimpleEvent;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
-import es.redmic.usersettingslib.events.common.SelectionCancelledEvent;
 
 /*-
  * #%L
@@ -26,27 +25,20 @@ import es.redmic.usersettingslib.events.common.SelectionCancelledEvent;
  * #L%
  */
 
-public class ClearCancelledEvent extends SelectionCancelledEvent {
+public class ClearSelectionConfirmedEvent extends SimpleEvent {
 
 	// @formatter:off
 
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
-		+ "\"type\":\"record\",\"name\":\"ClearCancelledEvent\","
-				+ "\"namespace\":\"es.redmic.usersettingslib.events.clear\",\"fields\":["
-			+ getSelectionEventSchema() + "," 
-			+ getFailEventSchema() + ","
+		+ "\"type\":\"record\",\"name\":\"ClearSelectionConfirmedEvent\","
+				+ "\"namespace\":\"es.redmic.usersettingslib.events.clearselection\",\"fields\":["
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
 
-	static String type = SettingsEventTypes.CLEAR_CANCELLED;
+	static String type = SettingsEventTypes.CLEAR_CONFIRMED;
 
-	public ClearCancelledEvent() {
+	public ClearSelectionConfirmedEvent() {
 		super(type);
-	}
-
-	public ClearCancelledEvent(SelectionDTO selection) {
-		super(type);
-		this.setSelection(selection);
 	}
 
 	@Override
