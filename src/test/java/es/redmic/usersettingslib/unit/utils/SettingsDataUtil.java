@@ -79,7 +79,7 @@ public abstract class SettingsDataUtil {
 		evt.setAggregateId(PREFIX + CODE);
 		evt.setVersion(1);
 		evt.setUserId(USER);
-		evt.setSelection(getSelectionDTO());
+		evt.setSettings(getSettingsDTO());
 		return evt;
 	}
 
@@ -98,7 +98,7 @@ public abstract class SettingsDataUtil {
 	public static SelectedEvent getSelectedEvent() {
 
 		SelectedEvent evt = new SelectedEvent().buildFrom(getSelectEvent());
-		evt.setSelection(getSelectionDTO());
+		evt.setSettings(getSettingsDTO());
 		return evt;
 	}
 
@@ -115,7 +115,7 @@ public abstract class SettingsDataUtil {
 	public static SelectCancelledEvent getSelectCancelledEvent() {
 
 		SelectCancelledEvent evt = new SelectCancelledEvent().buildFrom(getSelectEvent());
-		evt.setSelection(getSelectionDTO());
+		evt.setSettings(getSettingsDTO());
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -131,7 +131,7 @@ public abstract class SettingsDataUtil {
 		evt.setAggregateId(PREFIX + CODE);
 		evt.setVersion(1);
 		evt.setUserId(USER);
-		evt.setSelection(getSelectionDTO());
+		evt.setSettings(getSettingsDTO());
 		return evt;
 	}
 
@@ -150,7 +150,7 @@ public abstract class SettingsDataUtil {
 	public static DeselectedEvent getDeselectedEvent() {
 
 		DeselectedEvent evt = new DeselectedEvent().buildFrom(getDeselectEvent());
-		evt.setSelection(getSelectionDTO());
+		evt.setSettings(getSettingsDTO());
 		return evt;
 	}
 
@@ -167,7 +167,7 @@ public abstract class SettingsDataUtil {
 	public static DeselectCancelledEvent getDeselectCancelledEvent() {
 
 		DeselectCancelledEvent evt = new DeselectCancelledEvent().buildFrom(getDeselectEvent());
-		evt.setSelection(getSelectionDTO());
+		evt.setSettings(getSettingsDTO());
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -183,7 +183,7 @@ public abstract class SettingsDataUtil {
 		evt.setAggregateId(PREFIX + CODE);
 		evt.setVersion(1);
 		evt.setUserId(USER);
-		evt.setSelection(getSelectionDTO());
+		evt.setSettings(getSettingsDTO());
 		return evt;
 	}
 
@@ -202,7 +202,7 @@ public abstract class SettingsDataUtil {
 	public static SelectionClearedEvent getClearedEvent() {
 
 		SelectionClearedEvent evt = new SelectionClearedEvent().buildFrom(getClearEvent());
-		evt.setSelection(getSelectionDTO());
+		evt.setSettings(getSettingsDTO());
 		return evt;
 	}
 
@@ -219,7 +219,7 @@ public abstract class SettingsDataUtil {
 	public static ClearSelectionCancelledEvent getClearCancelledEvent() {
 
 		ClearSelectionCancelledEvent evt = new ClearSelectionCancelledEvent().buildFrom(getClearEvent());
-		evt.setSelection(getSelectionDTO());
+		evt.setSettings(getSettingsDTO());
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -235,7 +235,7 @@ public abstract class SettingsDataUtil {
 		evt.setAggregateId(PREFIX + CODE);
 		evt.setVersion(1);
 		evt.setUserId(USER);
-		evt.setPersistence(getPersistenceDTO());
+		evt.setSettings(getSettingsDTO());
 		return evt;
 	}
 
@@ -254,7 +254,7 @@ public abstract class SettingsDataUtil {
 	public static SettingsSavedEvent getSavedEvent() {
 
 		SettingsSavedEvent evt = new SettingsSavedEvent().buildFrom(getSaveEvent());
-		evt.setPersistence(getPersistenceDTO());
+		evt.setSettings(getSettingsDTO());
 		return evt;
 	}
 
@@ -271,7 +271,7 @@ public abstract class SettingsDataUtil {
 	public static SaveSettingsCancelledEvent getSaveCancelledEvent() {
 
 		SaveSettingsCancelledEvent evt = new SaveSettingsCancelledEvent().buildFrom(getSaveEvent());
-		evt.setPersistence(getPersistenceDTO());
+		evt.setSettings(getSettingsDTO());
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -313,7 +313,7 @@ public abstract class SettingsDataUtil {
 	public static DeleteSettingsCancelledEvent getDeleteCancelledEvent() {
 
 		DeleteSettingsCancelledEvent evt = new DeleteSettingsCancelledEvent().buildFrom(getDeleteEvent());
-		evt.setPersistence(getPersistenceDTO());
+		evt.setSettings(getSettingsDTO());
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");

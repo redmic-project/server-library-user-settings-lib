@@ -31,16 +31,17 @@ import es.redmic.exception.common.ExceptionType;
 import es.redmic.exception.common.InternalException;
 import es.redmic.usersettingslib.dto.PersistenceDTO;
 import es.redmic.usersettingslib.dto.SelectionDTO;
+import es.redmic.usersettingslib.dto.SettingsDTO;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionCancelledEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionConfirmedEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionFailedEvent;
 import es.redmic.usersettingslib.events.clearselection.PartialClearSelectionEvent;
 import es.redmic.usersettingslib.events.clearselection.SelectionClearedEvent;
-import es.redmic.usersettingslib.events.common.PersistenceCancelledEvent;
 import es.redmic.usersettingslib.events.common.PersistenceEvent;
-import es.redmic.usersettingslib.events.common.SelectionCancelledEvent;
 import es.redmic.usersettingslib.events.common.SelectionEvent;
+import es.redmic.usersettingslib.events.common.SettingsCancelledEvent;
+import es.redmic.usersettingslib.events.common.SettingsEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckFailedEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckedEvent;
@@ -129,27 +130,9 @@ public class SettingsEventFactory {
 		throw new InternalException(ExceptionType.INTERNAL_EXCEPTION);
 	}
 
-	public static Event getEvent(Event source, String type, SelectionDTO selection) {
+	public static Event getEvent(Event source, String type, SettingsDTO settings) {
 
-		SelectionEvent successfulEvent = null;
-
-		if (type.equals(SettingsEventTypes.PARTIAL_SELECT)) {
-
-			logger.debug("Creando evento PartialSelectEvent para: " + source.getAggregateId());
-			successfulEvent = new PartialSelectEvent().buildFrom(source);
-		}
-
-		if (type.equals(SettingsEventTypes.PARTIAL_DESELECT)) {
-
-			logger.debug("Creando evento PartialDeselectEvent para: " + source.getAggregateId());
-			successfulEvent = new PartialDeselectEvent().buildFrom(source);
-		}
-
-		if (type.equals(SettingsEventTypes.PARTIAL_CLEAR_SELECTION)) {
-
-			logger.debug("Creando evento PartialClearEvent para: " + source.getAggregateId());
-			successfulEvent = new PartialClearSelectionEvent().buildFrom(source);
-		}
+		SettingsEvent successfulEvent = null;
 
 		if (type.equals(SettingsEventTypes.SELECT)) {
 
@@ -184,6 +167,48 @@ public class SettingsEventFactory {
 			successfulEvent = new SelectionClearedEvent().buildFrom(source);
 		}
 
+		if (type.equals(SettingsEventTypes.SAVE)) {
+
+			logger.debug("Creando evento SaveSettingsEvent para: " + source.getAggregateId());
+			successfulEvent = new SaveSettingsEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.SAVED)) {
+			logger.debug("Creando evento SettingsSavedEvent para: " + source.getAggregateId());
+			successfulEvent = new SettingsSavedEvent().buildFrom(source);
+		}
+
+		if (successfulEvent != null) {
+			successfulEvent.setSettings(settings);
+			return successfulEvent;
+		} else {
+			logger.error("Tipo de evento no soportado");
+			throw new InternalException(ExceptionType.INTERNAL_EXCEPTION);
+		}
+	}
+
+	public static Event getEvent(Event source, String type, SelectionDTO selection) {
+
+		SelectionEvent successfulEvent = null;
+
+		if (type.equals(SettingsEventTypes.PARTIAL_SELECT)) {
+
+			logger.debug("Creando evento PartialSelectEvent para: " + source.getAggregateId());
+			successfulEvent = new PartialSelectEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.PARTIAL_DESELECT)) {
+
+			logger.debug("Creando evento PartialDeselectEvent para: " + source.getAggregateId());
+			successfulEvent = new PartialDeselectEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.PARTIAL_CLEAR_SELECTION)) {
+
+			logger.debug("Creando evento PartialClearEvent para: " + source.getAggregateId());
+			successfulEvent = new PartialClearSelectionEvent().buildFrom(source);
+		}
+
 		if (successfulEvent != null) {
 			successfulEvent.setSelection(selection);
 			return successfulEvent;
@@ -201,17 +226,6 @@ public class SettingsEventFactory {
 
 			logger.debug("Creando evento PartialSaveSettingsEvent para: " + source.getAggregateId());
 			successfulEvent = new PartialSaveSettingsEvent().buildFrom(source);
-		}
-
-		if (type.equals(SettingsEventTypes.SAVE)) {
-
-			logger.debug("Creando evento SaveSettingsEvent para: " + source.getAggregateId());
-			successfulEvent = new SaveSettingsEvent().buildFrom(source);
-		}
-
-		if (type.equals(SettingsEventTypes.SAVED)) {
-			logger.debug("Creando evento SettingsSavedEvent para: " + source.getAggregateId());
-			successfulEvent = new SettingsSavedEvent().buildFrom(source);
 		}
 
 		if (successfulEvent != null) {
@@ -274,10 +288,10 @@ public class SettingsEventFactory {
 		}
 	}
 
-	public static Event getEvent(Event source, String type, SelectionDTO selection, String exceptionType,
+	public static Event getEvent(Event source, String type, SettingsDTO settings, String exceptionType,
 			Map<String, String> exceptionArguments) {
 
-		SelectionCancelledEvent cancelledEvent = null;
+		SettingsCancelledEvent cancelledEvent = null;
 
 		if (type.equals(SettingsEventTypes.SELECT_CANCELLED)) {
 
@@ -297,25 +311,6 @@ public class SettingsEventFactory {
 			cancelledEvent = new ClearSelectionCancelledEvent().buildFrom(source);
 		}
 
-		if (cancelledEvent != null) {
-
-			cancelledEvent.setSelection(selection);
-			cancelledEvent.setExceptionType(exceptionType);
-			cancelledEvent.setArguments(exceptionArguments);
-			return cancelledEvent;
-
-		} else {
-
-			logger.error("Tipo de evento no soportado");
-			throw new InternalException(ExceptionType.INTERNAL_EXCEPTION);
-		}
-	}
-
-	public static Event getEvent(Event source, String type, PersistenceDTO persistence, String exceptionType,
-			Map<String, String> exceptionArguments) {
-
-		PersistenceCancelledEvent cancelledEvent = null;
-
 		if (type.equals(SettingsEventTypes.SAVE_CANCELLED)) {
 
 			logger.debug("Creando evento SaveSettingsCancelledEvent para: " + source.getAggregateId());
@@ -330,7 +325,7 @@ public class SettingsEventFactory {
 
 		if (cancelledEvent != null) {
 
-			cancelledEvent.setPersistence(persistence);
+			cancelledEvent.setSettings(settings);
 			cancelledEvent.setExceptionType(exceptionType);
 			cancelledEvent.setArguments(exceptionArguments);
 			return cancelledEvent;

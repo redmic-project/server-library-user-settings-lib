@@ -2,9 +2,9 @@ package es.redmic.usersettingslib.events.deselect;
 
 import org.apache.avro.Schema;
 
-import es.redmic.usersettingslib.dto.SelectionDTO;
+import es.redmic.usersettingslib.dto.SettingsDTO;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
-import es.redmic.usersettingslib.events.common.SelectionCancelledEvent;
+import es.redmic.usersettingslib.events.common.SettingsCancelledEvent;
 
 /*-
  * #%L
@@ -26,14 +26,14 @@ import es.redmic.usersettingslib.events.common.SelectionCancelledEvent;
  * #L%
  */
 
-public class DeselectCancelledEvent extends SelectionCancelledEvent {
+public class DeselectCancelledEvent extends SettingsCancelledEvent {
 
 	// @formatter:off
 
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
 		+ "\"type\":\"record\",\"name\":\"DeselectCancelledEvent\","
 				+ "\"namespace\":\"es.redmic.usersettingslib.events.deselect\",\"fields\":["
-			+ getSelectionEventSchema() + ","
+			+ getSettingsEventSchema() + ","
 			+ getFailEventSchema() + ","
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
@@ -44,9 +44,9 @@ public class DeselectCancelledEvent extends SelectionCancelledEvent {
 		super(type);
 	}
 
-	public DeselectCancelledEvent(SelectionDTO selection) {
+	public DeselectCancelledEvent(SettingsDTO settings) {
 		super(type);
-		this.setSelection(selection);
+		this.setSettings(settings);
 	}
 
 	@Override

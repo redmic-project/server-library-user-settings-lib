@@ -20,92 +20,79 @@ package es.redmic.usersettingslib.events.common;
  * #L%
  */
 
-import java.util.Map;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import es.redmic.brokerlib.avro.common.EventError;
-import es.redmic.usersettingslib.dto.PersistenceDTO;
+import es.redmic.brokerlib.avro.common.Event;
+import es.redmic.usersettingslib.dto.SettingsDTO;
 
-public abstract class PersistenceCancelledEvent extends EventError {
+public abstract class SettingsEvent extends Event {
 
-	private PersistenceDTO persistence;
+	private SettingsDTO settings;
 
-	public PersistenceCancelledEvent(String type) {
+	public SettingsEvent(String type) {
 		super(type);
 	}
 
-	public PersistenceDTO getPersistence() {
-		return persistence;
+	public SettingsDTO getSettings() {
+		return settings;
 	}
 
-	public void setPersistence(PersistenceDTO persistence) {
-		this.persistence = persistence;
+	public void setSettings(SettingsDTO settings) {
+		this.settings = settings;
 	}
 
 	@Override
 	public Object get(int field$) {
 		switch (field$) {
 		case 0:
-			return getPersistence();
+			return getSettings();
 		case 1:
-			return getExceptionType();
-		case 2:
-			return getArguments();
-		case 3:
 			return getAggregateId();
-		case 4:
+		case 2:
 			return getVersion();
-		case 5:
+		case 3:
 			return getType();
-		case 6:
+		case 4:
 			return getDate().getMillis();
-		case 7:
+		case 5:
 			return getSessionId();
-		case 8:
+		case 6:
 			return getUserId();
-		case 9:
+		case 7:
 			return getId();
 		default:
 			throw new org.apache.avro.AvroRuntimeException("Bad index");
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void put(int field$, Object value$) {
 		switch (field$) {
 		case 0:
-			persistence = (PersistenceDTO) value$;
+			settings = (SettingsDTO) value$;
 			break;
 		case 1:
-			setExceptionType(value$.toString());
-			break;
-		case 2:
-			setArguments((Map) value$);
-			break;
-		case 3:
 			setAggregateId(value$.toString());
 			break;
-		case 4:
+		case 2:
 			setVersion((java.lang.Integer) value$);
 			break;
-		case 5:
+		case 3:
 			setType(value$.toString());
 			break;
-		case 6:
+		case 4:
 			setDate(new DateTime(value$, DateTimeZone.UTC));
 			break;
-		case 7:
+		case 5:
 			setSessionId(value$.toString());
 			break;
-		case 8:
+		case 6:
 			setUserId(value$.toString());
 			break;
-		case 9:
+		case 7:
 			setId(value$.toString());
 			break;
 		default:
@@ -114,8 +101,8 @@ public abstract class PersistenceCancelledEvent extends EventError {
 	}
 
 	@JsonIgnore
-	public static String getPersistenceEventSchema() {
+	public static String getSettingsEventSchema() {
 
-		return "{\"name\":\"persistence\", \"type\": " + PersistenceDTO.SCHEMA$.toString() + "}";
+		return "{\"name\":\"settings\", \"type\": " + SettingsDTO.SCHEMA$.toString() + "}";
 	}
 }

@@ -4,9 +4,9 @@ import java.util.UUID;
 
 import org.apache.avro.Schema;
 
-import es.redmic.usersettingslib.dto.SelectionDTO;
+import es.redmic.usersettingslib.dto.SettingsDTO;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
-import es.redmic.usersettingslib.events.common.SelectionEvent;
+import es.redmic.usersettingslib.events.common.SettingsEvent;
 
 /*-
  * #%L
@@ -28,14 +28,14 @@ import es.redmic.usersettingslib.events.common.SelectionEvent;
  * #L%
  */
 
-public class SelectEvent extends SelectionEvent {
+public class SelectEvent extends SettingsEvent {
 
 	// @formatter:off
 
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
 		+ "\"type\":\"record\",\"name\":\"SelectEvent\","
 				+ "\"namespace\":\"es.redmic.usersettingslib.events.select\",\"fields\":["
-			+ getSelectionEventSchema() + ","
+			+ getSettingsEventSchema() + ","
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
 
@@ -46,9 +46,9 @@ public class SelectEvent extends SelectionEvent {
 		setSessionId(UUID.randomUUID().toString());
 	}
 
-	public SelectEvent(SelectionDTO selection) {
+	public SelectEvent(SettingsDTO settings) {
 		super(type);
-		this.setSelection(selection);
+		this.setSettings(settings);
 		setSessionId(UUID.randomUUID().toString());
 	}
 

@@ -2,9 +2,9 @@ package es.redmic.usersettingslib.events.save;
 
 import org.apache.avro.Schema;
 
-import es.redmic.usersettingslib.dto.PersistenceDTO;
+import es.redmic.usersettingslib.dto.SettingsDTO;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
-import es.redmic.usersettingslib.events.common.PersistenceCancelledEvent;
+import es.redmic.usersettingslib.events.common.SettingsCancelledEvent;
 
 /*-
  * #%L
@@ -26,14 +26,14 @@ import es.redmic.usersettingslib.events.common.PersistenceCancelledEvent;
  * #L%
  */
 
-public class SaveSettingsCancelledEvent extends PersistenceCancelledEvent {
+public class SaveSettingsCancelledEvent extends SettingsCancelledEvent {
 
 	// @formatter:off
 
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
 		+ "\"type\":\"record\",\"name\":\"SaveSettingsCancelledEvent\","
 				+ "\"namespace\":\"es.redmic.usersettingslib.events.save\",\"fields\":["
-			+ getPersistenceEventSchema() + ","
+			+ getSettingsEventSchema() + ","
 			+ getFailEventSchema() + ","
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
@@ -44,9 +44,9 @@ public class SaveSettingsCancelledEvent extends PersistenceCancelledEvent {
 		super(type);
 	}
 
-	public SaveSettingsCancelledEvent(PersistenceDTO persistence) {
+	public SaveSettingsCancelledEvent(SettingsDTO settings) {
 		super(type);
-		this.setPersistence(persistence);
+		this.setSettings(settings);
 	}
 
 	@Override

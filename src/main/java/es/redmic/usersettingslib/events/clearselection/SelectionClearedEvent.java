@@ -2,9 +2,9 @@ package es.redmic.usersettingslib.events.clearselection;
 
 import org.apache.avro.Schema;
 
-import es.redmic.usersettingslib.dto.SelectionDTO;
+import es.redmic.usersettingslib.dto.SettingsDTO;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
-import es.redmic.usersettingslib.events.common.SelectionEvent;
+import es.redmic.usersettingslib.events.common.SettingsEvent;
 
 /*-
  * #%L
@@ -26,14 +26,14 @@ import es.redmic.usersettingslib.events.common.SelectionEvent;
  * #L%
  */
 
-public class SelectionClearedEvent extends SelectionEvent {
+public class SelectionClearedEvent extends SettingsEvent {
 
 	// @formatter:off
 
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser()
 			.parse("{" + "\"type\":\"record\",\"name\":\"SelectionClearedEvent\","
 					+ "\"namespace\":\"es.redmic.usersettingslib.events.clearselection\",\"fields\":["
-					+ getSelectionEventSchema() + "," + getEventBaseSchema() + "]}");
+					+ getSettingsEventSchema() + "," + getEventBaseSchema() + "]}");
 	// @formatter:on
 
 	static String type = SettingsEventTypes.SELECTION_CLEARED;
@@ -42,9 +42,9 @@ public class SelectionClearedEvent extends SelectionEvent {
 		super(type);
 	}
 
-	public SelectionClearedEvent(SelectionDTO selection) {
+	public SelectionClearedEvent(SettingsDTO settings) {
 		super(type);
-		this.setSelection(selection);
+		this.setSettings(settings);
 	}
 
 	@Override

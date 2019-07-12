@@ -4,9 +4,9 @@ import java.util.UUID;
 
 import org.apache.avro.Schema;
 
-import es.redmic.usersettingslib.dto.PersistenceDTO;
+import es.redmic.usersettingslib.dto.SettingsDTO;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
-import es.redmic.usersettingslib.events.common.PersistenceEvent;
+import es.redmic.usersettingslib.events.common.SettingsEvent;
 
 /*-
  * #%L
@@ -28,14 +28,14 @@ import es.redmic.usersettingslib.events.common.PersistenceEvent;
  * #L%
  */
 
-public class SaveSettingsEvent extends PersistenceEvent {
+public class SaveSettingsEvent extends SettingsEvent {
 
 	// @formatter:off
 
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
 		+ "\"type\":\"record\",\"name\":\"SaveSettingsEvent\","
 				+ "\"namespace\":\"es.redmic.usersettingslib.events.save\",\"fields\":["
-			+ getPersistenceEventSchema() + ","
+			+ getSettingsEventSchema() + ","
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
 
@@ -46,9 +46,9 @@ public class SaveSettingsEvent extends PersistenceEvent {
 		setSessionId(UUID.randomUUID().toString());
 	}
 
-	public SaveSettingsEvent(PersistenceDTO persistence) {
+	public SaveSettingsEvent(SettingsDTO settings) {
 		super(type);
-		this.setPersistence(persistence);
+		this.setSettings(settings);
 		setSessionId(UUID.randomUUID().toString());
 	}
 

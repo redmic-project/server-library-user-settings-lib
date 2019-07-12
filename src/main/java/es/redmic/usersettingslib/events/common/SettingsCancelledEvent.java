@@ -28,29 +28,29 @@ import org.joda.time.DateTimeZone;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import es.redmic.brokerlib.avro.common.EventError;
-import es.redmic.usersettingslib.dto.SelectionDTO;
+import es.redmic.usersettingslib.dto.SettingsDTO;
 
-public abstract class SelectionCancelledEvent extends EventError {
+public abstract class SettingsCancelledEvent extends EventError {
 
-	private SelectionDTO selection;
+	private SettingsDTO settings;
 
-	public SelectionCancelledEvent(String type) {
+	public SettingsCancelledEvent(String type) {
 		super(type);
 	}
 
-	public SelectionDTO getSelection() {
-		return selection;
+	public SettingsDTO getSettings() {
+		return settings;
 	}
 
-	public void setSelection(SelectionDTO selection) {
-		this.selection = selection;
+	public void setSettings(SettingsDTO settings) {
+		this.settings = settings;
 	}
 
 	@Override
 	public Object get(int field$) {
 		switch (field$) {
 		case 0:
-			return getSelection();
+			return getSettings();
 		case 1:
 			return getExceptionType();
 		case 2:
@@ -79,7 +79,7 @@ public abstract class SelectionCancelledEvent extends EventError {
 	public void put(int field$, Object value$) {
 		switch (field$) {
 		case 0:
-			selection = (SelectionDTO) value$;
+			settings = (SettingsDTO) value$;
 			break;
 		case 1:
 			setExceptionType(value$.toString());
@@ -114,8 +114,8 @@ public abstract class SelectionCancelledEvent extends EventError {
 	}
 
 	@JsonIgnore
-	public static String getSelectionEventSchema() {
+	public static String getSettingsEventSchema() {
 
-		return "{\"name\":\"selection\", \"type\": " + SelectionDTO.SCHEMA$.toString() + "}";
+		return "{\"name\":\"settings\", \"type\": " + SettingsDTO.SCHEMA$.toString() + "}";
 	}
 }

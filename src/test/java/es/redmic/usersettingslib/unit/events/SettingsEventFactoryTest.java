@@ -120,7 +120,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 
 		Event source = SettingsDataUtil.getSelectEvent();
 		SelectEvent event = (SelectEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SELECT,
-				SettingsDataUtil.getSelectionDTO());
+				SettingsDataUtil.getSettingsDTO());
 
 		assertEquals(SettingsEventTypes.SELECT, event.getType());
 
@@ -132,7 +132,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 
 		Event source = SettingsDataUtil.getDeselectEvent();
 		DeselectEvent event = (DeselectEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.DESELECT,
-				SettingsDataUtil.getSelectionDTO());
+				SettingsDataUtil.getSettingsDTO());
 
 		assertEquals(SettingsEventTypes.DESELECT, event.getType());
 
@@ -144,7 +144,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 
 		Event source = SettingsDataUtil.getClearEvent();
 		ClearSelectionEvent event = (ClearSelectionEvent) SettingsEventFactory.getEvent(source,
-				SettingsEventTypes.CLEAR_SELECTION, SettingsDataUtil.getSelectionDTO());
+				SettingsEventTypes.CLEAR_SELECTION, SettingsDataUtil.getSettingsDTO());
 
 		assertEquals(SettingsEventTypes.CLEAR_SELECTION, event.getType());
 
@@ -156,7 +156,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 
 		Event source = SettingsDataUtil.getSaveEvent();
 		SaveSettingsEvent event = (SaveSettingsEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVE,
-				SettingsDataUtil.getPersistenceDTO());
+				SettingsDataUtil.getSettingsDTO());
 
 		assertEquals(SettingsEventTypes.SAVE, event.getType());
 
@@ -268,10 +268,10 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 
 		Event source = SettingsDataUtil.getSelectEvent();
 		SelectedEvent event = (SelectedEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SELECTED,
-				SettingsDataUtil.getSelectionDTO());
+				SettingsDataUtil.getSettingsDTO());
 
 		assertEquals(SettingsEventTypes.SELECTED, event.getType());
-		assertNotNull(event.getSelection());
+		assertNotNull(event.getSettings());
 
 		checkMetadataFields(source, event);
 	}
@@ -281,10 +281,10 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 
 		Event source = SettingsDataUtil.getDeselectEvent();
 		DeselectedEvent event = (DeselectedEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.DESELECTED,
-				SettingsDataUtil.getSelectionDTO());
+				SettingsDataUtil.getSettingsDTO());
 
 		assertEquals(SettingsEventTypes.DESELECTED, event.getType());
-		assertNotNull(event.getSelection());
+		assertNotNull(event.getSettings());
 
 		checkMetadataFields(source, event);
 	}
@@ -294,10 +294,10 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 
 		Event source = SettingsDataUtil.getClearEvent();
 		SelectionClearedEvent event = (SelectionClearedEvent) SettingsEventFactory.getEvent(source,
-				SettingsEventTypes.SELECTION_CLEARED, SettingsDataUtil.getSelectionDTO());
+				SettingsEventTypes.SELECTION_CLEARED, SettingsDataUtil.getSettingsDTO());
 
 		assertEquals(SettingsEventTypes.SELECTION_CLEARED, event.getType());
-		assertNotNull(event.getSelection());
+		assertNotNull(event.getSettings());
 
 		checkMetadataFields(source, event);
 	}
@@ -307,10 +307,10 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 
 		Event source = SettingsDataUtil.getSaveEvent();
 		SettingsSavedEvent event = (SettingsSavedEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVED,
-				SettingsDataUtil.getPersistenceDTO());
+				SettingsDataUtil.getSettingsDTO());
 
 		assertEquals(SettingsEventTypes.SAVED, event.getType());
-		assertNotNull(event.getPersistence());
+		assertNotNull(event.getSettings());
 
 		checkMetadataFields(source, event);
 	}
@@ -423,14 +423,14 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 		Event source = SettingsDataUtil.getSelectEvent();
 
 		SelectCancelledEvent event = (SelectCancelledEvent) SettingsEventFactory.getEvent(source,
-				SettingsEventTypes.SELECT_CANCELLED, SettingsDataUtil.getSelectionDTO(), exception.getExceptionType(),
+				SettingsEventTypes.SELECT_CANCELLED, SettingsDataUtil.getSettingsDTO(), exception.getExceptionType(),
 				exception.getArguments());
 
 		assertEquals(SettingsEventTypes.SELECT_CANCELLED, event.getType());
 
 		checkMetadataFields(source, event);
 		checkErrorFields(exception, event);
-		assertNotNull(event.getSelection());
+		assertNotNull(event.getSettings());
 	}
 
 	@Test
@@ -441,14 +441,14 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 		Event source = SettingsDataUtil.getDeselectEvent();
 
 		DeselectCancelledEvent event = (DeselectCancelledEvent) SettingsEventFactory.getEvent(source,
-				SettingsEventTypes.DESELECT_CANCELLED, SettingsDataUtil.getSelectionDTO(), exception.getExceptionType(),
+				SettingsEventTypes.DESELECT_CANCELLED, SettingsDataUtil.getSettingsDTO(), exception.getExceptionType(),
 				exception.getArguments());
 
 		assertEquals(SettingsEventTypes.DESELECT_CANCELLED, event.getType());
 
 		checkMetadataFields(source, event);
 		checkErrorFields(exception, event);
-		assertNotNull(event.getSelection());
+		assertNotNull(event.getSettings());
 	}
 
 	@Test
@@ -459,14 +459,14 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 		Event source = SettingsDataUtil.getClearEvent();
 
 		ClearSelectionCancelledEvent event = (ClearSelectionCancelledEvent) SettingsEventFactory.getEvent(source,
-				SettingsEventTypes.CLEAR_SELECTION_CANCELLED, SettingsDataUtil.getSelectionDTO(),
+				SettingsEventTypes.CLEAR_SELECTION_CANCELLED, SettingsDataUtil.getSettingsDTO(),
 				exception.getExceptionType(), exception.getArguments());
 
 		assertEquals(SettingsEventTypes.CLEAR_SELECTION_CANCELLED, event.getType());
 
 		checkMetadataFields(source, event);
 		checkErrorFields(exception, event);
-		assertNotNull(event.getSelection());
+		assertNotNull(event.getSettings());
 	}
 
 	@Test
@@ -477,14 +477,14 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 		Event source = SettingsDataUtil.getSaveEvent();
 
 		SaveSettingsCancelledEvent event = (SaveSettingsCancelledEvent) SettingsEventFactory.getEvent(source,
-				SettingsEventTypes.SAVE_CANCELLED, SettingsDataUtil.getPersistenceDTO(), exception.getExceptionType(),
+				SettingsEventTypes.SAVE_CANCELLED, SettingsDataUtil.getSettingsDTO(), exception.getExceptionType(),
 				exception.getArguments());
 
 		assertEquals(SettingsEventTypes.SAVE_CANCELLED, event.getType());
 
 		checkMetadataFields(source, event);
 		checkErrorFields(exception, event);
-		assertNotNull(event.getPersistence());
+		assertNotNull(event.getSettings());
 	}
 
 	@Test
@@ -495,14 +495,14 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 		Event source = SettingsDataUtil.getSaveEvent();
 
 		DeleteSettingsCancelledEvent event = (DeleteSettingsCancelledEvent) SettingsEventFactory.getEvent(source,
-				SettingsEventTypes.DELETE_CANCELLED, SettingsDataUtil.getPersistenceDTO(), exception.getExceptionType(),
+				SettingsEventTypes.DELETE_CANCELLED, SettingsDataUtil.getSettingsDTO(), exception.getExceptionType(),
 				exception.getArguments());
 
 		assertEquals(SettingsEventTypes.DELETE_CANCELLED, event.getType());
 
 		checkMetadataFields(source, event);
 		checkErrorFields(exception, event);
-		assertNotNull(event.getPersistence());
+		assertNotNull(event.getSettings());
 	}
 
 	////////////////////
