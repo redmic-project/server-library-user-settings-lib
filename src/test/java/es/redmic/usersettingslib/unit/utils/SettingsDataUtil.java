@@ -184,6 +184,7 @@ public abstract class SettingsDataUtil {
 		evt.setVersion(1);
 		evt.setUserId(USER);
 		evt.setSettings(getSettingsDTO());
+		evt.getSettings().setSelection(new ArrayList<>());
 		return evt;
 	}
 
