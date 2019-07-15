@@ -33,38 +33,56 @@
 			<artifactId>models</artifactId>
 			<version>${redmic.models.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>es.redmic.lib</groupId>
 			<artifactId>exceptions</artifactId>
 			<version>${redmic.exceptions.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>es.redmic.lib</groupId>
 			<artifactId>broker-lib</artifactId>
 			<version>${redmic.broker-lib.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>es.redmic.lib</groupId>
 			<artifactId>elasticsearch-lib</artifactId>
 			<version>${redmic.elasticsearch-lib.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>es.redmic.lib</groupId>
 			<artifactId>test-utils</artifactId>
 			<version>${redmic.test-utils.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.el</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>Jar Tests Package</id>
+						<phase>package</phase>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 	<repositories>
 		<repository>
