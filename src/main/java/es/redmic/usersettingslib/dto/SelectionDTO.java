@@ -21,6 +21,7 @@ package es.redmic.usersettingslib.dto;
  */
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.avro.Schema;
 import org.joda.time.DateTime;
@@ -112,13 +113,13 @@ public class SelectionDTO extends SettingsBaseDTO {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	@JsonIgnore
 	@Override
 	public void put(int field, Object value) {
 		switch (field) {
 		case 0:
-			setSelection(value != null ? (java.util.List) value : null);
+			setSelection(value != null ? getStringList((java.util.List) value) : null);
 			break;
 		case 1:
 			setService(value.toString());
@@ -138,5 +139,11 @@ public class SelectionDTO extends SettingsBaseDTO {
 		default:
 			throw new org.apache.avro.AvroRuntimeException("Bad index");
 		}
+	}
+
+	@JsonIgnore
+	private List<String> getStringList(List<?> value) {
+
+		return value.stream().map(s -> s.toString()).collect(Collectors.toList());
 	}
 }

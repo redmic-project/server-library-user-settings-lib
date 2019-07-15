@@ -21,6 +21,7 @@ package es.redmic.usersettingslib.dto;
  */
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 
@@ -101,10 +102,12 @@ public class SettingsDTO extends SettingsBaseDTO {
 		this.selection = selection;
 	}
 
+	@Override
 	public String getService() {
 		return service;
 	}
 
+	@Override
 	public void setService(String service) {
 		this.service = service;
 	}
@@ -191,7 +194,7 @@ public class SettingsDTO extends SettingsBaseDTO {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	@JsonIgnore
 	@Override
 	public void put(int field, Object value) {
@@ -206,7 +209,7 @@ public class SettingsDTO extends SettingsBaseDTO {
 			setUserId(value != null ? value.toString() : null);
 			break;
 		case 3:
-			setSelection(value != null ? (java.util.List) value : null);
+			setSelection(value != null ? getStringList((java.util.List) value) : null);
 			break;
 		case 4:
 			setService(value.toString());
@@ -226,5 +229,11 @@ public class SettingsDTO extends SettingsBaseDTO {
 		default:
 			throw new org.apache.avro.AvroRuntimeException("Bad index");
 		}
+	}
+
+	@JsonIgnore
+	private List<String> getStringList(List<?> value) {
+
+		return value.stream().map(s -> s.toString()).collect(Collectors.toList());
 	}
 }
