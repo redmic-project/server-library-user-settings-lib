@@ -25,9 +25,10 @@ import es.redmic.models.es.common.dto.EventApplicationResult;
 import es.redmic.models.es.common.query.dto.SimpleQueryDTO;
 import es.redmic.usersettingslib.model.Settings;
 
-public abstract class SettingsRepositoryImpl extends RWDataESRepository<Settings, SimpleQueryDTO> {
+public abstract class SettingsRepositoryImpl<TModel extends Settings, TQueryDTO extends SimpleQueryDTO>
+		extends RWDataESRepository<TModel, TQueryDTO> {
 
-	private static String[] INDEX = { "layer" };
+	private static String[] INDEX = { "settings" };
 	private static String TYPE = "_doc";
 
 	public SettingsRepositoryImpl() {
@@ -36,13 +37,11 @@ public abstract class SettingsRepositoryImpl extends RWDataESRepository<Settings
 
 	@Override
 	protected EventApplicationResult checkInsertConstraintsFulfilled(Settings modelToIndex) {
-		// TODO Comprobar que no exista esa setting con el nombre ...
 		return new EventApplicationResult(true);
 	}
 
 	@Override
 	protected EventApplicationResult checkUpdateConstraintsFulfilled(Settings modelToIndex) {
-		// TODO Comprobar que no exista esa setting con el nombre ...
 		return new EventApplicationResult(true);
 	}
 
