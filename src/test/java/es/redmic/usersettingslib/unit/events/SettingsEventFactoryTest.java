@@ -104,7 +104,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 	@Test
 	public void GetEvent_ReturnPartialSaveEvent_IfTypeIsPartialSave() {
 
-		Event source = SettingsDataUtil.getSaveEvent();
+		Event source = SettingsDataUtil.getSaveSettingsEvent();
 		PartialSaveSettingsEvent event = (PartialSaveSettingsEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.PARTIAL_SAVE, SettingsDataUtil.getPersistenceDTO());
 
@@ -154,7 +154,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 	@Test
 	public void GetEvent_ReturnSaveEvent_IfTypeIsSave() {
 
-		Event source = SettingsDataUtil.getSaveEvent();
+		Event source = SettingsDataUtil.getSaveSettingsEvent();
 		SaveSettingsEvent event = (SaveSettingsEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVE,
 				SettingsDataUtil.getSettingsDTO());
 
@@ -166,7 +166,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 	@Test
 	public void GetEvent_ReturnDeleteEvent_IfTypeIsDelete() {
 
-		Event source = SettingsDataUtil.getDeleteEvent();
+		Event source = SettingsDataUtil.getDeleteSettingsEvent();
 		DeleteSettingsEvent event = (DeleteSettingsEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.DELETE);
 
@@ -178,7 +178,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 	@Test
 	public void GetEvent_ReturnDeleteSettingsCheckedEvent_IfTypeIsDeleteChecked() {
 
-		Event source = SettingsDataUtil.getDeleteEvent();
+		Event source = SettingsDataUtil.getDeleteSettingsEvent();
 		DeleteSettingsCheckedEvent event = (DeleteSettingsCheckedEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.DELETE_CHECKED);
 
@@ -190,7 +190,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 	@Test
 	public void GetEvent_ReturnDeleteSettingsConfirmedEvent_IfTypeIsDeleteConfirmed() {
 
-		Event source = SettingsDataUtil.getDeleteEvent();
+		Event source = SettingsDataUtil.getDeleteSettingsEvent();
 		DeleteSettingsConfirmedEvent event = (DeleteSettingsConfirmedEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.DELETE_CONFIRMED);
 
@@ -202,7 +202,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 	@Test
 	public void GetEvent_ReturnSettingsDeletedEvent_IfTypeIsDeleted() {
 
-		Event source = SettingsDataUtil.getDeleteEvent();
+		Event source = SettingsDataUtil.getDeleteSettingsEvent();
 		SettingsDeletedEvent event = (SettingsDeletedEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.DELETED);
 
@@ -252,7 +252,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 	@Test
 	public void GetEvent_ReturnSaveConfirmedEvent_IfTypeIsSaveConfirmed() {
 
-		Event source = SettingsDataUtil.getSaveEvent();
+		Event source = SettingsDataUtil.getSaveSettingsEvent();
 		SaveSettingsConfirmedEvent event = (SaveSettingsConfirmedEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.SAVE_CONFIRMED);
 
@@ -305,7 +305,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 	@Test
 	public void GetEvent_ReturnSavedEvent_IfTypeIsSaved() {
 
-		Event source = SettingsDataUtil.getSaveEvent();
+		Event source = SettingsDataUtil.getSaveSettingsEvent();
 		SettingsSavedEvent event = (SettingsSavedEvent) SettingsEventFactory.getEvent(source, SettingsEventTypes.SAVED,
 				SettingsDataUtil.getSettingsDTO());
 
@@ -368,9 +368,9 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 	@Test
 	public void GetEvent_ReturnSaveFailedEvent_IfTypeIsSaveFailed() {
 
-		SaveSettingsFailedEvent exception = SettingsDataUtil.getSaveFailedEvent();
+		SaveSettingsFailedEvent exception = SettingsDataUtil.getSaveSettingsFailedEvent();
 
-		Event source = SettingsDataUtil.getSaveEvent();
+		Event source = SettingsDataUtil.getSaveSettingsEvent();
 
 		SaveSettingsFailedEvent event = (SaveSettingsFailedEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.SAVE_FAILED, exception.getExceptionType(), exception.getArguments());
@@ -384,9 +384,9 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 	@Test
 	public void GetEvent_ReturnDeleteSettingsFailedEvent_IfTypeIsDeleteFailed() {
 
-		DeleteSettingsFailedEvent exception = SettingsDataUtil.getDeleteFailedEvent();
+		DeleteSettingsFailedEvent exception = SettingsDataUtil.getDeleteSettingsFailedEvent();
 
-		Event source = SettingsDataUtil.getDeleteEvent();
+		Event source = SettingsDataUtil.getDeleteSettingsEvent();
 
 		DeleteSettingsFailedEvent event = (DeleteSettingsFailedEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.DELETE_FAILED, exception.getExceptionType(), exception.getArguments());
@@ -402,7 +402,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 
 		DeleteSettingsCheckFailedEvent exception = SettingsDataUtil.getDeleteSettingsCheckFailedEvent();
 
-		Event source = SettingsDataUtil.getDeleteEvent();
+		Event source = SettingsDataUtil.getDeleteSettingsEvent();
 
 		DeleteSettingsCheckFailedEvent event = (DeleteSettingsCheckFailedEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.DELETE_CHECK_FAILED, exception.getExceptionType(), exception.getArguments());
@@ -472,9 +472,9 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 	@Test
 	public void GetEvent_ReturnSaveCancelledEvent_IfTypeIsSaveCancelled() {
 
-		SaveSettingsCancelledEvent exception = SettingsDataUtil.getSaveCancelledEvent();
+		SaveSettingsCancelledEvent exception = SettingsDataUtil.getSaveSettingsCancelledEvent();
 
-		Event source = SettingsDataUtil.getSaveEvent();
+		Event source = SettingsDataUtil.getSaveSettingsEvent();
 
 		SaveSettingsCancelledEvent event = (SaveSettingsCancelledEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.SAVE_CANCELLED, SettingsDataUtil.getSettingsDTO(), exception.getExceptionType(),
@@ -490,9 +490,9 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 	@Test
 	public void GetEvent_ReturnDeleteSettingsCancelledEvent_IfTypeIsDeleteCancelled() {
 
-		DeleteSettingsCancelledEvent exception = SettingsDataUtil.getDeleteCancelledEvent();
+		DeleteSettingsCancelledEvent exception = SettingsDataUtil.getDeleteSettingsCancelledEvent();
 
-		Event source = SettingsDataUtil.getSaveEvent();
+		Event source = SettingsDataUtil.getSaveSettingsEvent();
 
 		DeleteSettingsCancelledEvent event = (DeleteSettingsCancelledEvent) SettingsEventFactory.getEvent(source,
 				SettingsEventTypes.DELETE_CANCELLED, SettingsDataUtil.getSettingsDTO(), exception.getExceptionType(),

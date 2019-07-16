@@ -74,9 +74,13 @@ public abstract class SettingsDataUtil {
 	// SELECT
 
 	public static SelectEvent getSelectEvent() {
+		return getSelectEvent(CODE);
+	}
+
+	public static SelectEvent getSelectEvent(String code) {
 
 		SelectEvent evt = new SelectEvent();
-		evt.setAggregateId(PREFIX + CODE);
+		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(1);
 		evt.setUserId(USER);
 		evt.setSettings(getSettingsDTO());
@@ -84,27 +88,43 @@ public abstract class SettingsDataUtil {
 	}
 
 	public static PartialSelectEvent getPartialSelectEvent() {
+		return getPartialSelectEvent(CODE);
+	}
 
-		PartialSelectEvent evt = new PartialSelectEvent().buildFrom(getSelectEvent());
-		evt.setSelection(getSelectionDTO());
+	public static PartialSelectEvent getPartialSelectEvent(String code) {
+
+		PartialSelectEvent evt = new PartialSelectEvent().buildFrom(getSelectEvent(code));
+		evt.setSelection(getSelectionDTO(code));
 		return evt;
 	}
 
 	public static SelectConfirmedEvent getSelectConfirmedEvent() {
+		return getSelectConfirmedEvent(CODE);
+	}
 
-		return new SelectConfirmedEvent().buildFrom(getSelectEvent());
+	public static SelectConfirmedEvent getSelectConfirmedEvent(String code) {
+
+		return new SelectConfirmedEvent().buildFrom(getSelectEvent(code));
 	}
 
 	public static SelectedEvent getSelectedEvent() {
+		return getSelectedEvent(CODE);
+	}
 
-		SelectedEvent evt = new SelectedEvent().buildFrom(getSelectEvent());
-		evt.setSettings(getSettingsDTO());
+	public static SelectedEvent getSelectedEvent(String code) {
+
+		SelectedEvent evt = new SelectedEvent().buildFrom(getSelectEvent(code));
+		evt.setSettings(getSettingsDTO(code));
 		return evt;
 	}
 
 	public static SelectFailedEvent getSelectFailedEvent() {
+		return getSelectFailedEvent(CODE);
+	}
 
-		SelectFailedEvent evt = new SelectFailedEvent().buildFrom(getSelectEvent());
+	public static SelectFailedEvent getSelectFailedEvent(String code) {
+
+		SelectFailedEvent evt = new SelectFailedEvent().buildFrom(getSelectEvent(code));
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -113,9 +133,13 @@ public abstract class SettingsDataUtil {
 	}
 
 	public static SelectCancelledEvent getSelectCancelledEvent() {
+		return getSelectCancelledEvent(CODE);
+	}
 
-		SelectCancelledEvent evt = new SelectCancelledEvent().buildFrom(getSelectEvent());
-		evt.setSettings(getSettingsDTO());
+	public static SelectCancelledEvent getSelectCancelledEvent(String code) {
+
+		SelectCancelledEvent evt = new SelectCancelledEvent().buildFrom(getSelectEvent(code));
+		evt.setSettings(getSettingsDTO(code));
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -126,9 +150,13 @@ public abstract class SettingsDataUtil {
 	// DESELECT
 
 	public static DeselectEvent getDeselectEvent() {
+		return getDeselectEvent(CODE);
+	}
+
+	public static DeselectEvent getDeselectEvent(String code) {
 
 		DeselectEvent evt = new DeselectEvent();
-		evt.setAggregateId(PREFIX + CODE);
+		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(1);
 		evt.setUserId(USER);
 		evt.setSettings(getSettingsDTO());
@@ -136,27 +164,43 @@ public abstract class SettingsDataUtil {
 	}
 
 	public static PartialDeselectEvent getPartialDeselectEvent() {
+		return getPartialDeselectEvent(CODE);
+	}
 
-		PartialDeselectEvent evt = new PartialDeselectEvent().buildFrom(getDeselectEvent());
-		evt.setSelection(getSelectionDTO());
+	public static PartialDeselectEvent getPartialDeselectEvent(String code) {
+
+		PartialDeselectEvent evt = new PartialDeselectEvent().buildFrom(getDeselectEvent(code));
+		evt.setSelection(getSelectionDTO(code));
 		return evt;
 	}
 
 	public static DeselectConfirmedEvent getDeselectConfirmedEvent() {
+		return getDeselectConfirmedEvent(CODE);
+	}
 
-		return new DeselectConfirmedEvent().buildFrom(getDeselectEvent());
+	public static DeselectConfirmedEvent getDeselectConfirmedEvent(String code) {
+
+		return new DeselectConfirmedEvent().buildFrom(getDeselectEvent(code));
 	}
 
 	public static DeselectedEvent getDeselectedEvent() {
+		return getDeselectedEvent(CODE);
+	}
 
-		DeselectedEvent evt = new DeselectedEvent().buildFrom(getDeselectEvent());
-		evt.setSettings(getSettingsDTO());
+	public static DeselectedEvent getDeselectedEvent(String code) {
+
+		DeselectedEvent evt = new DeselectedEvent().buildFrom(getDeselectEvent(code));
+		evt.setSettings(getSettingsDTO(code));
 		return evt;
 	}
 
 	public static DeselectFailedEvent getDeselectFailedEvent() {
+		return getDeselectFailedEvent(CODE);
+	}
 
-		DeselectFailedEvent evt = new DeselectFailedEvent().buildFrom(getDeselectEvent());
+	public static DeselectFailedEvent getDeselectFailedEvent(String code) {
+
+		DeselectFailedEvent evt = new DeselectFailedEvent().buildFrom(getDeselectEvent(code));
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -165,9 +209,13 @@ public abstract class SettingsDataUtil {
 	}
 
 	public static DeselectCancelledEvent getDeselectCancelledEvent() {
+		return getDeselectCancelledEvent(CODE);
+	}
 
-		DeselectCancelledEvent evt = new DeselectCancelledEvent().buildFrom(getDeselectEvent());
-		evt.setSettings(getSettingsDTO());
+	public static DeselectCancelledEvent getDeselectCancelledEvent(String code) {
+
+		DeselectCancelledEvent evt = new DeselectCancelledEvent().buildFrom(getDeselectEvent(code));
+		evt.setSettings(getSettingsDTO(code));
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -178,38 +226,58 @@ public abstract class SettingsDataUtil {
 	// CLEAR
 
 	public static ClearSelectionEvent getClearEvent() {
+		return getClearEvent(CODE);
+	}
+
+	public static ClearSelectionEvent getClearEvent(String code) {
 
 		ClearSelectionEvent evt = new ClearSelectionEvent();
-		evt.setAggregateId(PREFIX + CODE);
+		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(1);
 		evt.setUserId(USER);
-		evt.setSettings(getSettingsDTO());
+		evt.setSettings(getSettingsDTO(code));
 		evt.getSettings().setSelection(new ArrayList<>());
 		return evt;
 	}
 
 	public static PartialClearSelectionEvent getPartialClearSelectionEvent() {
+		return getPartialClearSelectionEvent(CODE);
+	}
 
-		PartialClearSelectionEvent evt = new PartialClearSelectionEvent().buildFrom(getClearEvent());
-		evt.setSelection(getSelectionDTO());
+	public static PartialClearSelectionEvent getPartialClearSelectionEvent(String code) {
+
+		PartialClearSelectionEvent evt = new PartialClearSelectionEvent().buildFrom(getClearEvent(code));
+		evt.setSelection(getSelectionDTO(code));
 		return evt;
 	}
 
 	public static ClearSelectionConfirmedEvent getClearConfirmedEvent() {
+		return getClearConfirmedEvent(CODE);
+	}
 
-		return new ClearSelectionConfirmedEvent().buildFrom(getClearEvent());
+	public static ClearSelectionConfirmedEvent getClearConfirmedEvent(String code) {
+
+		return new ClearSelectionConfirmedEvent().buildFrom(getClearEvent(code));
 	}
 
 	public static SelectionClearedEvent getClearedEvent() {
+		return getClearedEvent(CODE);
+	}
 
-		SelectionClearedEvent evt = new SelectionClearedEvent().buildFrom(getClearEvent());
-		evt.setSettings(getSettingsDTO());
+	public static SelectionClearedEvent getClearedEvent(String code) {
+
+		SelectionClearedEvent evt = new SelectionClearedEvent().buildFrom(getClearEvent(code));
+		evt.setSettings(getSettingsDTO(code));
 		return evt;
 	}
 
 	public static ClearSelectionFailedEvent getClearFailedEvent() {
+		return getClearFailedEvent(CODE);
+	}
 
-		ClearSelectionFailedEvent evt = new ClearSelectionFailedEvent().buildFrom(getClearEvent());
+	public static ClearSelectionFailedEvent getClearFailedEvent(String code) {
+
+		ClearSelectionFailedEvent evt = new ClearSelectionFailedEvent().buildFrom(getClearEvent(code));
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -218,9 +286,13 @@ public abstract class SettingsDataUtil {
 	}
 
 	public static ClearSelectionCancelledEvent getClearCancelledEvent() {
+		return getClearCancelledEvent(CODE);
+	}
 
-		ClearSelectionCancelledEvent evt = new ClearSelectionCancelledEvent().buildFrom(getClearEvent());
-		evt.setSettings(getSettingsDTO());
+	public static ClearSelectionCancelledEvent getClearCancelledEvent(String code) {
+
+		ClearSelectionCancelledEvent evt = new ClearSelectionCancelledEvent().buildFrom(getClearEvent(code));
+		evt.setSettings(getSettingsDTO(code));
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -230,10 +302,14 @@ public abstract class SettingsDataUtil {
 
 	// SAVE
 
-	public static SaveSettingsEvent getSaveEvent() {
+	public static SaveSettingsEvent getSaveSettingsEvent() {
+		return getSaveSettingsEvent(CODE);
+	}
+
+	public static SaveSettingsEvent getSaveSettingsEvent(String code) {
 
 		SaveSettingsEvent evt = new SaveSettingsEvent();
-		evt.setAggregateId(PREFIX + CODE);
+		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(1);
 		evt.setUserId(USER);
 		evt.setSettings(getSettingsDTO());
@@ -241,27 +317,43 @@ public abstract class SettingsDataUtil {
 	}
 
 	public static PartialSaveSettingsEvent getPartialSaveSettingsEvent() {
+		return getPartialSaveSettingsEvent(CODE);
+	}
 
-		PartialSaveSettingsEvent evt = new PartialSaveSettingsEvent().buildFrom(getSaveEvent());
-		evt.setPersistence(getPersistenceDTO());
+	public static PartialSaveSettingsEvent getPartialSaveSettingsEvent(String code) {
+
+		PartialSaveSettingsEvent evt = new PartialSaveSettingsEvent().buildFrom(getSaveSettingsEvent(code));
+		evt.setPersistence(getPersistenceDTO(code));
 		return evt;
 	}
 
-	public static SaveSettingsConfirmedEvent getSaveConfirmedEvent() {
-
-		return new SaveSettingsConfirmedEvent().buildFrom(getSaveEvent());
+	public static SaveSettingsConfirmedEvent getSaveSettingsConfirmedEvent() {
+		return getSaveSettingsConfirmedEvent(CODE);
 	}
 
-	public static SettingsSavedEvent getSavedEvent() {
+	public static SaveSettingsConfirmedEvent getSaveSettingsConfirmedEvent(String code) {
 
-		SettingsSavedEvent evt = new SettingsSavedEvent().buildFrom(getSaveEvent());
-		evt.setSettings(getSettingsDTO());
+		return new SaveSettingsConfirmedEvent().buildFrom(getSaveSettingsEvent(code));
+	}
+
+	public static SettingsSavedEvent getSettingsSavedEvent() {
+		return getSettingsSavedEvent(CODE);
+	}
+
+	public static SettingsSavedEvent getSettingsSavedEvent(String code) {
+
+		SettingsSavedEvent evt = new SettingsSavedEvent().buildFrom(getSaveSettingsEvent(code));
+		evt.setSettings(getSettingsDTO(code));
 		return evt;
 	}
 
-	public static SaveSettingsFailedEvent getSaveFailedEvent() {
+	public static SaveSettingsFailedEvent getSaveSettingsFailedEvent() {
+		return getSaveSettingsFailedEvent(CODE);
+	}
 
-		SaveSettingsFailedEvent evt = new SaveSettingsFailedEvent().buildFrom(getSaveEvent());
+	public static SaveSettingsFailedEvent getSaveSettingsFailedEvent(String code) {
+
+		SaveSettingsFailedEvent evt = new SaveSettingsFailedEvent().buildFrom(getSaveSettingsEvent(code));
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -269,10 +361,14 @@ public abstract class SettingsDataUtil {
 		return evt;
 	}
 
-	public static SaveSettingsCancelledEvent getSaveCancelledEvent() {
+	public static SaveSettingsCancelledEvent getSaveSettingsCancelledEvent() {
+		return getSaveSettingsCancelledEvent(CODE);
+	}
 
-		SaveSettingsCancelledEvent evt = new SaveSettingsCancelledEvent().buildFrom(getSaveEvent());
-		evt.setSettings(getSettingsDTO());
+	public static SaveSettingsCancelledEvent getSaveSettingsCancelledEvent(String code) {
+
+		SaveSettingsCancelledEvent evt = new SaveSettingsCancelledEvent().buildFrom(getSaveSettingsEvent(code));
+		evt.setSettings(getSettingsDTO(code));
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -282,28 +378,44 @@ public abstract class SettingsDataUtil {
 
 	// DELETE
 
-	public static DeleteSettingsEvent getDeleteEvent() {
+	public static DeleteSettingsEvent getDeleteSettingsEvent() {
+		return getDeleteSettingsEvent(CODE);
+	}
+
+	public static DeleteSettingsEvent getDeleteSettingsEvent(String code) {
 
 		DeleteSettingsEvent evt = new DeleteSettingsEvent();
-		evt.setAggregateId(PREFIX + CODE);
+		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(1);
 		evt.setUserId(USER);
 		return evt;
 	}
 
-	public static DeleteSettingsConfirmedEvent getDeleteConfirmedEvent() {
-
-		return new DeleteSettingsConfirmedEvent().buildFrom(getDeleteEvent());
+	public static DeleteSettingsConfirmedEvent getDeleteSettingsConfirmedEvent() {
+		return getDeleteSettingsConfirmedEvent(CODE);
 	}
 
-	public static SettingsDeletedEvent getDeletedEvent() {
+	public static DeleteSettingsConfirmedEvent getDeleteSettingsConfirmedEvent(String code) {
 
-		return new SettingsDeletedEvent().buildFrom(getDeleteEvent());
+		return new DeleteSettingsConfirmedEvent().buildFrom(getDeleteSettingsEvent(code));
 	}
 
-	public static DeleteSettingsFailedEvent getDeleteFailedEvent() {
+	public static SettingsDeletedEvent getSettingsDeletedEvent() {
+		return getSettingsDeletedEvent(CODE);
+	}
 
-		DeleteSettingsFailedEvent evt = new DeleteSettingsFailedEvent().buildFrom(getDeleteEvent());
+	public static SettingsDeletedEvent getSettingsDeletedEvent(String code) {
+
+		return new SettingsDeletedEvent().buildFrom(getDeleteSettingsEvent(code));
+	}
+
+	public static DeleteSettingsFailedEvent getDeleteSettingsFailedEvent() {
+		return getDeleteSettingsFailedEvent(CODE);
+	}
+
+	public static DeleteSettingsFailedEvent getDeleteSettingsFailedEvent(String code) {
+
+		DeleteSettingsFailedEvent evt = new DeleteSettingsFailedEvent().buildFrom(getDeleteSettingsEvent(code));
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -311,10 +423,14 @@ public abstract class SettingsDataUtil {
 		return evt;
 	}
 
-	public static DeleteSettingsCancelledEvent getDeleteCancelledEvent() {
+	public static DeleteSettingsCancelledEvent getDeleteSettingsCancelledEvent() {
+		return getDeleteSettingsCancelledEvent(CODE);
+	}
 
-		DeleteSettingsCancelledEvent evt = new DeleteSettingsCancelledEvent().buildFrom(getDeleteEvent());
-		evt.setSettings(getSettingsDTO());
+	public static DeleteSettingsCancelledEvent getDeleteSettingsCancelledEvent(String code) {
+
+		DeleteSettingsCancelledEvent evt = new DeleteSettingsCancelledEvent().buildFrom(getDeleteSettingsEvent(code));
+		evt.setSettings(getSettingsDTO(code));
 		evt.setExceptionType("ItemNotFound");
 		Map<String, String> arguments = new HashMap<String, String>();
 		arguments.put("a", "b");
@@ -323,13 +439,22 @@ public abstract class SettingsDataUtil {
 	}
 
 	public static CheckDeleteSettingsEvent getCheckDeleteSettingsEvent() {
+		return getCheckDeleteSettingsEvent(CODE);
+	}
 
-		return new CheckDeleteSettingsEvent().buildFrom(getDeleteEvent());
+	public static CheckDeleteSettingsEvent getCheckDeleteSettingsEvent(String code) {
+
+		return new CheckDeleteSettingsEvent().buildFrom(getDeleteSettingsEvent(code));
 	}
 
 	public static DeleteSettingsCheckFailedEvent getDeleteSettingsCheckFailedEvent() {
+		return getDeleteSettingsCheckFailedEvent(CODE);
+	}
 
-		DeleteSettingsCheckFailedEvent event = new DeleteSettingsCheckFailedEvent().buildFrom(getDeleteEvent());
+	public static DeleteSettingsCheckFailedEvent getDeleteSettingsCheckFailedEvent(String code) {
+
+		DeleteSettingsCheckFailedEvent event = new DeleteSettingsCheckFailedEvent()
+				.buildFrom(getDeleteSettingsEvent(code));
 
 		event.setExceptionType("ItemIsShared");
 		Map<String, String> arguments = new HashMap<String, String>();
@@ -340,18 +465,26 @@ public abstract class SettingsDataUtil {
 	}
 
 	public static DeleteSettingsCheckedEvent getDeleteSettingsCheckedEvent() {
+		return getDeleteSettingsCheckedEvent(CODE);
+	}
 
-		return new DeleteSettingsCheckedEvent().buildFrom(getDeleteEvent());
+	public static DeleteSettingsCheckedEvent getDeleteSettingsCheckedEvent(String code) {
+
+		return new DeleteSettingsCheckedEvent().buildFrom(getDeleteSettingsEvent(code));
 	}
 
 	//
 
-	@SuppressWarnings("serial")
 	public static SelectionDTO getSelectionDTO() {
+		return getSelectionDTO(CODE);
+	}
+
+	@SuppressWarnings("serial")
+	public static SelectionDTO getSelectionDTO(String code) {
 
 		SelectionDTO selection = new SelectionDTO();
 
-		selection.setId(PREFIX + CODE);
+		selection.setId(PREFIX + code);
 		selection.setService("prueba");
 		selection.setSelection(new ArrayList<String>() {
 			{
@@ -366,10 +499,14 @@ public abstract class SettingsDataUtil {
 	}
 
 	public static PersistenceDTO getPersistenceDTO() {
+		return getPersistenceDTO(CODE);
+	}
+
+	public static PersistenceDTO getPersistenceDTO(String code) {
 
 		PersistenceDTO persistence = new PersistenceDTO();
 
-		persistence.setId(PREFIX + CODE);
+		persistence.setId(PREFIX + code);
 		persistence.setName("prueba");
 		persistence.setUserId(USER);
 
@@ -381,8 +518,12 @@ public abstract class SettingsDataUtil {
 		return persistence;
 	}
 
-	@SuppressWarnings("serial")
 	public static SettingsDTO getSettingsDTO() {
+		return getSettingsDTO(CODE);
+	}
+
+	@SuppressWarnings("serial")
+	public static SettingsDTO getSettingsDTO(String code) {
 
 		SettingsDTO settings = new SettingsDTO();
 

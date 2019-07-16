@@ -319,7 +319,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void SaveEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		SaveSettingsEvent event = SettingsDataUtil.getSaveEvent();
+		SaveSettingsEvent event = SettingsDataUtil.getSaveSettingsEvent();
 
 		Object result = serializerAndDeserializer(event);
 
@@ -332,7 +332,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void SaveConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		SaveSettingsConfirmedEvent event = SettingsDataUtil.getSaveConfirmedEvent();
+		SaveSettingsConfirmedEvent event = SettingsDataUtil.getSaveSettingsConfirmedEvent();
 
 		Object result = serializerAndDeserializer(event);
 
@@ -345,7 +345,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void SavedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		SettingsSavedEvent event = SettingsDataUtil.getSavedEvent();
+		SettingsSavedEvent event = SettingsDataUtil.getSettingsSavedEvent();
 
 		Object result = serializerAndDeserializer(event);
 
@@ -358,7 +358,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void SaveFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		SaveSettingsFailedEvent event = SettingsDataUtil.getSaveFailedEvent();
+		SaveSettingsFailedEvent event = SettingsDataUtil.getSaveSettingsFailedEvent();
 
 		Object result = serializerAndDeserializer(event);
 
@@ -371,7 +371,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void SaveCancelledEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		SaveSettingsCancelledEvent event = SettingsDataUtil.getSaveCancelledEvent();
+		SaveSettingsCancelledEvent event = SettingsDataUtil.getSaveSettingsCancelledEvent();
 
 		Object result = serializerAndDeserializer(event);
 
@@ -386,7 +386,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void DeleteEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		DeleteSettingsEvent event = SettingsDataUtil.getDeleteEvent();
+		DeleteSettingsEvent event = SettingsDataUtil.getDeleteSettingsEvent();
 
 		Object result = serializerAndDeserializer(event);
 
@@ -438,7 +438,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void DeleteConfirmedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		DeleteSettingsConfirmedEvent event = SettingsDataUtil.getDeleteConfirmedEvent();
+		DeleteSettingsConfirmedEvent event = SettingsDataUtil.getDeleteSettingsConfirmedEvent();
 
 		Object result = serializerAndDeserializer(event);
 
@@ -451,7 +451,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void DeletedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		SettingsDeletedEvent event = SettingsDataUtil.getDeletedEvent();
+		SettingsDeletedEvent event = SettingsDataUtil.getSettingsDeletedEvent();
 
 		Object result = serializerAndDeserializer(event);
 
@@ -464,7 +464,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void DeleteFailedEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		DeleteSettingsFailedEvent event = SettingsDataUtil.getDeleteFailedEvent();
+		DeleteSettingsFailedEvent event = SettingsDataUtil.getDeleteSettingsFailedEvent();
 
 		Object result = serializerAndDeserializer(event);
 
@@ -477,7 +477,7 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 	@Test
 	public void DeleteCancelledEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
 
-		DeleteSettingsCancelledEvent event = SettingsDataUtil.getDeleteCancelledEvent();
+		DeleteSettingsCancelledEvent event = SettingsDataUtil.getDeleteSettingsCancelledEvent();
 
 		Object result = serializerAndDeserializer(event);
 
