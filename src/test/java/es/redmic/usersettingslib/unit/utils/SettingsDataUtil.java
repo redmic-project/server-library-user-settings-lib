@@ -84,6 +84,7 @@ public abstract class SettingsDataUtil {
 		evt.setVersion(1);
 		evt.setUserId(USER);
 		evt.setSettings(getSettingsDTO());
+		evt.setSessionId("sessionIdA");
 		return evt;
 	}
 
@@ -159,6 +160,7 @@ public abstract class SettingsDataUtil {
 		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(1);
 		evt.setUserId(USER);
+		evt.setSessionId("sessionIdB");
 		evt.setSettings(getSettingsDTO());
 		return evt;
 	}
@@ -235,6 +237,7 @@ public abstract class SettingsDataUtil {
 		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(1);
 		evt.setUserId(USER);
+		evt.setSessionId("sessionIdC");
 		evt.setSettings(getSettingsDTO(code));
 		evt.getSettings().setSelection(new ArrayList<>());
 		return evt;
@@ -312,6 +315,7 @@ public abstract class SettingsDataUtil {
 		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(1);
 		evt.setUserId(USER);
+		evt.setSessionId("sessionIdD");
 		evt.setSettings(getSettingsDTO());
 		return evt;
 	}
@@ -388,6 +392,7 @@ public abstract class SettingsDataUtil {
 		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(1);
 		evt.setUserId(USER);
+		evt.setSessionId("sessionIdE");
 		return evt;
 	}
 
