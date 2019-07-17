@@ -28,7 +28,6 @@ import org.joda.time.DateTimeZone;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kjetland.jackson.jsonSchema.annotations.JsonSchemaDefault;
-import com.kjetland.jackson.jsonSchema.annotations.JsonSchemaIgnore;
 
 public class PersistenceDTO extends SettingsBaseDTO {
 
@@ -37,6 +36,7 @@ public class PersistenceDTO extends SettingsBaseDTO {
 	@JsonIgnore
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
 		"{\"type\":\"record\",\"name\":\"PersistenceDTO\",\"namespace\":\"es.redmic.usersettingslib.dto\",\"fields\":["
+			+ "{\"name\":\"settingsId\",\"type\":[\"string\", \"null\"]},"
 			+ "{\"name\":\"name\",\"type\":[\"string\", \"null\"]},"
 			+ "{\"name\":\"shared\",\"type\":\"boolean\", \"default\": \"false\"},"
 			+ "{\"name\":\"userId\",\"type\": \"string\"},"
@@ -54,15 +54,21 @@ public class PersistenceDTO extends SettingsBaseDTO {
 		super();
 	}
 
+	private String settingsId;
+
 	private String name;
 
 	@JsonSchemaDefault(value = "false")
 	@NotNull
 	private Boolean shared = false;
 
-	@JsonIgnore
-	@JsonSchemaIgnore
-	private String userId;
+	public String getSettingsId() {
+		return settingsId;
+	}
+
+	public void setSettingsId(String settingsId) {
+		this.settingsId = settingsId;
+	}
 
 	public String getName() {
 		return name;
@@ -80,21 +86,13 @@ public class PersistenceDTO extends SettingsBaseDTO {
 		this.shared = shared;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + ((settingsId == null) ? 0 : settingsId.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((shared == null) ? 0 : shared.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -107,6 +105,11 @@ public class PersistenceDTO extends SettingsBaseDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		PersistenceDTO other = (PersistenceDTO) obj;
+		if (settingsId == null) {
+			if (other.settingsId != null)
+				return false;
+		} else if (!settingsId.equals(other.settingsId))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -116,11 +119,6 @@ public class PersistenceDTO extends SettingsBaseDTO {
 			if (other.shared != null)
 				return false;
 		} else if (!shared.equals(other.shared))
-			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
 	}
@@ -136,20 +134,22 @@ public class PersistenceDTO extends SettingsBaseDTO {
 	public Object get(int field) {
 		switch (field) {
 		case 0:
-			return getName();
+			return getSettingsId();
 		case 1:
-			return getShared();
+			return getName();
 		case 2:
-			return getUserId();
+			return getShared();
 		case 3:
-			return getService();
+			return getUserId();
 		case 4:
-			return getInserted() != null ? getInserted().getMillis() : null;
+			return getService();
 		case 5:
-			return getUpdated() != null ? getUpdated().getMillis() : null;
+			return getInserted() != null ? getInserted().getMillis() : null;
 		case 6:
-			return getAccessed() != null ? getAccessed().getMillis() : null;
+			return getUpdated() != null ? getUpdated().getMillis() : null;
 		case 7:
+			return getAccessed() != null ? getAccessed().getMillis() : null;
+		case 8:
 			return getId();
 		default:
 			throw new org.apache.avro.AvroRuntimeException("Bad index");
@@ -161,27 +161,30 @@ public class PersistenceDTO extends SettingsBaseDTO {
 	public void put(int field, Object value) {
 		switch (field) {
 		case 0:
-			setName(value != null ? value.toString() : null);
+			setSettingsId(value != null ? value.toString() : null);
 			break;
 		case 1:
-			setShared(value != null ? (boolean) value : null);
+			setName(value != null ? value.toString() : null);
 			break;
 		case 2:
-			setUserId(value != null ? value.toString() : null);
+			setShared(value != null ? (boolean) value : null);
 			break;
 		case 3:
-			setService(value.toString());
+			setUserId(value != null ? value.toString() : null);
 			break;
 		case 4:
-			setInserted(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
+			setService(value.toString());
 			break;
 		case 5:
-			setUpdated(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
+			setInserted(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
 			break;
 		case 6:
-			setAccessed(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
+			setUpdated(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
 			break;
 		case 7:
+			setAccessed(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
+			break;
+		case 8:
 			setId(value.toString());
 			break;
 		default:

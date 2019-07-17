@@ -41,8 +41,8 @@ public class SettingsDTO extends SettingsBaseDTO {
 		"{\"type\":\"record\",\"name\":\"SettingsDTO\",\"namespace\":\"es.redmic.usersettingslib.dto\",\"fields\":["
 			+ "{\"name\":\"name\",\"type\":[\"string\", \"null\"]},"
 			+ "{\"name\":\"shared\",\"type\":\"boolean\", \"default\": \"false\"},"
-			+ "{\"name\":\"userId\",\"type\":[\"string\", \"null\"]},"
 			+ "{\"name\": \"selection\",\"type\": [{\"type\": \"array\",\"items\":\"string\"},\"null\"]},"
+			+ "{\"name\":\"userId\",\"type\":[\"string\", \"null\"]},"
 			+ "{\"name\":\"service\",\"type\":\"string\"},"
 			+ "{\"name\":\"inserted\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}],"
 				+ "\"default\": null},"
@@ -63,9 +63,10 @@ public class SettingsDTO extends SettingsBaseDTO {
 	@NotNull
 	private Boolean shared = false;
 
-	private String userId;
-
 	private List<String> selection;
+
+	@NotNull
+	private String userId;
 
 	@NotNull
 	private String service;
@@ -86,20 +87,22 @@ public class SettingsDTO extends SettingsBaseDTO {
 		this.shared = shared;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
 	public List<String> getSelection() {
 		return selection;
 	}
 
 	public void setSelection(List<String> selection) {
 		this.selection = selection;
+	}
+
+	@Override
+	public String getUserId() {
+		return userId;
+	}
+
+	@Override
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	@Override
@@ -118,9 +121,9 @@ public class SettingsDTO extends SettingsBaseDTO {
 		int result = super.hashCode();
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((selection == null) ? 0 : selection.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result + ((service == null) ? 0 : service.hashCode());
 		result = prime * result + ((shared == null) ? 0 : shared.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -143,6 +146,11 @@ public class SettingsDTO extends SettingsBaseDTO {
 				return false;
 		} else if (!selection.equals(other.selection))
 			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
 		if (service == null) {
 			if (other.service != null)
 				return false;
@@ -152,11 +160,6 @@ public class SettingsDTO extends SettingsBaseDTO {
 			if (other.shared != null)
 				return false;
 		} else if (!shared.equals(other.shared))
-			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
 	}
@@ -176,9 +179,9 @@ public class SettingsDTO extends SettingsBaseDTO {
 		case 1:
 			return getShared();
 		case 2:
-			return getUserId();
-		case 3:
 			return getSelection();
+		case 3:
+			return getUserId();
 		case 4:
 			return getService();
 		case 5:
@@ -206,10 +209,10 @@ public class SettingsDTO extends SettingsBaseDTO {
 			setShared(value != null ? (boolean) value : null);
 			break;
 		case 2:
-			setUserId(value != null ? value.toString() : null);
+			setSelection(value != null ? getStringList((java.util.List) value) : null);
 			break;
 		case 3:
-			setSelection(value != null ? getStringList((java.util.List) value) : null);
+			setUserId(value != null ? value.toString() : null);
 			break;
 		case 4:
 			setService(value.toString());

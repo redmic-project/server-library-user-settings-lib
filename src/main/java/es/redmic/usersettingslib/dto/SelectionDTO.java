@@ -37,6 +37,7 @@ public class SelectionDTO extends SettingsBaseDTO {
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
 		"{\"type\":\"record\",\"name\":\"SelectionDTO\",\"namespace\":\"es.redmic.usersettingslib.dto\",\"fields\":["
 			+ "{\"name\": \"selection\",\"type\": [{\"type\": \"array\",\"items\":\"string\"},\"null\"]},"
+			+ "{\"name\":\"userId\",\"type\":[\"string\", \"null\"]},"
 			+ "{\"name\":\"service\",\"type\":\"string\"},"
 			+ "{\"name\":\"inserted\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}],"
 				+ "\"default\": null},"
@@ -99,14 +100,16 @@ public class SelectionDTO extends SettingsBaseDTO {
 		case 0:
 			return getSelection();
 		case 1:
-			return getService();
+			return getUserId();
 		case 2:
-			return getInserted() != null ? getInserted().getMillis() : null;
+			return getService();
 		case 3:
-			return getUpdated() != null ? getUpdated().getMillis() : null;
+			return getInserted() != null ? getInserted().getMillis() : null;
 		case 4:
-			return getAccessed() != null ? getAccessed().getMillis() : null;
+			return getUpdated() != null ? getUpdated().getMillis() : null;
 		case 5:
+			return getAccessed() != null ? getAccessed().getMillis() : null;
+		case 6:
 			return getId();
 		default:
 			throw new org.apache.avro.AvroRuntimeException("Bad index");
@@ -122,18 +125,21 @@ public class SelectionDTO extends SettingsBaseDTO {
 			setSelection(value != null ? getStringList((java.util.List) value) : null);
 			break;
 		case 1:
-			setService(value.toString());
+			setUserId(value != null ? value.toString() : null);
 			break;
 		case 2:
-			setInserted(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
+			setService(value.toString());
 			break;
 		case 3:
-			setUpdated(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
+			setInserted(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
 			break;
 		case 4:
-			setAccessed(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
+			setUpdated(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
 			break;
 		case 5:
+			setAccessed(value != null ? new DateTime(value, DateTimeZone.UTC).toDateTime() : null);
+			break;
+		case 6:
 			setId(value.toString());
 			break;
 		default:

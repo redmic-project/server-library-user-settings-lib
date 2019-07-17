@@ -39,6 +39,10 @@ public abstract class SettingsBaseDTO extends CommonDTO {
 
 	@JsonIgnore
 	@JsonSchemaIgnore
+	private String userId;
+
+	@JsonIgnore
+	@JsonSchemaIgnore
 	private String service;
 
 	@JsonSerialize(using = CustomDateTimeSerializer.class)
@@ -52,6 +56,14 @@ public abstract class SettingsBaseDTO extends CommonDTO {
 	@JsonSerialize(using = CustomDateTimeSerializer.class)
 	@JsonDeserialize(using = CustomDateTimeDeserializer.class)
 	DateTime accessed;
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
 	public String getService() {
 		return service;
@@ -89,6 +101,7 @@ public abstract class SettingsBaseDTO extends CommonDTO {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result + ((service == null) ? 0 : service.hashCode());
 		result = prime * result + ((accessed == null) ? 0 : accessed.hashCode());
 		result = prime * result + ((inserted == null) ? 0 : inserted.hashCode());
@@ -105,6 +118,11 @@ public abstract class SettingsBaseDTO extends CommonDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		SettingsBaseDTO other = (SettingsBaseDTO) obj;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
 		if (service == null) {
 			if (other.service != null)
 				return false;
