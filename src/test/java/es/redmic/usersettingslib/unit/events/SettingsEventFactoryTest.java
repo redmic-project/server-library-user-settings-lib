@@ -405,9 +405,9 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 		Event source = SettingsDataUtil.getDeleteSettingsEvent();
 
 		DeleteSettingsCheckFailedEvent event = (DeleteSettingsCheckFailedEvent) SettingsEventFactory.getEvent(source,
-				SettingsEventTypes.DELETE_CHECK_FAILED, exception.getExceptionType(), exception.getArguments());
+				SettingsEventTypes.CHECK_DELETE_FAILED, exception.getExceptionType(), exception.getArguments());
 
-		assertEquals(SettingsEventTypes.DELETE_CHECK_FAILED, event.getType());
+		assertEquals(SettingsEventTypes.CHECK_DELETE_FAILED, event.getType());
 
 		checkMetadataFields(source, event);
 		checkErrorFields(exception, event);

@@ -270,7 +270,7 @@ public class SettingsEventFactory {
 			failedEvent = new DeleteSettingsFailedEvent().buildFrom(source);
 		}
 
-		if (type.equals(SettingsEventTypes.DELETE_CHECK_FAILED)) {
+		if (type.equals(SettingsEventTypes.CHECK_DELETE_FAILED)) {
 
 			logger.debug("Checkeo de eliminación fallido, la confirmación está compartida");
 			failedEvent = new DeleteSettingsCheckFailedEvent().buildFrom(source);

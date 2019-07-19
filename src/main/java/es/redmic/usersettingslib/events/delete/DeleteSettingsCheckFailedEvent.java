@@ -36,7 +36,7 @@ public class DeleteSettingsCheckFailedEvent extends EventError {
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
 
-	static String type = SettingsEventTypes.DELETE_CHECK_FAILED;
+	static String type = SettingsEventTypes.CHECK_DELETE_FAILED;
 
 	public DeleteSettingsCheckFailedEvent() {
 		super(type);
