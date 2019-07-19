@@ -33,7 +33,7 @@ public class SelectCancelledEvent extends SettingsCancelledEvent {
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
 		+ "\"type\":\"record\",\"name\":\"SelectCancelledEvent\","
 				+ "\"namespace\":\"es.redmic.usersettingslib.events.select\",\"fields\":["
-			+ getSettingsEventSchema() + ","
+			+ "{\"name\":\"settings\", \"type\": [" + SettingsDTO.SCHEMA$.toString() + ",  \"null\"]}" + ","
 			+ getFailEventSchema() + ","
 			+ getEventBaseSchema() + "]}");
 	// @formatter:on
