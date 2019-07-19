@@ -491,6 +491,7 @@ public abstract class SettingsDataUtil {
 
 		selection.setId(PREFIX + code);
 		selection.setService("prueba");
+		selection.setUserId(USER);
 		selection.setSelection(new ArrayList<String>() {
 			{
 				add("1");
