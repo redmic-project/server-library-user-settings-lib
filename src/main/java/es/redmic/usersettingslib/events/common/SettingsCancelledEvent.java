@@ -116,6 +116,6 @@ public abstract class SettingsCancelledEvent extends EventError {
 	@JsonIgnore
 	public static String getSettingsEventSchema() {
 
-		return "{\"name\":\"settings\", \"type\": " + SettingsDTO.SCHEMA$.toString() + "}";
+		return "{\"name\":\"settings\", \"type\": [" + SettingsDTO.SCHEMA$.toString() + ", \"null\"]}";
 	}
 }
