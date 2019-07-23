@@ -27,6 +27,7 @@ import java.util.UUID;
 
 import org.joda.time.DateTime;
 
+import es.redmic.exception.common.ExceptionType;
 import es.redmic.usersettingslib.dto.PersistenceDTO;
 import es.redmic.usersettingslib.dto.SelectionDTO;
 import es.redmic.usersettingslib.dto.SettingsDTO;
@@ -158,7 +159,7 @@ public abstract class SettingsDataUtil {
 
 		DeselectEvent evt = new DeselectEvent();
 		evt.setAggregateId(PREFIX + code);
-		evt.setVersion(1);
+		evt.setVersion(2);
 		evt.setUserId(USER);
 		evt.setSessionId("sessionIdB");
 		evt.setSettings(getSettingsDTO());
@@ -235,7 +236,7 @@ public abstract class SettingsDataUtil {
 
 		ClearSelectionEvent evt = new ClearSelectionEvent();
 		evt.setAggregateId(PREFIX + code);
-		evt.setVersion(1);
+		evt.setVersion(2);
 		evt.setUserId(USER);
 		evt.setSessionId("sessionIdC");
 		evt.setSettings(getSettingsDTO(code));
@@ -390,7 +391,7 @@ public abstract class SettingsDataUtil {
 
 		DeleteSettingsEvent evt = new DeleteSettingsEvent();
 		evt.setAggregateId(PREFIX + code);
-		evt.setVersion(1);
+		evt.setVersion(2);
 		evt.setUserId(USER);
 		evt.setSessionId("sessionIdE");
 		return evt;
@@ -421,9 +422,9 @@ public abstract class SettingsDataUtil {
 	public static DeleteSettingsFailedEvent getDeleteSettingsFailedEvent(String code) {
 
 		DeleteSettingsFailedEvent evt = new DeleteSettingsFailedEvent().buildFrom(getDeleteSettingsEvent(code));
-		evt.setExceptionType("ItemNotFound");
+		evt.setExceptionType(ExceptionType.DELETE_ITEM_EXCEPTION.name());
 		Map<String, String> arguments = new HashMap<String, String>();
-		arguments.put("a", "b");
+		// arguments.put("a", "b");
 		evt.setArguments(arguments);
 		return evt;
 	}
@@ -436,9 +437,9 @@ public abstract class SettingsDataUtil {
 
 		DeleteSettingsCancelledEvent evt = new DeleteSettingsCancelledEvent().buildFrom(getDeleteSettingsEvent(code));
 		evt.setSettings(getSettingsDTO(code));
-		evt.setExceptionType("ItemNotFound");
+		evt.setExceptionType(ExceptionType.DELETE_ITEM_EXCEPTION.name());
 		Map<String, String> arguments = new HashMap<String, String>();
-		arguments.put("a", "b");
+		// arguments.put("a", "b");
 		evt.setArguments(arguments);
 		return evt;
 	}
@@ -461,9 +462,9 @@ public abstract class SettingsDataUtil {
 		DeleteSettingsCheckFailedEvent event = new DeleteSettingsCheckFailedEvent()
 				.buildFrom(getDeleteSettingsEvent(code));
 
-		event.setExceptionType("ItemIsShared");
+		event.setExceptionType(ExceptionType.DELETE_ITEM_EXCEPTION.name());
 		Map<String, String> arguments = new HashMap<String, String>();
-		arguments.put("a", "b");
+		// arguments.put("a", "b");
 		event.setArguments(arguments);
 
 		return event;
@@ -533,7 +534,7 @@ public abstract class SettingsDataUtil {
 
 		SettingsDTO settings = new SettingsDTO();
 
-		settings.setId(PREFIX + CODE);
+		settings.setId(PREFIX + code);
 
 		settings.setName("prueba");
 		settings.setUserId(USER);
