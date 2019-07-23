@@ -37,7 +37,7 @@ public class SelectionDTO extends SettingsBaseDTO {
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
 		"{\"type\":\"record\",\"name\":\"SelectionDTO\",\"namespace\":\"es.redmic.usersettingslib.dto\",\"fields\":["
 			+ "{\"name\": \"selection\",\"type\": [{\"type\": \"array\",\"items\":\"string\"},\"null\"]},"
-			+ "{\"name\":\"userId\",\"type\":[\"string\", \"null\"]},"
+			+ "{\"name\":\"userId\",\"type\":\"string\"},"
 			+ "{\"name\":\"service\",\"type\":\"string\"},"
 			+ "{\"name\":\"inserted\",\"type\":[\"null\",{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}],"
 				+ "\"default\": null},"
