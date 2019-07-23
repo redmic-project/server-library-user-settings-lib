@@ -22,6 +22,7 @@ package es.redmic.usersettingslib.mapper;
 
 import org.mapstruct.Mapper;
 
+import es.redmic.usersettingslib.dto.PersistenceDTO;
 import es.redmic.usersettingslib.dto.SelectionDTO;
 import es.redmic.usersettingslib.dto.SettingsDTO;
 
@@ -29,4 +30,6 @@ import es.redmic.usersettingslib.dto.SettingsDTO;
 public abstract class SettingsMapper {
 
 	public abstract SettingsDTO map(SelectionDTO selection);
+
+	public abstract SettingsDTO map(PersistenceDTO persistence);
 }
