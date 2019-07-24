@@ -36,7 +36,7 @@ public class PersistenceDTO extends SettingsBaseDTO {
 	@JsonIgnore
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse(
 		"{\"type\":\"record\",\"name\":\"PersistenceDTO\",\"namespace\":\"es.redmic.usersettingslib.dto\",\"fields\":["
-			+ "{\"name\":\"settingsId\",\"type\":[\"string\", \"null\"]},"
+			+ "{\"name\":\"settingsId\",\"type\":\"string\"},"
 			+ "{\"name\":\"name\",\"type\":[\"string\", \"null\"]},"
 			+ "{\"name\":\"shared\",\"type\":\"boolean\", \"default\": \"false\"},"
 			+ "{\"name\":\"userId\",\"type\": \"string\"},"
@@ -54,6 +54,7 @@ public class PersistenceDTO extends SettingsBaseDTO {
 		super();
 	}
 
+	@NotNull
 	private String settingsId;
 
 	private String name;

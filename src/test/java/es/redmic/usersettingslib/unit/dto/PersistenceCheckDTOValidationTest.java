@@ -50,4 +50,12 @@ public class PersistenceCheckDTOValidationTest extends DTOBaseTest<PersistenceDT
 
 		checkDTOHasError(dto, NOT_NULL_MESSAGE_TEMPLATE);
 	}
+
+	@Test
+	public void validationDTO_ReturnError_IfSettingsIdIsNull() {
+
+		dto.setSettingsId(null);
+
+		checkDTOHasError(dto, NOT_NULL_MESSAGE_TEMPLATE);
+	}
 }

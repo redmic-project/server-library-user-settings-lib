@@ -513,6 +513,8 @@ public abstract class SettingsDataUtil {
 
 		PersistenceDTO persistence = new PersistenceDTO();
 
+		persistence.setSettingsId(PREFIX + UUID.randomUUID().toString());
+
 		persistence.setId(PREFIX + code);
 		persistence.setName("prueba");
 		persistence.setUserId(USER);
