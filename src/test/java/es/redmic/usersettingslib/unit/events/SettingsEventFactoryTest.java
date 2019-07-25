@@ -41,6 +41,7 @@ import es.redmic.usersettingslib.events.select.SelectConfirmedEvent;
 import es.redmic.usersettingslib.events.select.SelectEvent;
 import es.redmic.usersettingslib.events.select.SelectFailedEvent;
 import es.redmic.usersettingslib.events.select.SelectedEvent;
+import es.redmic.usersettingslib.events.update.UpdateSettingsAccessedDateEvent;
 import es.redmic.usersettingslib.unit.utils.SettingsDataUtil;
 
 /*-
@@ -207,6 +208,18 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 				SettingsEventTypes.DELETED);
 
 		assertEquals(SettingsEventTypes.DELETED, event.getType());
+
+		checkMetadataFields(source, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnUpdateSettingsAccessedDateEvent_IfTypeIsSave() {
+
+		Event source = SettingsDataUtil.getUpdateSettingsAccessedDateEvent();
+		UpdateSettingsAccessedDateEvent event = (UpdateSettingsAccessedDateEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.UPDATE_ACCESSED_DATE);
+
+		assertEquals(SettingsEventTypes.UPDATE_ACCESSED_DATE, event.getType());
 
 		checkMetadataFields(source, event);
 	}

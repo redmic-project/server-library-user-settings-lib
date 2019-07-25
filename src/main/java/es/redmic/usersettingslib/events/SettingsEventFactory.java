@@ -67,6 +67,7 @@ import es.redmic.usersettingslib.events.select.SelectConfirmedEvent;
 import es.redmic.usersettingslib.events.select.SelectEvent;
 import es.redmic.usersettingslib.events.select.SelectFailedEvent;
 import es.redmic.usersettingslib.events.select.SelectedEvent;
+import es.redmic.usersettingslib.events.update.UpdateSettingsAccessedDateEvent;
 
 public class SettingsEventFactory {
 
@@ -124,6 +125,12 @@ public class SettingsEventFactory {
 
 			logger.debug("Creando evento SettingsDeletedEvent para: " + source.getAggregateId());
 			return new SettingsDeletedEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.UPDATE_ACCESSED_DATE)) {
+
+			logger.debug("Creando evento UpdateSettingsAccessedDateEvent para: " + source.getAggregateId());
+			return new UpdateSettingsAccessedDateEvent().buildFrom(source);
 		}
 
 		logger.error("Tipo de evento no soportado");

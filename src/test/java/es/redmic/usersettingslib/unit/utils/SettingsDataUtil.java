@@ -37,6 +37,7 @@ import es.redmic.usersettingslib.events.clearselection.ClearSelectionEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionFailedEvent;
 import es.redmic.usersettingslib.events.clearselection.PartialClearSelectionEvent;
 import es.redmic.usersettingslib.events.clearselection.SelectionClearedEvent;
+import es.redmic.usersettingslib.events.clone.CloneSettingsEvent;
 import es.redmic.usersettingslib.events.delete.CheckDeleteSettingsEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckFailedEvent;
@@ -63,6 +64,7 @@ import es.redmic.usersettingslib.events.select.SelectConfirmedEvent;
 import es.redmic.usersettingslib.events.select.SelectEvent;
 import es.redmic.usersettingslib.events.select.SelectFailedEvent;
 import es.redmic.usersettingslib.events.select.SelectedEvent;
+import es.redmic.usersettingslib.events.update.UpdateSettingsAccessedDateEvent;
 
 public abstract class SettingsDataUtil {
 
@@ -477,6 +479,39 @@ public abstract class SettingsDataUtil {
 	public static DeleteSettingsCheckedEvent getDeleteSettingsCheckedEvent(String code) {
 
 		return new DeleteSettingsCheckedEvent().buildFrom(getDeleteSettingsEvent(code));
+	}
+
+	// Clone
+
+	public static CloneSettingsEvent getCloneSettingsEvent() {
+		return getCloneSettingsEvent(CODE);
+	}
+
+	public static CloneSettingsEvent getCloneSettingsEvent(String code) {
+
+		CloneSettingsEvent evt = new CloneSettingsEvent();
+		evt.setAggregateId(PREFIX + code);
+		evt.setVersion(1);
+		evt.setUserId(USER);
+		evt.setSessionId("sessionIdF");
+		evt.setPersistence(getPersistenceDTO(code));
+		return evt;
+	}
+
+	// UpdateSettingsAccessedDate
+
+	public static UpdateSettingsAccessedDateEvent getUpdateSettingsAccessedDateEvent() {
+		return getUpdateSettingsAccessedDateEvent(CODE);
+	}
+
+	public static UpdateSettingsAccessedDateEvent getUpdateSettingsAccessedDateEvent(String code) {
+
+		UpdateSettingsAccessedDateEvent evt = new UpdateSettingsAccessedDateEvent();
+		evt.setAggregateId(PREFIX + code);
+		evt.setVersion(2);
+		evt.setUserId(USER);
+		evt.setSessionId("sessionIdG");
+		return evt;
 	}
 
 	//

@@ -32,6 +32,7 @@ import es.redmic.usersettingslib.events.clearselection.ClearSelectionEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionFailedEvent;
 import es.redmic.usersettingslib.events.clearselection.PartialClearSelectionEvent;
 import es.redmic.usersettingslib.events.clearselection.SelectionClearedEvent;
+import es.redmic.usersettingslib.events.clone.CloneSettingsEvent;
 import es.redmic.usersettingslib.events.delete.CheckDeleteSettingsEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.delete.DeleteSettingsCheckFailedEvent;
@@ -58,6 +59,7 @@ import es.redmic.usersettingslib.events.select.SelectConfirmedEvent;
 import es.redmic.usersettingslib.events.select.SelectEvent;
 import es.redmic.usersettingslib.events.select.SelectFailedEvent;
 import es.redmic.usersettingslib.events.select.SelectedEvent;
+import es.redmic.usersettingslib.events.update.UpdateSettingsAccessedDateEvent;
 import es.redmic.usersettingslib.unit.utils.SettingsDataUtil;
 
 public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
@@ -483,6 +485,36 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 
 		assertTrue("El objeto obtenido debe ser una instancia de DeleteCancelledEvent",
 				DeleteSettingsCancelledEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	// CLONE
+
+	@Test
+	public void CloneEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		CloneSettingsEvent event = SettingsDataUtil.getCloneSettingsEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de CloneSettingsEvent",
+				CloneSettingsEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	// UpdateSettingsAccessedDate
+
+	@Test
+	public void UpdateSettingsAccessedDateEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		UpdateSettingsAccessedDateEvent event = SettingsDataUtil.getUpdateSettingsAccessedDateEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de UpdateSettingsAccessedDateEvent",
+				UpdateSettingsAccessedDateEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}
