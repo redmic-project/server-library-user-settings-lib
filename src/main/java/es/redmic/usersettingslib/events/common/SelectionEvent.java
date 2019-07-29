@@ -45,6 +45,23 @@ public abstract class SelectionEvent extends Event {
 	}
 
 	@Override
+	public void setUserId(String userId) {
+		super.setUserId(userId);
+
+		if (getSelection() != null)
+			getSelection().setUserId(userId);
+	}
+
+	@Override
+	public String getUserId() {
+
+		if (getSelection() != null)
+			assert getSelection().getUserId().equals(super.getUserId());
+
+		return super.getUserId();
+	}
+
+	@Override
 	public Object get(int field$) {
 		switch (field$) {
 		case 0:

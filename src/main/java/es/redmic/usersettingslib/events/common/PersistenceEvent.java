@@ -45,6 +45,24 @@ public abstract class PersistenceEvent extends Event {
 	}
 
 	@Override
+	public void setUserId(String userId) {
+
+		super.setUserId(userId);
+
+		if (getPersistence() != null)
+			getPersistence().setUserId(userId);
+	}
+
+	@Override
+	public String getUserId() {
+
+		if (getPersistence() != null)
+			assert getPersistence().getUserId().equals(super.getUserId());
+
+		return super.getUserId();
+	}
+
+	@Override
 	public Object get(int field$) {
 		switch (field$) {
 		case 0:

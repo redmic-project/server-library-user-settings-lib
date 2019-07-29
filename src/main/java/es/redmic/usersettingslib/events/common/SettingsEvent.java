@@ -45,6 +45,22 @@ public abstract class SettingsEvent extends Event {
 	}
 
 	@Override
+	public void setUserId(String userId) {
+		super.setUserId(userId);
+
+		if (getSettings() != null)
+			getSettings().setUserId(userId);
+	}
+
+	@Override
+	public String getUserId() {
+
+		if (getSettings() != null)
+			assert getSettings().getUserId().equals(super.getUserId());
+		return super.getUserId();
+	}
+
+	@Override
 	public Object get(int field$) {
 		switch (field$) {
 		case 0:
