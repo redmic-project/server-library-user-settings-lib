@@ -71,7 +71,7 @@ public abstract class SettingsDataUtil {
 	// @formatter:off
 	public final static String PREFIX = "settings-",
 			CODE = UUID.randomUUID().toString(),
-			USER = "1";
+			USER = "13";
 	// @formatter:on
 
 	// SELECT
