@@ -85,9 +85,9 @@ public abstract class SettingsDataUtil {
 		SelectEvent evt = new SelectEvent();
 		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(1);
-		evt.setUserId(USER);
 		evt.setSettings(getSettingsDTO());
 		evt.setSessionId("sessionIdA");
+		evt.setUserId(USER);
 		return evt;
 	}
 
@@ -162,9 +162,9 @@ public abstract class SettingsDataUtil {
 		DeselectEvent evt = new DeselectEvent();
 		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(2);
-		evt.setUserId(USER);
 		evt.setSessionId("sessionIdB");
 		evt.setSettings(getSettingsDTO());
+		evt.setUserId(USER);
 		return evt;
 	}
 
@@ -239,10 +239,10 @@ public abstract class SettingsDataUtil {
 		ClearSelectionEvent evt = new ClearSelectionEvent();
 		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(2);
-		evt.setUserId(USER);
 		evt.setSessionId("sessionIdC");
 		evt.setSettings(getSettingsDTO(code));
 		evt.getSettings().setSelection(new ArrayList<>());
+		evt.setUserId(USER);
 		return evt;
 	}
 
@@ -317,9 +317,9 @@ public abstract class SettingsDataUtil {
 		SaveSettingsEvent evt = new SaveSettingsEvent();
 		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(1);
-		evt.setUserId(USER);
 		evt.setSessionId("sessionIdD");
 		evt.setSettings(getSettingsDTO());
+		evt.setUserId(USER);
 		return evt;
 	}
 
@@ -492,9 +492,9 @@ public abstract class SettingsDataUtil {
 		CloneSettingsEvent evt = new CloneSettingsEvent();
 		evt.setAggregateId(PREFIX + code);
 		evt.setVersion(1);
-		evt.setUserId(USER);
 		evt.setSessionId("sessionIdF");
 		evt.setPersistence(getPersistenceDTO(code));
+		evt.setUserId(USER);
 		return evt;
 	}
 
