@@ -57,6 +57,7 @@ public class PersistenceDTO extends SettingsBaseDTO {
 	@NotNull
 	private String settingsId;
 
+	@NotNull
 	private String name;
 
 	@JsonSchemaDefault(value = "false")
