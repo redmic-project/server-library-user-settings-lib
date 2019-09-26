@@ -71,7 +71,8 @@ public abstract class SettingsDataUtil {
 	// @formatter:off
 	public final static String PREFIX = "settings-",
 			CODE = UUID.randomUUID().toString(),
-			USER = "13";
+			USER = "13",
+			SERVICE_NAME = "/atlas/commands/layer/settings";
 	// @formatter:on
 
 	// SELECT
@@ -526,7 +527,7 @@ public abstract class SettingsDataUtil {
 		SelectionDTO selection = new SelectionDTO();
 
 		selection.setId(PREFIX + code);
-		selection.setService("prueba");
+		selection.setService(SERVICE_NAME);
 		selection.setUserId(USER);
 		selection.setSelection(new ArrayList<String>() {
 			{
@@ -554,7 +555,7 @@ public abstract class SettingsDataUtil {
 		persistence.setName("prueba");
 		persistence.setUserId(USER);
 
-		persistence.setService("prueba");
+		persistence.setService(SERVICE_NAME);
 
 		persistence.setInserted(DateTime.now());
 		persistence.setUpdated(DateTime.now());
@@ -576,7 +577,7 @@ public abstract class SettingsDataUtil {
 		settings.setName("prueba");
 		settings.setUserId(USER);
 
-		settings.setService("prueba");
+		settings.setService(SERVICE_NAME);
 		settings.setSelection(new ArrayList<String>() {
 			{
 				add("1");
