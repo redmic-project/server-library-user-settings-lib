@@ -55,8 +55,7 @@ public abstract class SettingsRepositoryImpl<TModel extends Settings, TQueryDTO 
 	@PostConstruct
 	public void postConstructSettingsRepositoryImpl() {
 		INTERNAL_QUERY = QueryBuilders.boolQuery()
-				.must(QueryBuilders.termQuery("service", microServiceCommandsPath + controllerPath))
-				.must(QueryBuilders.existsQuery("name"));
+				.must(QueryBuilders.termQuery("service", microServiceCommandsPath + controllerPath));
 	}
 
 	@Override
@@ -86,6 +85,10 @@ public abstract class SettingsRepositoryImpl<TModel extends Settings, TQueryDTO 
 
 		if (terms.containsKey("userId")) {
 			query.must(QueryBuilders.termQuery("userId", terms.get("userId")));
+		}
+
+		if (terms.containsKey("name")) {
+			query.must(QueryBuilders.existsQuery("name"));
 		}
 		return super.getTermQuery(terms, query);
 	}
