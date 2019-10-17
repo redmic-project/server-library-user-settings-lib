@@ -22,7 +22,7 @@
 		<redmic.models.version>0.10.0-feature-cleanAtlasComponents</redmic.models.version>
 		<redmic.exceptions.version>0.9.0-feature-atlasExceptions</redmic.exceptions.version>
 		<redmic.broker-lib.version>0.10.0-feature-atlasMicroservice</redmic.broker-lib.version>
-		<redmic.elasticsearch-lib.version>0.10.0-feature-parentChildIndex</redmic.elasticsearch-lib.version>
+		<redmic.elasticsearch-lib.version>0.12.0</redmic.elasticsearch-lib.version>
 		<redmic.test-utils.version>0.9.0-feature-atlasMicroservice</redmic.test-utils.version>
 		<!-- OTHERS -->
 		<mapstruct.version>1.3.0.Final</mapstruct.version>
