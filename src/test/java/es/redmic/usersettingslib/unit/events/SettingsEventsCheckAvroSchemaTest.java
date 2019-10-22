@@ -47,6 +47,7 @@ import es.redmic.usersettingslib.events.deselect.DeselectEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectFailedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectedEvent;
 import es.redmic.usersettingslib.events.deselect.PartialDeselectEvent;
+import es.redmic.usersettingslib.events.fail.SettingsRollbackEvent;
 import es.redmic.usersettingslib.events.save.PartialSaveSettingsEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsConfirmedEvent;
@@ -515,6 +516,21 @@ public class SettingsEventsCheckAvroSchemaTest extends AvroBaseTest {
 
 		assertTrue("El objeto obtenido debe ser una instancia de UpdateSettingsAccessedDateEvent",
 				UpdateSettingsAccessedDateEvent.class.isInstance(result));
+
+		assertEquals(result, event);
+	}
+
+	// FAIL
+
+	@Test
+	public void SettingsRollbackEventSerializeAndDeserialize_IsSuccessful_IfSchemaAndDataAreCorrect() {
+
+		SettingsRollbackEvent event = SettingsDataUtil.getSettingsRollbackEvent();
+
+		Object result = serializerAndDeserializer(event);
+
+		assertTrue("El objeto obtenido debe ser una instancia de SettingsRollbackEvent",
+				SettingsRollbackEvent.class.isInstance(result));
 
 		assertEquals(result, event);
 	}

@@ -27,10 +27,12 @@ import java.util.UUID;
 
 import org.joda.time.DateTime;
 
+import es.redmic.brokerlib.avro.fail.PrepareRollbackEvent;
 import es.redmic.exception.common.ExceptionType;
 import es.redmic.usersettingslib.dto.PersistenceDTO;
 import es.redmic.usersettingslib.dto.SelectionDTO;
 import es.redmic.usersettingslib.dto.SettingsDTO;
+import es.redmic.usersettingslib.events.SettingsEventTypes;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionCancelledEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionConfirmedEvent;
 import es.redmic.usersettingslib.events.clearselection.ClearSelectionEvent;
@@ -52,6 +54,7 @@ import es.redmic.usersettingslib.events.deselect.DeselectEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectFailedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectedEvent;
 import es.redmic.usersettingslib.events.deselect.PartialDeselectEvent;
+import es.redmic.usersettingslib.events.fail.SettingsRollbackEvent;
 import es.redmic.usersettingslib.events.save.PartialSaveSettingsEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsConfirmedEvent;
@@ -516,6 +519,31 @@ public abstract class SettingsDataUtil {
 	}
 
 	//
+
+	public static PrepareRollbackEvent getPrepareRollbackEvent() {
+		return getPrepareRollbackEvent(CODE);
+	}
+
+	public static PrepareRollbackEvent getPrepareRollbackEvent(String code) {
+
+		PrepareRollbackEvent event = new PrepareRollbackEvent().buildFrom(getSaveSettingsEvent(code));
+		event.setFailEventType(SettingsEventTypes.SAVE);
+		return event;
+	}
+
+	public static SettingsRollbackEvent getSettingsRollbackEvent() {
+		return getSettingsRollbackEvent(CODE);
+	}
+
+	public static SettingsRollbackEvent getSettingsRollbackEvent(String code) {
+
+		SettingsRollbackEvent event = new SettingsRollbackEvent().buildFrom(getSaveSettingsEvent(code));
+
+		event.setFailEventType(SettingsEventTypes.SAVE);
+		event.setLastSnapshotItem(getSettingsDTO(code));
+
+		return event;
+	}
 
 	public static SelectionDTO getSelectionDTO() {
 		return getSelectionDTO(CODE);

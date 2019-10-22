@@ -64,7 +64,10 @@ public abstract class SettingsEventTypes {
 		DELETE_CONFIRMED = "DELETE_CONFIRMED",
 		DELETED = "DELETED",
 		DELETE_FAILED = "DELETE_FAILED",
-		DELETE_CANCELLED = "DELETE_CANCELLED";
+		DELETE_CANCELLED = "DELETE_CANCELLED",
+		//FAIL
+		PREPARE_ROLLBACK = "PREPARE_ROLLBACK",
+		ROLLBACK = "ROLLBACK";
 	//@formatter:on
 
 	public static boolean isLocked(String eventType) {
