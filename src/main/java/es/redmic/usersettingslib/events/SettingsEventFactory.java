@@ -27,6 +27,7 @@ import org.apache.logging.log4j.Logger;
 
 import es.redmic.brokerlib.avro.common.Event;
 import es.redmic.brokerlib.avro.common.EventError;
+import es.redmic.brokerlib.avro.fail.PrepareRollbackEvent;
 import es.redmic.exception.common.ExceptionType;
 import es.redmic.exception.common.InternalException;
 import es.redmic.usersettingslib.dto.PersistenceDTO;
@@ -55,6 +56,7 @@ import es.redmic.usersettingslib.events.deselect.DeselectEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectFailedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectedEvent;
 import es.redmic.usersettingslib.events.deselect.PartialDeselectEvent;
+import es.redmic.usersettingslib.events.fail.SettingsRollbackEvent;
 import es.redmic.usersettingslib.events.save.PartialSaveSettingsEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsConfirmedEvent;
@@ -138,6 +140,14 @@ public class SettingsEventFactory {
 	}
 
 	public static Event getEvent(Event source, String type, SettingsDTO settings) {
+
+		if (type.equals(SettingsEventTypes.ROLLBACK)) {
+			logger.debug("Creando evento SettingsRollbackEvent para: " + source.getAggregateId());
+			SettingsRollbackEvent rollbackEvent = new SettingsRollbackEvent().buildFrom(source);
+			rollbackEvent.setLastSnapshotItem(settings);
+			rollbackEvent.setFailEventType(((PrepareRollbackEvent) source).getFailEventType());
+			return rollbackEvent;
+		}
 
 		SettingsEvent successfulEvent = null;
 

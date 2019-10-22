@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import es.redmic.brokerlib.avro.common.Event;
 import es.redmic.brokerlib.avro.common.EventError;
+import es.redmic.brokerlib.avro.fail.PrepareRollbackEvent;
 import es.redmic.testutils.utils.AvroBaseTest;
 import es.redmic.usersettingslib.events.SettingsEventFactory;
 import es.redmic.usersettingslib.events.SettingsEventTypes;
@@ -29,6 +30,7 @@ import es.redmic.usersettingslib.events.deselect.DeselectEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectFailedEvent;
 import es.redmic.usersettingslib.events.deselect.DeselectedEvent;
 import es.redmic.usersettingslib.events.deselect.PartialDeselectEvent;
+import es.redmic.usersettingslib.events.fail.SettingsRollbackEvent;
 import es.redmic.usersettingslib.events.save.PartialSaveSettingsEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsCancelledEvent;
 import es.redmic.usersettingslib.events.save.SaveSettingsConfirmedEvent;
@@ -516,6 +518,23 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 		checkMetadataFields(source, event);
 		checkErrorFields(exception, event);
 		assertNotNull(event.getSettings());
+	}
+
+	////////////////////
+
+	@Test
+	public void GetEvent_ReturnCategoryRollbackEvent_IfTypeIsRollback() {
+
+		PrepareRollbackEvent source = SettingsDataUtil.getPrepareRollbackEvent();
+
+		SettingsRollbackEvent event = (SettingsRollbackEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.ROLLBACK, SettingsDataUtil.getSettingsDTO());
+
+		assertEquals(SettingsEventTypes.ROLLBACK, event.getType());
+
+		checkMetadataFields(source, event);
+		assertEquals(source.getFailEventType(), event.getFailEventType());
+		assertNotNull(event.getLastSnapshotItem());
 	}
 
 	////////////////////
