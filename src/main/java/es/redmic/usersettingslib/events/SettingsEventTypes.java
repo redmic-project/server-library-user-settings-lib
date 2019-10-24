@@ -1,5 +1,7 @@
 package es.redmic.usersettingslib.events;
 
+import java.util.Arrays;
+
 /*-
  * #%L
  * user-settings-lib
@@ -67,7 +69,8 @@ public abstract class SettingsEventTypes {
 		DELETE_CANCELLED = "DELETE_CANCELLED",
 		//FAIL
 		PREPARE_ROLLBACK = "PREPARE_ROLLBACK",
-		ROLLBACK = "ROLLBACK";
+		ROLLBACK = "ROLLBACK",
+		ROLLBACK_FAILED = "ROLLBACK_FAILED";
 	//@formatter:on
 
 	public static boolean isLocked(String eventType) {
@@ -89,5 +92,28 @@ public abstract class SettingsEventTypes {
 	public static boolean isUpdatable(String eventType) {
 
 		return (isSnapshot(eventType) && !eventType.equals(DELETED.toString()));
+	}
+
+	public static String getEventFailedTypeByActionType(String actionType) {
+
+		if (Arrays.asList(PARTIAL_SELECT, SELECT, SELECT_CONFIRMED, SELECT_FAILED).contains(actionType)) {
+			return SELECT_FAILED;
+		}
+		if (Arrays.asList(PARTIAL_DESELECT, DESELECT, DESELECT_CONFIRMED, DESELECT_FAILED).contains(actionType)) {
+			return DESELECT_FAILED;
+		}
+		if (Arrays.asList(PARTIAL_CLEAR_SELECTION, CLEAR_SELECTION, CLEAR_SELECTION_CONFIRMED, CLEAR_SELECTION_FAILED)
+				.contains(actionType)) {
+			return CLEAR_SELECTION_FAILED;
+		}
+		if (Arrays.asList(PARTIAL_SAVE, SAVE, SAVE_CONFIRMED, SAVE_FAILED, CLONE, UPDATE_ACCESSED_DATE)
+				.contains(actionType)) {
+			return SAVE_FAILED;
+		}
+		if (Arrays.asList(DELETE, CHECK_DELETE, DELETE_CHECKED, CHECK_DELETE_FAILED, DELETE_CONFIRMED, DELETE_FAILED)
+				.contains(actionType)) {
+			return DELETE_FAILED;
+		}
+		return null;
 	}
 }
