@@ -3,6 +3,8 @@ package es.redmic.usersettingslib.unit.events;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.UUID;
+
 import org.junit.Test;
 
 import es.redmic.brokerlib.avro.common.Event;
@@ -523,7 +525,7 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 	////////////////////
 
 	@Test
-	public void GetEvent_ReturnCategoryRollbackEvent_IfTypeIsRollback() {
+	public void GetEvent_ReturnSettingsRollbackEvent_IfTypeIsRollback() {
 
 		PrepareRollbackEvent source = SettingsDataUtil.getPrepareRollbackEvent();
 
@@ -535,6 +537,78 @@ public class SettingsEventFactoryTest extends AvroBaseTest {
 		checkMetadataFields(source, event);
 		assertEquals(source.getFailEventType(), event.getFailEventType());
 		assertNotNull(event.getLastSnapshotItem());
+	}
+
+	// ROLLBACK
+
+	@Test
+	public void GetEvent_ReturnSelectFailedEvent_IfRollbackFailEventTypeIsSelect() {
+
+		SettingsRollbackEvent source = SettingsDataUtil.getSettingsRollbackEvent(UUID.randomUUID().toString(),
+				SettingsEventTypes.SELECT);
+
+		SelectFailedEvent event = (SelectFailedEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.getEventFailedTypeByActionType(source.getFailEventType()));
+
+		assertEquals(SettingsEventTypes.SELECT_FAILED, event.getType());
+
+		checkMetadataFields(source, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnDeselectFailedEvent_IfRollbackFailEventTypeIsDeselect() {
+
+		SettingsRollbackEvent source = SettingsDataUtil.getSettingsRollbackEvent(UUID.randomUUID().toString(),
+				SettingsEventTypes.DESELECT);
+
+		DeselectFailedEvent event = (DeselectFailedEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.getEventFailedTypeByActionType(source.getFailEventType()));
+
+		assertEquals(SettingsEventTypes.DESELECT_FAILED, event.getType());
+
+		checkMetadataFields(source, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnClearSelectionFailedEvent_IfRollbackFailEventTypeIsClearSelection() {
+
+		SettingsRollbackEvent source = SettingsDataUtil.getSettingsRollbackEvent(UUID.randomUUID().toString(),
+				SettingsEventTypes.CLEAR_SELECTION);
+
+		ClearSelectionFailedEvent event = (ClearSelectionFailedEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.getEventFailedTypeByActionType(source.getFailEventType()));
+
+		assertEquals(SettingsEventTypes.CLEAR_SELECTION_FAILED, event.getType());
+
+		checkMetadataFields(source, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnSaveSettingsFailedEvent_IfRollbackFailEventTypeIsSaveSettings() {
+
+		SettingsRollbackEvent source = SettingsDataUtil.getSettingsRollbackEvent(UUID.randomUUID().toString(),
+				SettingsEventTypes.SAVE);
+
+		SaveSettingsFailedEvent event = (SaveSettingsFailedEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.getEventFailedTypeByActionType(source.getFailEventType()));
+
+		assertEquals(SettingsEventTypes.SAVE_FAILED, event.getType());
+
+		checkMetadataFields(source, event);
+	}
+
+	@Test
+	public void GetEvent_ReturnDeleteSettingsFailedEvent_IfRollbackFailEventTypeIsDeleteSettings() {
+
+		SettingsRollbackEvent source = SettingsDataUtil.getSettingsRollbackEvent(UUID.randomUUID().toString(),
+				SettingsEventTypes.DELETE);
+
+		DeleteSettingsFailedEvent event = (DeleteSettingsFailedEvent) SettingsEventFactory.getEvent(source,
+				SettingsEventTypes.getEventFailedTypeByActionType(source.getFailEventType()));
+
+		assertEquals(SettingsEventTypes.DELETE_FAILED, event.getType());
+
+		checkMetadataFields(source, event);
 	}
 
 	////////////////////

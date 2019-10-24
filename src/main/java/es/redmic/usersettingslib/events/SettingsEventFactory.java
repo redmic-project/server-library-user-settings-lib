@@ -139,6 +139,40 @@ public class SettingsEventFactory {
 		throw new InternalException(ExceptionType.INTERNAL_EXCEPTION);
 	}
 
+	public static Event getEvent(SettingsRollbackEvent source, String type) {
+
+		EventError failedEvent = null;
+
+		if (type.equals(SettingsEventTypes.SELECT_FAILED)) {
+			failedEvent = new SelectFailedEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.DESELECT_FAILED)) {
+			failedEvent = new DeselectFailedEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.CLEAR_SELECTION_FAILED)) {
+			failedEvent = new ClearSelectionFailedEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.SAVE_FAILED)) {
+			failedEvent = new SaveSettingsFailedEvent().buildFrom(source);
+		}
+
+		if (type.equals(SettingsEventTypes.DELETE_FAILED)) {
+			failedEvent = new DeleteSettingsFailedEvent().buildFrom(source);
+		}
+
+		if (failedEvent != null) {
+			failedEvent.setExceptionType("unknown");
+			return failedEvent;
+
+		} else {
+			logger.error("Tipo de evento no soportado");
+			throw new InternalException(ExceptionType.INTERNAL_EXCEPTION);
+		}
+	}
+
 	public static Event getEvent(Event source, String type, SettingsDTO settings) {
 
 		if (type.equals(SettingsEventTypes.ROLLBACK)) {

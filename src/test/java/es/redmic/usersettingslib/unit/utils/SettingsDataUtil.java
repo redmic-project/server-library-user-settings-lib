@@ -545,6 +545,16 @@ public abstract class SettingsDataUtil {
 		return event;
 	}
 
+	public static SettingsRollbackEvent getSettingsRollbackEvent(String code, String failEventType) {
+
+		SettingsRollbackEvent event = new SettingsRollbackEvent().buildFrom(getSaveSettingsEvent(code));
+
+		event.setFailEventType(failEventType);
+		event.setLastSnapshotItem(getSettingsDTO(code));
+
+		return event;
+	}
+
 	public static SelectionDTO getSelectionDTO() {
 		return getSelectionDTO(CODE);
 	}
