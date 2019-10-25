@@ -35,7 +35,7 @@ public class SettingsRollbackEvent extends BaseRollbackEvent {
 	public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{"
 		+ "\"type\":\"record\",\"name\":\"SettingsRollbackEvent\","
 				+ "\"namespace\":\"es.redmic.usersettingslib.events.fail\",\"fields\":["
-			+ "{\"name\":\"lastSnapshotItem\",\"type\":" + SettingsDTO.SCHEMA$.toString() + "},"
+			+ "{\"name\":\"lastSnapshotItem\",\"type\":[\"null\"," + SettingsDTO.SCHEMA$.toString() + "]},"
 			+ "{\"name\":\"failEventType\",\"type\": \"string\"},"
 			+ getEventBaseSchema() + "]}");
 	
